@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.logic.jellyfish"
+        minSdkVersion 16
+        targetSdkVersion 28
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('/src/main/assets/fish.jks')
+            storePassword '12345678'
+            keyAlias 'fish'
+            keyPassword '12345678'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        release {
+            storeFile file('/src/main/assets/fish.jks')
+            storePassword '12345678'
+            keyAlias 'fish'
+            keyPassword '12345678'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+//    sourceSets {
+//        main.java.srcDirs += 'src/main/kotlin'
+//    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/AMap3DMap_6.9.2_AMapSearch_6.9.2_AMapLocation_4.7.0_20190709.jar')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+}
