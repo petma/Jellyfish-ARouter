@@ -1,4 +1,4 @@
-package com.logic.jellyfish.main
+package com.logic.jellyfish.ui.main
 
 import android.Manifest
 import android.annotation.TargetApi
@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.R
 import com.logic.jellyfish.databinding.MainFragmentBinding
@@ -17,27 +17,28 @@ import com.logic.jellyfish.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
 
+    private lateinit var viewModel: MainViewModel
+    private lateinit var binding: MainFragmentBinding
+
     private var needCheckBackLocation = false
     private var isNeedCheck = true
-
-    private var viewModel: MainViewModel? = null
-    private lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         val view = inflater.inflate(R.layout.main_fragment, container, false)
-        binding = DataBindingUtil.bind(view)!!
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding = MainFragmentBinding.bind(view)
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         try {
-            super.onResume()
             if (Build.VERSION.SDK_INT >= 23) {
                 if (isNeedCheck) {
                     checkPermissions(needPermissions)
@@ -46,6 +47,13 @@ class MainFragment : Fragment() {
         } catch (e: Throwable) {
             e.printStackTrace()
         }
+        initData()
+    }
+
+    private fun initData() {
+        viewModel.aMapServiceDataString.observe(this, Observer {
+
+        })
     }
 
     /**
@@ -110,7 +118,8 @@ class MainFragment : Fragment() {
 
     private fun shouldShowMyRequestPermissionRationale(perm: String): Boolean {
         try {
-            val method = javaClass.getMethod("shouldShowRequestPermissionRationale", String::class.java)
+            val method =
+                javaClass.getMethod("shouldShowRequestPermissionRationale", String::class.java)
             return method.invoke(this, perm) as Boolean
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -140,7 +149,7 @@ class MainFragment : Fragment() {
         BACK_LOCATION_PERMISSION
     )
 
-    companion object{
+    companion object {
         private const val BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION"
     }
 

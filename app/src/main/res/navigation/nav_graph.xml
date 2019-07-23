@@ -7,31 +7,17 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.logic.jellyfish.main.MainFragment"
+        android:name="com.logic.jellyfish.ui.main.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_mainFragment_to_mapActivity"
-            app:destination="@id/mapActivity"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
-        <action
-            android:id="@+id/action_mainFragment_to_mapFragment"
-            app:destination="@id/mapFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:destination="@id/mapActivity" />
     </fragment>
-
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.logic.jellyfish.map.MapFragment"
-        android:label="MapFragment"
-        tools:layout="@layout/map_fragment" />
-
     <activity
         android:id="@+id/mapActivity"
-        android:name="com.logic.jellyfish.map.MapActivity"
-        android:label="map_activity"
+        android:name="com.logic.jellyfish.ui.map.MapActivity"
+        android:label="MapActivity"
         tools:layout="@layout/map_activity" />
 
 </navigation>
