@@ -2,8 +2,8 @@ package com.logic.jellyfish.http
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.logic.jellyfish.App
 import com.logic.jellyfish.BuildConfig
+import com.logic.jellyfish.app.App
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

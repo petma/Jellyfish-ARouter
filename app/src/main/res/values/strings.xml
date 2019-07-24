@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">Jellyfish</string>
+    <string name="app_name">水母运动</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resume">继续</string>
+    <string name="stop">停止</string>
+    <string name="speed">配速</string>
+    <string name="time_cost">用时</string>
+    <string name="consume">消耗</string>
+    <string name="kilo">公里</string>
 </resources>

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="timber_button_resume">#2DD4CC</color>
+    <color name="timber_button_stop">#F75050</color>
+
+    <color name="DimGray">#696969</color>
+    <color name="DarkGray">#FF444444</color>
 </resources>

@@ -15,8 +15,8 @@ import com.amap.api.maps.model.MyLocationStyle
 import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.OnTrackLifecycleListener
 import com.amap.api.track.query.model.*
-import com.logic.jellyfish.App
 import com.logic.jellyfish.R
+import com.logic.jellyfish.app.App
 import com.logic.jellyfish.data.EventObserver
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.createViewModel

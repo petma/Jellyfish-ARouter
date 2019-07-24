@@ -31,9 +31,10 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding> : Fragment() {
         initView()
     }
 
+    abstract fun setLayout(): Int
+
     abstract fun initView()
 
-    abstract fun setLayout(): Int
 
     private fun createViewModel(): VM {
         return ViewModelProviders.of(this).get(getViewModel(this))

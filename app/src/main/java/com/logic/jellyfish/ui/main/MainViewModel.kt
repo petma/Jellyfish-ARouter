@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.google.gson.Gson
-import com.logic.jellyfish.App
 import com.logic.jellyfish.R
+import com.logic.jellyfish.app.App
 import com.logic.jellyfish.http.RetrofitFactory
 import com.logic.jellyfish.utils.TRACK_SERVICE_KEY
 import com.logic.jellyfish.utils.toast
@@ -26,16 +26,18 @@ class MainViewModel : ViewModel() {
     val serviceDesc = MutableLiveData<String>()
 
     fun startRunning(v: View) {
-        v.findNavController().navigate(R.id.action_mainFragment_to_mapActivity)
+        v.findNavController().navigate(R.id.action_mainFragment_to_timerFragment)
     }
 
     fun createService(v: View) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitFactory.aMapService.addService(
-                    TRACK_SERVICE_KEY,
-                    serviceValue.value
-            )
-            withContext(Dispatchers.Main) {
+        viewModelScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitFactory.aMapService.addService(
+                        TRACK_SERVICE_KEY,
+                        serviceValue.value
+                    )
+                }
                 when (response.errcode) {
                     10000 -> {
                         v.toast("成功${response.errdetail}")
@@ -53,27 +55,34 @@ class MainViewModel : ViewModel() {
                     _aMapServiceDataString.value = Gson().toJson(response)
                 } else {
                     _aMapServiceDataString.value =
-                            "${_aMapServiceDataString.value}\n${Gson().toJson(response)}"
+                        "${_aMapServiceDataString.value}你好${Gson().toJson(response)}"
                 }
+            } catch (e: Exception) {
+                v.toast("网络异常")
             }
+
         }
     }
 
     fun createTerminal(v: View) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = RetrofitFactory.aMapService.addTerminal(
-                    TRACK_SERVICE_KEY,
-                    App.sid,
-                    App.name
-            )
-            withContext(Dispatchers.Main) {
+        viewModelScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitFactory.aMapService.addTerminal(
+                        TRACK_SERVICE_KEY,
+                        App.sid,
+                        App.name
+                    )
+                }
                 App.tid = response.data?.tid
                 if (_aMapServiceDataString.value == null) {
                     _aMapServiceDataString.value = Gson().toJson(response)
                 } else {
                     _aMapServiceDataString.value =
-                            "${_aMapServiceDataString.value}\n${Gson().toJson(response)}"
+                        "${_aMapServiceDataString.value}\n${Gson().toJson(response)}"
                 }
+            } catch (e: Exception) {
+                v.toast("网络异常")
             }
         }
     }

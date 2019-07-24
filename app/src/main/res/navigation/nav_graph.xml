@@ -11,13 +11,40 @@
         android:label="MainFragment"
         tools:layout="@layout/main_fragment">
         <action
-            android:id="@+id/action_mainFragment_to_mapActivity"
-            app:destination="@id/mapActivity" />
+            android:id="@+id/action_mainFragment_to_timerFragment"
+            app:destination="@id/timerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="com.logic.jellyfish.ui.timer.TimerFragment"
+        android:label="TimerFragment"
+        tools:layout="@layout/timer_fragment">
+        <action
+            android:id="@+id/action_timerFragment_to_mapActivity"
+            app:destination="@id/mapActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_timerFragment_to_x5WebViewActivity"
+            app:destination="@id/x5WebViewActivity" />
+    </fragment>
+
     <activity
         android:id="@+id/mapActivity"
         android:name="com.logic.jellyfish.ui.map.MapActivity"
         android:label="MapActivity"
         tools:layout="@layout/map_activity" />
+    <activity
+        android:id="@+id/x5WebViewActivity"
+        android:name="com.logic.jellyfish.ui.web.X5WebViewActivity"
+        android:label="X5WebViewActivity" />
+
 
 </navigation>
