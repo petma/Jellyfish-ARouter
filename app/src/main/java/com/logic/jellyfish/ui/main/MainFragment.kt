@@ -4,40 +4,23 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.R
+import com.logic.jellyfish.base.BaseFragment
 import com.logic.jellyfish.databinding.MainFragmentBinding
 
 
-class MainFragment : Fragment() {
-
-    private lateinit var viewModel: MainViewModel
-    private lateinit var binding: MainFragmentBinding
+class MainFragment : BaseFragment<MainViewModel, MainFragmentBinding>() {
 
     private var needCheckBackLocation = false
     private var isNeedCheck = true
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        binding = MainFragmentBinding.bind(view)
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
+    override fun setLayout(): Int {
+        return R.layout.main_fragment
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun initView() {
+        binding.viewmodel = viewModel
         try {
             if (Build.VERSION.SDK_INT >= 23) {
                 if (isNeedCheck) {
@@ -47,19 +30,11 @@ class MainFragment : Fragment() {
         } catch (e: Throwable) {
             e.printStackTrace()
         }
-        initData()
-    }
-
-    private fun initData() {
         viewModel.aMapServiceDataString.observe(this, Observer {
 
         })
     }
 
-    /**
-     * @param
-     * @since 2.5.0
-     */
     @TargetApi(23)
     private fun checkPermissions(permissions: Array<String>) {
         try {
@@ -86,13 +61,6 @@ class MainFragment : Fragment() {
 
     }
 
-    /**
-     * 获取权限集中需要申请权限的列表
-     *
-     * @param permissions
-     * @return
-     * @since 2.5.0
-     */
     @TargetApi(23)
     private fun findDeniedPermissions(permissions: Array<String>): List<String>? {
         try {
@@ -137,9 +105,6 @@ class MainFragment : Fragment() {
         return -1
     }
 
-    /**
-     * 需要进行检测的权限数组
-     */
     private val needPermissions = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION,

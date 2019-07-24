@@ -1,12 +1,11 @@
 package com.logic.jellyfish.ui.map
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.logic.jellyfish.data.Event
 
-class MapViewModel(application: Application) : AndroidViewModel(application) {
+class MapViewModel : ViewModel() {
 
     private val _startService = MutableLiveData<Event<Unit>>()
     val startService: LiveData<Event<Unit>> = _startService

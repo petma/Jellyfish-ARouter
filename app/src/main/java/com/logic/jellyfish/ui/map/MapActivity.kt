@@ -3,7 +3,6 @@ package com.logic.jellyfish.ui.map
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
@@ -20,14 +19,15 @@ import com.logic.jellyfish.App
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.EventObserver
 import com.logic.jellyfish.databinding.MapActivityBinding
+import com.logic.jellyfish.utils.createViewModel
 import com.logic.jellyfish.utils.log
 import com.logic.jellyfish.utils.toast
 import kotlinx.android.synthetic.main.map_activity.*
 
 class MapActivity : AppCompatActivity() {
 
+    private val viewModel: MapViewModel by lazy { createViewModel(MapViewModel::class.java) }
     private lateinit var binding: MapActivityBinding
-    private lateinit var viewModel: MapViewModel
 
     private lateinit var aMap: AMap
     private lateinit var uiSettings: UiSettings
@@ -39,8 +39,10 @@ class MapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.map_activity)
-        viewModel = ViewModelProviders.of(this).get(MapViewModel::class.java)
-        binding.viewmodel = viewModel
+        binding.apply {
+            viewmodel = viewModel
+            lifecycleOwner = this@MapActivity
+        }
 
         map_view.onCreate(savedInstanceState)
         initMap()
