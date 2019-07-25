@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.map
+package com.logic.jellyfish.ui.timer
 
 import android.annotation.TargetApi
 import android.app.Notification
@@ -11,29 +11,20 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.amap.api.maps.AMap
-import com.amap.api.maps.CameraUpdateFactory
-import com.amap.api.maps.UiSettings
-import com.amap.api.maps.model.MyLocationStyle
 import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.ErrorCode
 import com.amap.api.track.TrackParam
 import com.amap.api.track.query.model.*
 import com.logic.jellyfish.R
-import com.logic.jellyfish.data.EventObserver
-import com.logic.jellyfish.databinding.MapActivityBinding
+import com.logic.jellyfish.databinding.TimerActivityBinding
+import com.logic.jellyfish.ui.map.MapActivity
 import com.logic.jellyfish.utils.*
-import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
-import kotlinx.android.synthetic.main.map_activity.*
 
-class MapActivity : AppCompatActivity() {
+class TimerActivity : AppCompatActivity() {
 
-   private val viewModel: MapViewModel by lazy { createViewModel<MapViewModel>() }
-   private lateinit var binding: MapActivityBinding
+   private val viewModel: TimerViewModel by lazy { createViewModel<TimerViewModel>() }
+   private lateinit var binding: TimerActivityBinding
 
-   // 地图相关的配置和服务
-   private lateinit var aMap: AMap
-   private lateinit var uiSettings: UiSettings
    private lateinit var aMapTrackClient: AMapTrackClient
 
    // 地图相关的判断和参数
@@ -45,55 +36,21 @@ class MapActivity : AppCompatActivity() {
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-      binding = DataBindingUtil.setContentView(this, R.layout.map_activity)
+      binding = DataBindingUtil.setContentView(this, R.layout.timer_activity)
       binding.apply {
          viewmodel = viewModel
-         lifecycleOwner = this@MapActivity
+         lifecycleOwner = this@TimerActivity
       }
-      map_view.onCreate(savedInstanceState)
-
-      initMap()
-      initTrack()
    }
 
-   private fun initMap() {
-      aMap = map_view.map
-      uiSettings = aMap.uiSettings
-
-      aMap.moveCamera(CameraUpdateFactory.newCameraPosition(SHEN_ZHEN))
-
-      val myLocationStyle = MyLocationStyle()
-      myLocationStyle.strokeColor(android.R.color.transparent)
-      myLocationStyle.radiusFillColor(android.R.color.transparent)
-      aMap.myLocationStyle = myLocationStyle
-
-      uiSettings.isMyLocationButtonEnabled = true
-      uiSettings.isTiltGesturesEnabled = false
-
-      aMap.isMyLocationEnabled = true
-      aMap.moveCamera(CameraUpdateFactory.zoomTo(18f))
-   }
-
-   private fun initTrack() {
-      aMapTrackClient = AMapTrackClient(this)
-      viewModel.startService.observe(this, EventObserver {
-         if (isServiceRunning) {
-            aMapTrackClient.stopTrack(
-               TrackParam(Constants.SERVICE_ID, terminalId),
-               onTrackLifecycleListener
-            )
-         } else {
-            startTrack()
-         }
-      })
-      viewModel.startGather.observe(this, EventObserver {
-         if (isGatherRunning) {
-            aMapTrackClient.stopGather(onTrackLifecycleListener)
-         } else {
-            aMapTrackClient.trackId = trackId
-            aMapTrackClient.startGather(onTrackLifecycleListener)
-         }
-      })
+   override fun onDestroy() {
+      super.onDestroy()
+      if (isServiceRunning) {
+         aMapTrackClient.stopTrack(
+            TrackParam(Constants.SERVICE_ID, terminalId),
+            onTrackLifecycleListener
+         )
+      }
    }
 
    private fun startTrack() {
@@ -110,7 +67,8 @@ class MapActivity : AppCompatActivity() {
                      // 是否要创建新的轨迹,还是在之前的轨迹的基础上继续上传
                      if (uploadToTrack) {
                         // 添加新的轨迹
-                        aMapTrackClient.addTrack(AddTrackRequest(Constants.SERVICE_ID, terminalId),
+                        aMapTrackClient.addTrack(
+                           AddTrackRequest(Constants.SERVICE_ID, terminalId),
                            object : SimpleOnTrackListener() {
                               // 添加新的轨迹回调
                               override fun onAddTrackCallback(addTrackResponse: AddTrackResponse) {
@@ -187,7 +145,6 @@ class MapActivity : AppCompatActivity() {
       return builder.build()
    }
 
-
    private val onTrackLifecycleListener = object : SimpleOnTrackLifecycleListener() {
       override fun onBindServiceCallback(status: Int, msg: String) {
          log("onBindServiceCallback, status: $status, msg: $msg")
@@ -252,31 +209,4 @@ class MapActivity : AppCompatActivity() {
 
    private fun updateBtnStatus() {
    }
-
-   override fun onResume() {
-      super.onResume()
-      map_view.onResume()
-   }
-
-   override fun onPause() {
-      super.onPause()
-      map_view.onPause()
-   }
-
-   override fun onSaveInstanceState(outState: Bundle) {
-      super.onSaveInstanceState(outState)
-      map_view.onSaveInstanceState(outState)
-   }
-
-   override fun onDestroy() {
-      super.onDestroy()
-      map_view.onDestroy()
-      if (isServiceRunning) {
-         aMapTrackClient.stopTrack(
-            TrackParam(Constants.SERVICE_ID, terminalId),
-            onTrackLifecycleListener
-         )
-      }
-   }
-
 }

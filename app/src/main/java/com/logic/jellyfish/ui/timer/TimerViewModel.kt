@@ -4,8 +4,9 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
-import com.logic.jellyfish.R
+import com.logic.jellyfish.ui.map.MapActivity
+import com.logic.jellyfish.ui.web.X5WebViewActivity
+import com.logic.jellyfish.utils.navigateTo
 
 class TimerViewModel : ViewModel() {
 
@@ -25,16 +26,18 @@ class TimerViewModel : ViewModel() {
     val weather: LiveData<String> = _weather
 
     fun resume(v: View) {
-        v.findNavController().navigate(R.id.action_timerFragment_to_mapActivity)
-
+//        v.findNavController().navigate(R.id.action_timerFragment_to_mapActivity)
+//        v.navigateTo<MapActivity>()
     }
 
     fun stop(v: View) {
-        v.findNavController().navigate(R.id.action_timerFragment_to_x5WebViewActivity)
+//        v.findNavController().navigate(R.id.action_timerFragment_to_x5WebViewActivity)
+        v.navigateTo<X5WebViewActivity>()
     }
 
     fun openMap(v: View) {
-        v.findNavController().navigate(R.id.action_timerFragment_to_mapActivity)
+//        v.findNavController().navigate(R.id.action_timerFragment_to_mapActivity)
+        v.navigateTo<MapActivity>()
     }
 
     fun lock() {

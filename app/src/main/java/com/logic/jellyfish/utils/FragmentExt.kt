@@ -16,3 +16,7 @@ fun <T : ViewModel> Fragment.createViewModel(clazz: Class<T>): T {
 fun <T : ViewModel> Fragment.createSharedViewModel(clazz: Class<T>): T? {
     return this.activity?.let { ViewModelProviders.of(it).get(clazz) }
 }
+
+fun Fragment.toast(content: String) {
+   context?.toast(content)
+}

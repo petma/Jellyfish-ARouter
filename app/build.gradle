@@ -17,7 +17,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('/src/main/assets/fish.jks')
+            storeFile file('fish.jks')
             storePassword '12345678'
             keyAlias 'fish'
             keyPassword '12345678'
@@ -26,7 +26,7 @@ android {
         }
 
         release {
-            storeFile file('/src/main/assets/fish.jks')
+            storeFile file('fish.jks')
             storePassword '12345678'
             keyAlias 'fish'
             keyPassword '12345678'

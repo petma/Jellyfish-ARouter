@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.logic.jellyfish.R
 import com.logic.jellyfish.utils.log
+import com.logic.jellyfish.web.X5Js
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
@@ -29,6 +30,7 @@ class X5WebViewActivity : AppCompatActivity() {
     private fun initWebView() {
 //        web_view.setBackgroundColor(Color.DKGRAY)
         val settings = web_view.settings
+
         settings.apply {
             // 默认false
             loadWithOverviewMode = false
@@ -82,6 +84,7 @@ class X5WebViewActivity : AppCompatActivity() {
         }
 
         web_view.webViewClient = X5WebViewClient()
+        web_view.addJavascriptInterface(X5Js(this), "Android")
     }
 
     inner class X5WebViewClient : WebViewClient() {

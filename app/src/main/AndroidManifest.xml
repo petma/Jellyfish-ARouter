@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.logic.jellyfish">
+    <!-- 运动时会使用前台服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
@@ -41,18 +43,24 @@
             android:name="com.amap.api.v2.apikey"
             android:value="b6ffa70584e636c36229251ea26e13af" />
 
-        <activity
-            android:theme="@style/SplashTheme"
-            android:name=".ui.web.X5WebViewActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask">
+
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity" />
+        <activity
+            android:theme="@style/SplashTheme"
+            android:name=".ui.web.X5WebViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"></activity>
+
+        <activity android:name=".ui.timer.TimerActivity" />
+        <activity android:name=".ui.goal.GoalActivity" />
+
+
         <service android:name="com.amap.api.track.AMapTrackService" />
         <service android:name="com.amap.api.location.APSService" />
 

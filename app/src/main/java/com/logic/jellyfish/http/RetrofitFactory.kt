@@ -14,14 +14,9 @@ import java.util.concurrent.TimeUnit
 object RetrofitFactory {
 
     val aMapService: AMapService by lazy { createAMapService() }
-    val hospitalService: HospitalService by lazy { createHospitalService() }
 
     private const val HOSPITAL_URL = "http://39.108.79.16"
     private const val A_MAP_URL = "https://tsapi.amap.com"
-
-    private fun createHospitalService(): HospitalService {
-        return createRetrofit(HOSPITAL_URL).create(HospitalService::class.java)
-    }
 
     private fun createAMapService(): AMapService {
         return createRetrofit(A_MAP_URL).create(AMapService::class.java)
