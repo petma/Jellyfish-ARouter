@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="com.logic.jellyfish.ui.timer.TimerViewModel" />
@@ -115,23 +117,43 @@
             app:layout_constraintVertical_bias="0.1"
             tools:text="25℃" />
 
+        <ImageView
+            android:id="@+id/lock"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:onClick="@{() -> viewmodel.lock()}"
+            android:src="@mipmap/ic_lock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/open_map" />
+
+        <ImageView
+            android:id="@+id/open_map"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:onClick="@{(v) -> viewmodel.openMap(v)}"
+            android:src="@mipmap/ic_mini_map"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
+
         <FrameLayout
             android:id="@+id/resume_button_container"
+            visible="@{viewmodel.isStopped}"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="92dp"
+            android:layout_height="80dp"
             android:background="@drawable/timber_button_resume_circle"
-            android:onClick="@{(v) -> viewmodel.resume(v)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="h,1:1"
+            android:onClick="@{() -> viewmodel.resume()}"
+            app:layout_constraintBottom_toBottomOf="@+id/open_map"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toStartOf="@+id/stop_button_container"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintStart_toEndOf="@+id/open_map">
+            app:layout_constraintStart_toEndOf="@+id/open_map"
+            app:layout_constraintTop_toTopOf="@+id/open_map">
 
             <TextView
                 android:id="@+id/resume"
@@ -139,26 +161,43 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/resume" />
-
         </FrameLayout>
 
+        <FrameLayout
+            android:id="@+id/suspend_button_container"
+            visible="@{!viewmodel.isStopped}"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@drawable/timber_button_stop_circle"
+            android:onClick="@{() -> viewmodel.suspend()}"
+            app:layout_constraintBottom_toBottomOf="@+id/open_map"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toStartOf="@+id/lock"
+            app:layout_constraintStart_toEndOf="@+id/open_map"
+            app:layout_constraintTop_toTopOf="@+id/open_map"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/suspend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/suspend" />
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/stop_button_container"
+            visible="@{viewmodel.isStopped}"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="80dp"
             android:background="@drawable/timber_button_stop_circle"
             android:onClick="@{(v) -> viewmodel.stop(v)}"
-            app:layout_constraintBottom_toBottomOf="@+id/resume_button_container"
-            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintBottom_toBottomOf="@+id/lock"
+            app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toStartOf="@+id/lock"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintStart_toEndOf="@+id/resume_button_container">
+            app:layout_constraintStart_toEndOf="@+id/resume_button_container"
+            app:layout_constraintTop_toTopOf="@+id/lock">
 
             <TextView
                 android:id="@+id/stop"
@@ -167,39 +206,6 @@
                 android:layout_gravity="center"
                 android:text="@string/stop" />
         </FrameLayout>
-
-        <ImageView
-            android:id="@+id/lock"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:onClick="@{() -> viewmodel.lock()}"
-            android:src="@mipmap/ic_lock"
-            app:layout_constraintBottom_toBottomOf="@+id/stop_button_container"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/stop_button_container"
-            app:layout_constraintTop_toTopOf="@+id/stop_button_container" />
-
-        <ImageView
-            android:id="@+id/open_map"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:onClick="@{(v) -> viewmodel.openMap(v)}"
-            android:src="@mipmap/ic_mini_map"
-            app:layout_constraintBottom_toBottomOf="@+id/resume_button_container"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/resume_button_container"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/resume_button_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

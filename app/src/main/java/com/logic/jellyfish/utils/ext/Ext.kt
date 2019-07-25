@@ -1,4 +1,4 @@
-package com.logic.jellyfish.utils
+package com.logic.jellyfish.utils.ext
 
 import android.content.Context
 import android.util.Log

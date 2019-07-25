@@ -1,4 +1,4 @@
-package com.logic.jellyfish.utils
+package com.logic.jellyfish.utils.ext
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel

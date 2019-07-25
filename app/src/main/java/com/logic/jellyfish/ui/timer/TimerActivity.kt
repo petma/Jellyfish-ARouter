@@ -18,7 +18,12 @@ import com.amap.api.track.query.model.*
 import com.logic.jellyfish.R
 import com.logic.jellyfish.databinding.TimerActivityBinding
 import com.logic.jellyfish.ui.map.MapActivity
-import com.logic.jellyfish.utils.*
+import com.logic.jellyfish.utils.Constants
+import com.logic.jellyfish.utils.SimpleOnTrackLifecycleListener
+import com.logic.jellyfish.utils.SimpleOnTrackListener
+import com.logic.jellyfish.utils.ext.createViewModel
+import com.logic.jellyfish.utils.ext.log
+import com.logic.jellyfish.utils.ext.toast
 
 class TimerActivity : AppCompatActivity() {
 
@@ -41,6 +46,9 @@ class TimerActivity : AppCompatActivity() {
          viewmodel = viewModel
          lifecycleOwner = this@TimerActivity
       }
+
+      aMapTrackClient = AMapTrackClient(this)
+      viewModel.startCount()
    }
 
    override fun onDestroy() {

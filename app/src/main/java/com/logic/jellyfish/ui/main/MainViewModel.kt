@@ -1,17 +1,19 @@
 package com.logic.jellyfish.ui.main
 
 import android.view.View
+import android.widget.LinearLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.logic.jellyfish.R
 import com.logic.jellyfish.app.App
 import com.logic.jellyfish.http.RetrofitFactory
 import com.logic.jellyfish.ui.timer.TimerActivity
 import com.logic.jellyfish.utils.Constants.TRACK_SERVICE_KEY
-import com.logic.jellyfish.utils.navigateTo
-import com.logic.jellyfish.utils.toast
+import com.logic.jellyfish.utils.ext.navigateTo
+import com.logic.jellyfish.utils.ext.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,6 +29,10 @@ class MainViewModel : ViewModel() {
 
    fun startRunning(v: View) {
       v.navigateTo<TimerActivity>()
+   }
+
+   fun go(hello: LinearLayout) {
+      hello.setBackgroundResource(R.color.colorAccent)
    }
 
    fun createService(v: View) {

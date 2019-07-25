@@ -22,8 +22,13 @@ import com.amap.api.track.query.model.*
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.EventObserver
 import com.logic.jellyfish.databinding.MapActivityBinding
-import com.logic.jellyfish.utils.*
+import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
+import com.logic.jellyfish.utils.SimpleOnTrackLifecycleListener
+import com.logic.jellyfish.utils.SimpleOnTrackListener
+import com.logic.jellyfish.utils.ext.createViewModel
+import com.logic.jellyfish.utils.ext.log
+import com.logic.jellyfish.utils.ext.toast
 import kotlinx.android.synthetic.main.map_activity.*
 
 class MapActivity : AppCompatActivity() {

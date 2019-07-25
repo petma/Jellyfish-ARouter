@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.logic.jellyfish.R
-import com.logic.jellyfish.utils.log
+import com.logic.jellyfish.utils.ext.log
 import com.logic.jellyfish.web.X5Js
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView

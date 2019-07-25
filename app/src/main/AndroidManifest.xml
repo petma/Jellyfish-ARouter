@@ -2,27 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.logic.jellyfish">
+
     <!-- 运动时会使用前台服务 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- 允许程序打开网络套接字 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 允许程序设置内置sd卡的写权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 允许程序访问WiFi网络信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- 允许程序读写手机状态和身份 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
@@ -37,38 +28,38 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name="com.logic.jellyfish.ui.map.MapActivity" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b6ffa70584e636c36229251ea26e13af" />
 
-
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.ready.ReadyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.map.MapActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.main.MainActivity" />
 
         <activity
-            android:theme="@style/SplashTheme"
             android:name=".ui.web.X5WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme" />
 
-        <activity android:name=".ui.timer.TimerActivity" />
+        <activity
+            android:name=".ui.timer.TimerActivity"
+            android:theme="@style/TimerTheme" />
+
         <activity android:name=".ui.goal.GoalActivity" />
-
 
         <service android:name="com.amap.api.track.AMapTrackService" />
         <service android:name="com.amap.api.location.APSService" />
-
-        <!--&lt;!&ndash; 腾讯X5内核初始化 &ndash;&gt;-->
-        <!--<service-->
-        <!--android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"-->
-        <!--android:label="dexopt"-->
-        <!--android:process=":dexopt" />-->
     </application>
 
 </manifest>

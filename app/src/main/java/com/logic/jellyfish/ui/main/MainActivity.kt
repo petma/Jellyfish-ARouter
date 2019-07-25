@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.logic.jellyfish.R
 import com.logic.jellyfish.databinding.MainActivityBinding
-import com.logic.jellyfish.utils.createViewModel
+import com.logic.jellyfish.utils.ext.createViewModel
 
 class MainActivity : AppCompatActivity() {
 

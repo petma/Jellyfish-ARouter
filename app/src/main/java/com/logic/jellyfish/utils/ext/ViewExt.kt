@@ -1,4 +1,4 @@
-package com.logic.jellyfish.utils
+package com.logic.jellyfish.utils.ext
 
 import android.content.Intent
 import android.view.View

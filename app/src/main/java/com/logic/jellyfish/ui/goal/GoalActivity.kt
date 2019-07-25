@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.logic.jellyfish.R
 import com.logic.jellyfish.databinding.GoalActivityBinding
-import com.logic.jellyfish.utils.createViewModel
+import com.logic.jellyfish.utils.ext.createViewModel
 
 class GoalActivity : AppCompatActivity() {
 
