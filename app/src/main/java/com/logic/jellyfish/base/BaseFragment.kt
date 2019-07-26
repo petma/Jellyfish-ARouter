@@ -12,7 +12,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.utils.getViewModel
 
-abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(private val layout: Int) :
+    Fragment() {
 
     protected val viewModel: VM by lazy { createViewModel() }
     protected lateinit var binding: SV
@@ -21,19 +22,17 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding> : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, setLayout(), null, false)
+        binding = DataBindingUtil.inflate(layoutInflater, layout, null, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initView()
+        init()
     }
 
-    abstract fun setLayout(): Int
-
-    abstract fun initView()
+    abstract fun init()
 
 
     private fun createViewModel(): VM {

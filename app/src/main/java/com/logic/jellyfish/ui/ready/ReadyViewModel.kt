@@ -1,13 +1,15 @@
 package com.logic.jellyfish.ui.ready
 
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.ui.timer.TimerActivity
-import com.logic.jellyfish.utils.ext.startActivity
+import com.logic.jellyfish.data.Event
 
 class ReadyViewModel : ViewModel() {
 
+   val startEvent = MutableLiveData<Event<Unit>>()
+
    fun startRunning(v: View) {
-      v.startActivity<TimerActivity>()
+      startEvent.value = Event(Unit)
    }
 }
