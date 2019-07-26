@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.main
+package com.logic.jellyfish.ui.test
 
 import android.view.View
 import android.widget.LinearLayout
@@ -12,7 +12,7 @@ import com.logic.jellyfish.app.App
 import com.logic.jellyfish.http.RetrofitFactory
 import com.logic.jellyfish.ui.timer.TimerActivity
 import com.logic.jellyfish.utils.Constants.TRACK_SERVICE_KEY
-import com.logic.jellyfish.utils.ext.navigateTo
+import com.logic.jellyfish.utils.ext.startActivity
 import com.logic.jellyfish.utils.ext.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class MainViewModel : ViewModel() {
    val serviceDesc = MutableLiveData<String>()
 
    fun startRunning(v: View) {
-      v.navigateTo<TimerActivity>()
+      v.startActivity<TimerActivity>()
    }
 
    fun go(hello: LinearLayout) {

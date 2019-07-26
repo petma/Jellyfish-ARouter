@@ -143,7 +143,7 @@
 
         <FrameLayout
             android:id="@+id/resume_button_container"
-            visible="@{viewmodel.isStopped}"
+            visible="@{viewmodel.isPaused}"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:background="@drawable/timber_button_resume_circle"
@@ -165,11 +165,11 @@
 
         <FrameLayout
             android:id="@+id/suspend_button_container"
-            visible="@{!viewmodel.isStopped}"
+            visible="@{!viewmodel.isPaused}"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="@drawable/timber_button_stop_circle"
-            android:onClick="@{() -> viewmodel.suspend()}"
+            android:onClick="@{() -> viewmodel.pause()}"
             app:layout_constraintBottom_toBottomOf="@+id/open_map"
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintEnd_toStartOf="@+id/lock"
@@ -187,7 +187,7 @@
 
         <FrameLayout
             android:id="@+id/stop_button_container"
-            visible="@{viewmodel.isStopped}"
+            visible="@{viewmodel.isPaused}"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:background="@drawable/timber_button_stop_circle"

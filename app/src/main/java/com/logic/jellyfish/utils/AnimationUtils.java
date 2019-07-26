@@ -36,7 +36,6 @@ public class AnimationUtils {
         animation.setDuration(duration);
         animation.setFillAfter(true);
         animation.setAnimationListener(new AnimationListener() {
-
             @Override
             public void onAnimationStart(Animation animation) {
             }

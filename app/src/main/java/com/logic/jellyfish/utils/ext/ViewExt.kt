@@ -9,6 +9,15 @@ fun View.toast(content: String) {
    log(content)
 }
 
-inline fun <reified T> View.navigateTo() {
+inline fun <reified T> View.startActivity() {
    this.context.startActivity(Intent(this.context, T::class.java))
 }
+
+inline fun <reified T> View.startService() {
+   this.context.startService(Intent(this.context, T::class.java))
+}
+
+inline fun <reified T> View.startForegroundService() {
+   this.context.startForegroundService(Intent(this.context, T::class.java))
+}
+

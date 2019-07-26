@@ -1,31 +1,20 @@
-package com.logic.jellyfish.ui.main
+package com.logic.jellyfish.ui.test
 
 import android.Manifest
 import android.annotation.TargetApi
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.logic.jellyfish.R
+import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.databinding.MainActivityBinding
-import com.logic.jellyfish.utils.ext.createViewModel
 
-class MainActivity : AppCompatActivity() {
-
-   private val viewModel: MainViewModel by lazy { createViewModel<MainViewModel>() }
-   private lateinit var binding: MainActivityBinding
+class MainActivity : BaseActivity<MainViewModel, MainActivityBinding>(R.layout.main_activity) {
 
    private var needCheckBackLocation = false
    private var isNeedCheck = true
 
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
-      binding.apply {
-         viewmodel = viewModel
-         lifecycleOwner = this@MainActivity
-      }
+   override fun init() {
+      binding.viewmodel = viewModel
    }
 
    override fun onResume() {
@@ -33,13 +22,12 @@ class MainActivity : AppCompatActivity() {
       try {
          if (Build.VERSION.SDK_INT >= 23) {
             if (isNeedCheck) {
-//               checkPermissions(needPermissions)
+               checkPermissions(needPermissions)
             }
          }
       } catch (e: Throwable) {
          e.printStackTrace()
       }
-
    }
 
    @TargetApi(23)

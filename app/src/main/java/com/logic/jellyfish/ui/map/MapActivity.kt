@@ -1,36 +1,37 @@
 package com.logic.jellyfish.ui.map
 
-import android.annotation.TargetApi
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.os.Build
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.UiSettings
-import com.amap.api.maps.model.MyLocationStyle
+import com.amap.api.maps.model.*
 import com.amap.api.track.AMapTrackClient
-import com.amap.api.track.ErrorCode
-import com.amap.api.track.TrackParam
-import com.amap.api.track.query.model.*
+import com.amap.api.track.query.entity.DriveMode
+import com.amap.api.track.query.entity.Point
+import com.amap.api.track.query.model.QueryTerminalRequest
+import com.amap.api.track.query.model.QueryTerminalResponse
+import com.amap.api.track.query.model.QueryTrackRequest
+import com.amap.api.track.query.model.QueryTrackResponse
 import com.logic.jellyfish.R
-import com.logic.jellyfish.data.EventObserver
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
-import com.logic.jellyfish.utils.SimpleOnTrackLifecycleListener
 import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.ext.createViewModel
-import com.logic.jellyfish.utils.ext.log
 import com.logic.jellyfish.utils.ext.toast
 import kotlinx.android.synthetic.main.map_activity.*
+import java.util.*
 
+/**
+ * 功能:
+ *
+ * 1. 实时显示自己的位置
+ * 2. 画出跑步的轨迹
+ * 3. 截屏分享
+ */
 class MapActivity : AppCompatActivity() {
 
    private val viewModel: MapViewModel by lazy { createViewModel<MapViewModel>() }
@@ -41,12 +42,10 @@ class MapActivity : AppCompatActivity() {
    private lateinit var uiSettings: UiSettings
    private lateinit var aMapTrackClient: AMapTrackClient
 
-   // 地图相关的判断和参数
-   private var terminalId: Long = 0
-   private var trackId: Long = 0
-   private var uploadToTrack = false
-   private var isServiceRunning: Boolean = false
-   private var isGatherRunning: Boolean = false
+   // 画轨迹相关的参数
+   private val polyLines = LinkedList<Polyline>()
+   private val endMarkers = LinkedList<Marker>()
+
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -57,11 +56,13 @@ class MapActivity : AppCompatActivity() {
       }
       map_view.onCreate(savedInstanceState)
 
-      initMap()
+      // 初始化一些重要参数
+      init()
       initTrack()
    }
 
-   private fun initMap() {
+   private fun init() {
+      aMapTrackClient = AMapTrackClient(applicationContext)
       aMap = map_view.map
       uiSettings = aMap.uiSettings
 
@@ -80,182 +81,128 @@ class MapActivity : AppCompatActivity() {
    }
 
    private fun initTrack() {
-      aMapTrackClient = AMapTrackClient(this)
-      viewModel.startService.observe(this, EventObserver {
-         if (isServiceRunning) {
-            aMapTrackClient.stopTrack(
-               TrackParam(Constants.SERVICE_ID, terminalId),
-               onTrackLifecycleListener
-            )
-         } else {
-            startTrack()
-         }
-      })
-      viewModel.startGather.observe(this, EventObserver {
-         if (isGatherRunning) {
-            aMapTrackClient.stopGather(onTrackLifecycleListener)
-         } else {
-            aMapTrackClient.trackId = trackId
-            aMapTrackClient.startGather(onTrackLifecycleListener)
-         }
-      })
+//      val finishRun = intent.getBooleanExtra("finish_run", true)
+//      if (finishRun){
+      paintTrack()
+//      }
    }
 
-   private fun startTrack() {
-      // 查询终端信息
+   private fun paintTrack() {
+      clearTracksOnMap()
+      // 先查询terminal id，然后用terminal id查询轨迹
+      // 查询符合条件的所有轨迹，并分别绘制
       aMapTrackClient.queryTerminal(
-         QueryTerminalRequest(Constants.SERVICE_ID, Constants.TERMINAL_NAME),
-         object : SimpleOnTrackListener() {
-            // 查询终端信息回调
+         QueryTerminalRequest(
+            Constants.SERVICE_ID,
+            Constants.TERMINAL_NAME
+         ), object : SimpleOnTrackListener() {
             override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
                if (queryTerminalResponse.isSuccess) {
-                  // 如果终端存在
                   if (queryTerminalResponse.isTerminalExist) {
-                     terminalId = queryTerminalResponse.tid
-                     // 是否要创建新的轨迹,还是在之前的轨迹的基础上继续上传
-                     if (uploadToTrack) {
-                        // 添加新的轨迹
-                        aMapTrackClient.addTrack(AddTrackRequest(Constants.SERVICE_ID, terminalId),
-                           object : SimpleOnTrackListener() {
-                              // 添加新的轨迹回调
-                              override fun onAddTrackCallback(addTrackResponse: AddTrackResponse) {
-                                 if (addTrackResponse.isSuccess) {
-                                    trackId = addTrackResponse.trid
-                                    beginTrack()
-                                 } else {
-                                    toast("网络请求失败,${addTrackResponse.errorMsg}")
-                                 }
-                              }
-                           })
-                     }
-                     // 不创建新的轨迹,直接在旧的轨迹的基础上继续添加
-                     else {
-                        beginTrack()
-                     }
-                  }
-                  // 如果终端不存在,就创建新的终端
-                  else {
-                     aMapTrackClient.addTerminal(
-                        AddTerminalRequest(Constants.TERMINAL_NAME, Constants.SERVICE_ID),
+                     val tid = queryTerminalResponse.tid
+                     // 搜索最近12小时以内上报的属于某个轨迹的轨迹点信息，散点上报不会包含在该查询结果中
+                     val queryTrackRequest = QueryTrackRequest(
+                        Constants.SERVICE_ID, // 服务ID
+                        tid, // 终端ID
+                        -1, // 轨迹id，不指定，查询所有轨迹，注意分页仅在查询特定轨迹id时生效，查询所有轨迹时无法对轨迹点进行分页
+                        System.currentTimeMillis() - 12 * 60 * 60 * 1000, // 12个小时前的时间戳
+                        System.currentTimeMillis(), // 现在的时间戳
+                        0, // 不启用去噪
+                        1, // 绑路 1是 0否
+                        0, // 不进行精度过滤
+                        DriveMode.DRIVING, // 当前仅支持驾车模式
+                        1, // 距离补偿 1是 0否
+                        5000, // 距离补偿，只有超过5km的点才启用距离补偿
+                        1, // 结果应该包含轨迹点信息
+                        1, // 返回第1页数据，但由于未指定轨迹，分页将失效
+                        100    // 一页不超过100条
+                     )
+                     aMapTrackClient.queryTerminalTrack(
+                        queryTrackRequest,
                         object : SimpleOnTrackListener() {
-                           override fun onCreateTerminalCallback(addTerminalResponse: AddTerminalResponse) {
-                              if (addTerminalResponse.isSuccess) {
-                                 terminalId = addTerminalResponse.tid
-                                 beginTrack()
+                           override fun onQueryTrackCallback(queryTrackResponse: QueryTrackResponse) {
+                              if (queryTrackResponse.isSuccess) {
+                                 val tracks = queryTrackResponse.tracks
+                                 if (tracks != null && tracks.isNotEmpty()) {
+                                    var allEmpty = true
+                                    for (track in tracks) {
+                                       val points = track.points
+                                       if (points != null && points.size > 0) {
+                                          allEmpty = false
+                                          drawTrackOnMap(points)
+                                       }
+                                    }
+                                    if (allEmpty) {
+                                       toast("所有轨迹都无轨迹点，请尝试放宽过滤限制，如：关闭绑路模式")
+                                    } else {
+                                       val sb = StringBuilder()
+                                       sb.append("共查询到").append(tracks.size)
+                                          .append("条轨迹，每条轨迹行驶距离分别为：")
+                                       for (track in tracks) {
+                                          sb.append(track.distance).append("m,")
+                                       }
+                                       sb.deleteCharAt(sb.length - 1)
+                                       toast(sb.toString())
+                                    }
+                                 } else {
+                                    toast("未获取到轨迹")
+                                 }
                               } else {
-                                 toast("网络请求失败,${addTerminalResponse.errorMsg}")
+                                 toast("查询历史轨迹失败，${queryTrackResponse.errorMsg}")
                               }
                            }
                         })
+                  } else {
+                     toast("Terminal不存在")
                   }
                } else {
-                  toast("网络请求失败${queryTerminalResponse.errorMsg}")
+                  toast("网络请求失败，错误原因: ${queryTerminalResponse.errorMsg}")
                }
             }
-         }
-      )
+         })
    }
 
-   private fun beginTrack() {
-      val trackParam = TrackParam(Constants.SERVICE_ID, terminalId)
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-         trackParam.notification = createNotification()
+   private fun drawTrackOnMap(points: List<Point>) {
+      val boundsBuilder = LatLngBounds.Builder()
+      val polylineOptions = PolylineOptions()
+      polylineOptions.color(Color.BLUE).width(20f)
+      if (points.isNotEmpty()) {
+         // 起点
+         val p = points[0]
+         val latLng = LatLng(p.lat, p.lng)
+         val markerOptions = MarkerOptions()
+            .position(latLng)
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+         endMarkers.add(aMap.addMarker(markerOptions))
       }
-      aMapTrackClient.startTrack(trackParam, onTrackLifecycleListener)
+      if (points.size > 1) {
+         // 终点
+         val p = points[points.size - 1]
+         val latLng = LatLng(p.lat, p.lng)
+         val markerOptions = MarkerOptions()
+            .position(latLng)
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+         endMarkers.add(aMap.addMarker(markerOptions))
+      }
+      for (p in points) {
+         val latLng = LatLng(p.lat, p.lng)
+         polylineOptions.add(latLng)
+         boundsBuilder.include(latLng)
+      }
+      val polyline = aMap.addPolyline(polylineOptions)
+      polyLines.add(polyline)
+      aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 30))
    }
 
-   /**
-    * 在8.0以上手机，如果app切到后台，系统会限制定位相关接口调用频率
-    * 可以在启动轨迹上报服务时提供一个通知，这样Service启动时会使用该通知成为前台Service，可以避免此限制
-    */
-   @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-   private fun createNotification(): Notification {
-      val builder: Notification.Builder
-      builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-         val channel = NotificationChannel(
-            "CHANNEL_ID_SERVICE_RUNNING",
-            "app service",
-            NotificationManager.IMPORTANCE_LOW
-         )
-         nm.createNotificationChannel(channel)
-         Notification.Builder(applicationContext, "CHANNEL_ID_SERVICE_RUNNING")
-      } else {
-         Notification.Builder(applicationContext)
+   private fun clearTracksOnMap() {
+      for (polyline in polyLines) {
+         polyline.remove()
       }
-      val nfIntent = Intent(this, MapActivity::class.java)
-      nfIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-      builder.setContentIntent(PendingIntent.getActivity(this, 0, nfIntent, 0))
-         .setSmallIcon(R.mipmap.ic_launcher)
-         .setContentTitle("猎鹰sdk运行中")
-         .setContentText("猎鹰sdk运行中")
-      return builder.build()
-   }
-
-
-   private val onTrackLifecycleListener = object : SimpleOnTrackLifecycleListener() {
-      override fun onBindServiceCallback(status: Int, msg: String) {
-         log("onBindServiceCallback, status: $status, msg: $msg")
+      for (marker in endMarkers) {
+         marker.remove()
       }
-
-      override fun onStartTrackCallback(status: Int, msg: String) {
-         if (status == ErrorCode.TrackListen.START_TRACK_SUCEE || status == ErrorCode.TrackListen.START_TRACK_SUCEE_NO_NETWORK) {
-            // 成功启动
-            toast("启动服务成功")
-            isServiceRunning = true
-            updateBtnStatus()
-         } else if (status == ErrorCode.TrackListen.START_TRACK_ALREADY_STARTED) {
-            // 已经启动
-            toast("服务已经启动")
-            isServiceRunning = true
-            updateBtnStatus()
-         } else {
-            toast("error onStartTrackCallback, status: $status, msg: $msg")
-         }
-      }
-
-      override fun onStopTrackCallback(status: Int, msg: String) {
-         if (status == ErrorCode.TrackListen.STOP_TRACK_SUCCE) {
-            // 成功停止
-            toast("停止服务成功")
-            isServiceRunning = false
-            isGatherRunning = false
-            updateBtnStatus()
-         } else {
-            toast("error onStopTrackCallback, status: $status, msg: $msg")
-         }
-      }
-
-      override fun onStartGatherCallback(status: Int, msg: String) {
-         when (status) {
-            ErrorCode.TrackListen.START_GATHER_SUCEE -> {
-               toast("定位采集开启成功")
-               isGatherRunning = true
-               updateBtnStatus()
-            }
-            ErrorCode.TrackListen.START_GATHER_ALREADY_STARTED -> {
-               toast("定位采集已经开启")
-               isGatherRunning = true
-               updateBtnStatus()
-            }
-            else -> {
-               toast("error onStartGatherCallback, status: $status, msg: $msg")
-            }
-         }
-      }
-
-      override fun onStopGatherCallback(status: Int, msg: String) {
-         if (status == ErrorCode.TrackListen.STOP_GATHER_SUCCE) {
-            toast("定位采集停止成功")
-            isGatherRunning = false
-            updateBtnStatus()
-         } else {
-            toast("error onStopGatherCallback, status: $status, msg: $msg")
-         }
-      }
-   }
-
-   private fun updateBtnStatus() {
+      endMarkers.clear()
+      polyLines.clear()
    }
 
    override fun onResume() {
@@ -276,12 +223,6 @@ class MapActivity : AppCompatActivity() {
    override fun onDestroy() {
       super.onDestroy()
       map_view.onDestroy()
-      if (isServiceRunning) {
-         aMapTrackClient.stopTrack(
-            TrackParam(Constants.SERVICE_ID, terminalId),
-            onTrackLifecycleListener
-         )
-      }
    }
 
 }

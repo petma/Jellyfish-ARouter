@@ -36,27 +36,24 @@
         <activity android:name=".ui.ready.ReadyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.map.MapActivity"
             android:launchMode="singleTop" />
-
-        <activity android:name=".ui.main.MainActivity" />
-
+        <activity android:name=".ui.test.MainActivity" />
         <activity
             android:name=".ui.web.X5WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:theme="@style/SplashTheme" />
-
         <activity
             android:name=".ui.timer.TimerActivity"
             android:theme="@style/TimerTheme" />
-
         <activity android:name=".ui.goal.GoalActivity" />
+
+        <service android:name=".service.TrackService" />
 
         <service android:name="com.amap.api.track.AMapTrackService" />
         <service android:name="com.amap.api.location.APSService" />
