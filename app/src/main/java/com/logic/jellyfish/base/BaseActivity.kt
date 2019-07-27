@@ -8,12 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.utils.getViewModel
 
-abstract class BaseActivity<VM : ViewModel, SV : ViewDataBinding>(
+abstract class BaseActivity<VM : ViewModel, BV : ViewDataBinding>(
    private val layout: Int
 ) : AppCompatActivity() {
 
    protected val viewModel: VM by lazy { createViewModel() }
-   protected lateinit var binding: SV
+   protected lateinit var binding: BV
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)

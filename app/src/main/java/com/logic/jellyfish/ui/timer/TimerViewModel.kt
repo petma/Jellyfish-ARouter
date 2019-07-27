@@ -1,6 +1,7 @@
 package com.logic.jellyfish.ui.timer
 
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.logic.jellyfish.data.Event
@@ -10,14 +11,29 @@ import java.util.*
 
 class TimerViewModel : ViewModel() {
 
-   val speedNumber = MutableLiveData<String>()
-   val timeCostNumber = MutableLiveData<String>()
-   val caloriesConsumeNumberNumber = MutableLiveData<String>()
-   val kiloMeterNumber = MutableLiveData<String>()
-   val weather = MutableLiveData<String>()
-   val isPaused = MutableLiveData<Boolean>()
-   val resumeGather = MutableLiveData<Event<Unit>>()
-   val pauseGather = MutableLiveData<Event<Unit>>()
+   private val _speedNumber = MutableLiveData<String>()
+   val speedNumber: LiveData<String> = _speedNumber
+
+   private val _timeCostNumber = MutableLiveData<String>()
+   val timeCostNumber: LiveData<String> = _timeCostNumber
+
+   private val _caloriesConsumeNumberNumber = MutableLiveData<String>()
+   val caloriesConsumeNumberNumber: LiveData<String> = _caloriesConsumeNumberNumber
+
+   private val _kiloMeterNumber = MutableLiveData<String>()
+   val kiloMeterNumber: LiveData<String> = _kiloMeterNumber
+
+   private val _weather = MutableLiveData<String>()
+   val weather: LiveData<String> = _weather
+
+   private val _isPaused = MutableLiveData<Boolean>()
+   val isPaused: LiveData<Boolean> = _isPaused
+
+   private val _resumeGather = MutableLiveData<Event<Unit>>()
+   val resumeGather: LiveData<Event<Unit>> = _resumeGather
+
+   private val _pauseGather = MutableLiveData<Event<Unit>>()
+   val pauseGather: LiveData<Event<Unit>> = _pauseGather
 
    private var timer: Timer? = null
 
@@ -25,9 +41,18 @@ class TimerViewModel : ViewModel() {
     * 继续按钮
     */
    fun resume() {
-      isPaused.value = false
       startCount()
-      resumeGather.value = Event(Unit)
+      _isPaused.value = false
+      _resumeGather.value = Event(Unit)
+   }
+
+   /**
+    * 暂停按钮
+    */
+   fun pause() {
+      stopCount()
+      _isPaused.value = true
+      _pauseGather.value = Event(Unit)
    }
 
    /**
@@ -36,16 +61,6 @@ class TimerViewModel : ViewModel() {
    fun stop(v: View) {
       (v.context as TimerActivity).finish()
    }
-
-   /**
-    * 暂停按钮
-    */
-   fun pause() {
-      isPaused.value = true
-      stopCount()
-      pauseGather.value = Event(Unit)
-   }
-
 
    fun openMap(v: View) {
       v.startActivity<MapActivity>()
@@ -68,7 +83,7 @@ class TimerViewModel : ViewModel() {
             } else {
                second++
             }
-            timeCostNumber.postValue("${minute}分:${second}秒")
+            _timeCostNumber.postValue("${minute}分:${second}秒")
          }
       }, 0L, 1000L)
    }

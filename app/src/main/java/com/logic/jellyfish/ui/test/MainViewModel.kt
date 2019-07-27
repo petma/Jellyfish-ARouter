@@ -1,13 +1,11 @@
 package com.logic.jellyfish.ui.test
 
 import android.view.View
-import android.widget.LinearLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.logic.jellyfish.R
 import com.logic.jellyfish.app.App
 import com.logic.jellyfish.http.RetrofitFactory
 import com.logic.jellyfish.ui.timer.TimerActivity
@@ -23,16 +21,14 @@ class MainViewModel : ViewModel() {
    private val _aMapServiceDataString = MutableLiveData<String>()
    val aMapServiceDataString: LiveData<String> = _aMapServiceDataString
 
-   val serviceName = MutableLiveData<String>()
+   private val _serviceName = MutableLiveData<String>()
+   val serviceName: LiveData<String> = _serviceName
 
-   val serviceDesc = MutableLiveData<String>()
+   private val _serviceDesc = MutableLiveData<String>()
+   val serviceDesc: LiveData<String> = _serviceDesc
 
    fun startRunning(v: View) {
       v.startActivity<TimerActivity>()
-   }
-
-   fun go(hello: LinearLayout) {
-      hello.setBackgroundResource(R.color.colorAccent)
    }
 
    fun createService(v: View) {
@@ -41,7 +37,7 @@ class MainViewModel : ViewModel() {
             val response = withContext(Dispatchers.IO) {
                RetrofitFactory.aMapService.addService(
                   TRACK_SERVICE_KEY,
-                  serviceName.value
+                  _serviceName.value
                )
             }
             when (response.errcode) {
