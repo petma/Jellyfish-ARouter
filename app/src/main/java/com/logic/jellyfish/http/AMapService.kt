@@ -22,7 +22,7 @@ interface AMapService {
     @POST("v1/track/terminal/add")
     suspend fun addTerminal(
         @Field("key") key: String?,
-        @Field("sid") sid: String?,
+        @Field("sid") sid: Long,
         @Field("name") name: String?,
         @Field("desc") desc: String? = null,
         @Field("props ") props: String? = null

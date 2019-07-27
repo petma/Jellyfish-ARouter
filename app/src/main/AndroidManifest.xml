@@ -42,7 +42,7 @@
         <activity
             android:name=".ui.map.MapActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".ui.test.MainActivity" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.web.X5WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

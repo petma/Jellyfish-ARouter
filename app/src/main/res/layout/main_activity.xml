@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.logic.jellyfish.ui.test.MainViewModel" />
+            type="com.logic.jellyfish.ui.main.MainViewModel" />
 
     </data>
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".ui.test.MainFragment">
+        tools:context=".ui.main.MainFragment">
 
         <Button
             android:id="@+id/button2"
@@ -40,14 +40,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="服务name"
-            android:text="@={viewmodel.serviceName}" />
+            android:hint="服务name" />
+        <!--android:text="@={viewmodel.serviceName}" />-->
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="服务desc"
-            android:text="@={viewmodel.serviceDesc}" />
+            android:hint="服务desc" />
+        <!--android:text="@={viewmodel.serviceDesc}" />-->
 
         <Button
             android:id="@+id/live"

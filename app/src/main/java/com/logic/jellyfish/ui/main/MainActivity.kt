@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.test
+package com.logic.jellyfish.ui.main
 
 import android.Manifest
 import android.annotation.TargetApi

@@ -11,11 +11,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+/**
+ * 这个RetrofitFactory是个单例
+ * 然后通过这个单例工厂的静态方法创造出aMapService
+ */
 object RetrofitFactory {
 
     val aMapService: AMapService by lazy { createAMapService() }
 
-    private const val HOSPITAL_URL = "http://39.108.79.16"
     private const val A_MAP_URL = "https://tsapi.amap.com"
 
     private fun createAMapService(): AMapService {
@@ -88,7 +91,7 @@ object RetrofitFactory {
         }
     }
 
-    fun isNetworkConnected(): Boolean {
+    private fun isNetworkConnected(): Boolean {
         return try {
             val cm = App.app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val info = cm.activeNetworkInfo

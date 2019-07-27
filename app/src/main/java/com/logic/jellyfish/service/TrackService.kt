@@ -11,6 +11,7 @@ import com.amap.api.track.ErrorCode
 import com.amap.api.track.TrackParam
 import com.amap.api.track.query.model.*
 import com.logic.jellyfish.R
+import com.logic.jellyfish.app.Cache
 import com.logic.jellyfish.data.MessageEvent
 import com.logic.jellyfish.ui.timer.TimerActivity
 import com.logic.jellyfish.utils.Constants
@@ -78,7 +79,7 @@ class TrackService : Service() {
    private fun startTrack() {
       // 查询终端信息
       aMapTrackClient.queryTerminal(
-         QueryTerminalRequest(Constants.SERVICE_ID, Constants.TERMINAL_NAME),
+         QueryTerminalRequest(Constants.SERVICE_ID, Cache.terminalName),
          object : SimpleOnTrackListener() {
             // 查询终端信息回调
             override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
@@ -111,7 +112,7 @@ class TrackService : Service() {
                   // 如果终端不存在,就创建新的终端
                   else {
                      aMapTrackClient.addTerminal(
-                        AddTerminalRequest(Constants.TERMINAL_NAME, Constants.SERVICE_ID),
+                        AddTerminalRequest(Cache.terminalName, Constants.SERVICE_ID),
                         object : SimpleOnTrackListener() {
                            override fun onCreateTerminalCallback(addTerminalResponse: AddTerminalResponse) {
                               if (addTerminalResponse.isSuccess) {

@@ -16,6 +16,7 @@ import com.amap.api.track.query.model.QueryTerminalResponse
 import com.amap.api.track.query.model.QueryTrackRequest
 import com.amap.api.track.query.model.QueryTrackResponse
 import com.logic.jellyfish.R
+import com.logic.jellyfish.app.Cache
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
@@ -56,7 +57,6 @@ class MapActivity : AppCompatActivity() {
       }
       map_view.onCreate(savedInstanceState)
 
-      // 初始化一些重要参数
       init()
       initTrack()
    }
@@ -94,28 +94,29 @@ class MapActivity : AppCompatActivity() {
       aMapTrackClient.queryTerminal(
          QueryTerminalRequest(
             Constants.SERVICE_ID,
-            Constants.TERMINAL_NAME
+            Cache.terminalName
          ), object : SimpleOnTrackListener() {
             override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
                if (queryTerminalResponse.isSuccess) {
                   if (queryTerminalResponse.isTerminalExist) {
                      val tid = queryTerminalResponse.tid
                      // 搜索最近12小时以内上报的属于某个轨迹的轨迹点信息，散点上报不会包含在该查询结果中
+                     // http://a.amap.com/lbs/static/unzip/Android_Track_Doc/index.html
                      val queryTrackRequest = QueryTrackRequest(
-                        Constants.SERVICE_ID, // 服务ID
-                        tid, // 终端ID
-                        -1, // 轨迹id，不指定，查询所有轨迹，注意分页仅在查询特定轨迹id时生效，查询所有轨迹时无法对轨迹点进行分页
-                        System.currentTimeMillis() - 12 * 60 * 60 * 1000, // 12个小时前的时间戳
-                        System.currentTimeMillis(), // 现在的时间戳
-                        0, // 不启用去噪
-                        1, // 绑路 1是 0否
-                        0, // 不进行精度过滤
-                        DriveMode.DRIVING, // 当前仅支持驾车模式
-                        1, // 距离补偿 1是 0否
-                        5000, // 距离补偿，只有超过5km的点才启用距离补偿
-                        1, // 结果应该包含轨迹点信息
-                        1, // 返回第1页数据，但由于未指定轨迹，分页将失效
-                        100    // 一页不超过100条
+                        Constants.SERVICE_ID, // sid - 服务ID
+                        tid, // tid - 终端ID
+                        -1, // trid - 轨迹id，不指定，查询所有轨迹，注意分页仅在查询特定轨迹id时生效，查询所有轨迹时无法对轨迹点进行分页
+                        System.currentTimeMillis() - 12 * 60 * 60 * 1000, // startTime - 12个小时前的时间戳
+                        System.currentTimeMillis(), // endTime - 现在的时间戳
+                        0, // denoise - 不启用去噪
+                        1, // mapmatch - 绑路 1是 0否
+                        0, // threshold - 不进行精度过滤
+                        DriveMode.DRIVING, // drivemode - 当前仅支持驾车模式
+                        1, // recoup - 距离补偿 1是 0否
+                        5000, // gap -  距离补偿，只有超过5km的点才启用距离补偿
+                        1, // ispoints - 结果应该包含轨迹点信息
+                        1, // page - 返回第1页数据，但由于未指定轨迹，分页将失效
+                        100    // pageSize - 一页不超过100条
                      )
                      aMapTrackClient.queryTerminalTrack(
                         queryTrackRequest,
