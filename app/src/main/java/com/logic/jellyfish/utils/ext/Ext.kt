@@ -5,7 +5,7 @@ import android.content.Context
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import com.logic.jellyfish.app.App
+import com.logic.jellyfish.App
 
 fun Context.toast(content: String) {
    Toast.makeText(this, content, Toast.LENGTH_LONG).show()

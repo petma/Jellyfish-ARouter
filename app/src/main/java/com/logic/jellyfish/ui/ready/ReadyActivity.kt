@@ -7,8 +7,9 @@ import android.content.pm.PackageManager
 import android.os.Build
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
-import com.logic.jellyfish.data.EventObserver
+import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.databinding.ReadyActivityBinding
+import com.logic.jellyfish.service.LocationService
 import com.logic.jellyfish.ui.timer.TimerActivity
 
 class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layout.ready_activity) {
@@ -36,6 +37,8 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
             startActivity(Intent(this, TimerActivity::class.java))
          }
       })
+
+      startService(Intent(this, LocationService::class.java))
    }
 
    override fun onResume() {

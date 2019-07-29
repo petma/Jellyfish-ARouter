@@ -3,7 +3,7 @@ package com.logic.jellyfish.ui.map
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.data.Event
+import com.logic.jellyfish.data.entity.Event
 
 class MapViewModel : ViewModel() {
 

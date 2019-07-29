@@ -15,6 +15,7 @@ import com.amap.api.track.query.model.QueryTerminalRequest
 import com.amap.api.track.query.model.QueryTerminalResponse
 import com.amap.api.track.query.model.QueryTrackRequest
 import com.amap.api.track.query.model.QueryTrackResponse
+import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
@@ -93,7 +94,7 @@ class MapActivity : AppCompatActivity() {
       aMapTrackClient.queryTerminal(
          QueryTerminalRequest(
             Constants.SERVICE_ID,
-            "qq"
+            Cache.terminalName
          ), object : SimpleOnTrackListener() {
             override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
                if (queryTerminalResponse.isSuccess) {

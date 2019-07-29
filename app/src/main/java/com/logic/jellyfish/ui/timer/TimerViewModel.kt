@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.data.Event
+import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.ui.map.MapActivity
 import com.logic.jellyfish.utils.ext.startActivity
 import java.util.*
@@ -67,7 +67,6 @@ class TimerViewModel : ViewModel() {
    }
 
    fun lock() {
-
    }
 
    private var second = 0
