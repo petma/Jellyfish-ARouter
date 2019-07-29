@@ -34,20 +34,24 @@
             android:value="b6ffa70584e636c36229251ea26e13af" />
 
         <activity android:name=".ui.ready.ReadyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.map.MapActivity"
             android:launchMode="singleTop" />
         <activity android:name=".ui.main.MainActivity" />
+
         <activity
-            android:name=".ui.web.X5WebViewActivity"
+            android:name=".web.X5WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
-            android:theme="@style/SplashTheme" />
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.timer.TimerActivity"
             android:theme="@style/TimerTheme" />

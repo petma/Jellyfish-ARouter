@@ -45,19 +45,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.613" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="42dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center"
-            android:text="开始运动"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.957"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.977" />
-
         <ProgressBar
             android:visibility="@{viewmodel.showProgress ? View.VISIBLE : View.GONE}"
             android:id="@+id/progressBar"

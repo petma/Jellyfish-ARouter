@@ -9,7 +9,10 @@ import com.logic.jellyfish.app.Cache
 import com.logic.jellyfish.data.Event
 import com.logic.jellyfish.http.RetrofitFactory
 import com.logic.jellyfish.utils.Constants
-import com.logic.jellyfish.utils.ext.*
+import com.logic.jellyfish.utils.ext.getAndroidId
+import com.logic.jellyfish.utils.ext.getString
+import com.logic.jellyfish.utils.ext.saveString
+import com.logic.jellyfish.utils.ext.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,35 +28,34 @@ class ReadyViewModel : ViewModel() {
    fun startRunning(v: View) {
       // 先检查是否有提交过终端申请
       val terminalName = v.getString(Constants.PREF_KEY_TERMINAL_NAME)
-      val terminalId = v.getLong(Constants.PREF_KEY_TERMINAL_ID)
 
       // 本地没有保存到号码,说明之前没有申请或者没有申请成功
-      if (terminalName == null || terminalId == -1L) {
+      if (terminalName == null) {
          viewModelScope.launch {
             try {
                _showProgress.value = true
+               val name = getAndroidId()
                val response = withContext(Dispatchers.IO) {
                   RetrofitFactory.aMapService.addTerminal(
                      Constants.TRACK_SERVICE_KEY,
                      Constants.SERVICE_ID,
-                     getAndroidId()
+                     name
                   )
                }
-
                when (response.errcode) {
                   // 创建新终端成功
                   10000 -> {
                      response.data?.let {
-                        Cache.terminalName = it.name
-                        Cache.terminalId = it.tid
-                        v.saveString(Constants.PREF_KEY_TERMINAL_NAME, it.name)
-                        v.saveLong(Constants.PREF_KEY_TERMINAL_ID, it.tid)
+                        Cache.terminalName = name
+                        v.saveString(Constants.PREF_KEY_TERMINAL_NAME, name)
                         _startEvent.value = Event(Unit)
                      }
                   }
                   // 终端已存在,理论上应该不会走到这一条
                   20009 -> {
-                     Cache.terminalName = getAndroidId()
+                     Cache.terminalName = name
+                     v.saveString(Constants.PREF_KEY_TERMINAL_NAME, name)
+                     _startEvent.value = Event(Unit)
                      v.toast("终端已存在")
                   }
                   // 创建失败

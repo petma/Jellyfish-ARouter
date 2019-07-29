@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.web
+package com.logic.jellyfish.web
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,7 +9,6 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.logic.jellyfish.R
 import com.logic.jellyfish.utils.ext.log
-import com.logic.jellyfish.web.X5Js
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
@@ -23,7 +22,7 @@ class X5WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_activity)
         initWebView()
-        web_view.loadUrl("http://192.168.1.63:8080/")
+       web_view.loadUrl("file:///android_asset/jellyfish-web/index.html")
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -84,7 +83,7 @@ class X5WebViewActivity : AppCompatActivity() {
         }
 
         web_view.webViewClient = X5WebViewClient()
-        web_view.addJavascriptInterface(X5Js(this), "Android")
+       web_view.addJavascriptInterface(X5Javascript(this), "Android")
     }
 
     inner class X5WebViewClient : WebViewClient() {

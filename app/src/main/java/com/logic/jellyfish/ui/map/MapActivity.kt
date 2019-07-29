@@ -16,7 +16,6 @@ import com.amap.api.track.query.model.QueryTerminalResponse
 import com.amap.api.track.query.model.QueryTrackRequest
 import com.amap.api.track.query.model.QueryTrackResponse
 import com.logic.jellyfish.R
-import com.logic.jellyfish.app.Cache
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
@@ -58,7 +57,7 @@ class MapActivity : AppCompatActivity() {
       map_view.onCreate(savedInstanceState)
 
       init()
-      initTrack()
+      paintTrack()
    }
 
    private fun init() {
@@ -83,7 +82,7 @@ class MapActivity : AppCompatActivity() {
    private fun initTrack() {
 //      val finishRun = intent.getBooleanExtra("finish_run", true)
 //      if (finishRun){
-      paintTrack()
+//      paintTrack()
 //      }
    }
 
@@ -94,7 +93,7 @@ class MapActivity : AppCompatActivity() {
       aMapTrackClient.queryTerminal(
          QueryTerminalRequest(
             Constants.SERVICE_ID,
-            Cache.terminalName
+            "qq"
          ), object : SimpleOnTrackListener() {
             override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
                if (queryTerminalResponse.isSuccess) {
@@ -112,7 +111,7 @@ class MapActivity : AppCompatActivity() {
                         1, // mapmatch - 绑路 1是 0否
                         0, // threshold - 不进行精度过滤
                         DriveMode.DRIVING, // drivemode - 当前仅支持驾车模式
-                        1, // recoup - 距离补偿 1是 0否
+                        0, // recoup - 距离补偿 1是 0否
                         5000, // gap -  距离补偿，只有超过5km的点才启用距离补偿
                         1, // ispoints - 结果应该包含轨迹点信息
                         1, // page - 返回第1页数据，但由于未指定轨迹，分页将失效

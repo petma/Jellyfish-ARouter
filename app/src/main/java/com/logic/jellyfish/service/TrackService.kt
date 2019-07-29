@@ -45,7 +45,7 @@ class TrackService : Service() {
       super.onCreate()
       EventBus.getDefault().register(this)
       aMapTrackClient = AMapTrackClient(applicationContext)
-      startForeground(NOTIFICATION_ID, createNotification())
+//      startForeground(NOTIFICATION_ID, createNotification())
       startTrack()
    }
 
@@ -69,7 +69,7 @@ class TrackService : Service() {
    }
 
    @Subscribe(threadMode = ThreadMode.MAIN)
-   fun onKeyInputEvent(event: MessageEvent) {
+   fun onMessageEvent(event: MessageEvent) {
       when (event.type) {
          MessageEvent.TYPE_PAUSE_TRACK_SERVICE -> stopGather()
          MessageEvent.TYPE_RESUME_TRACK_SERVICE -> startGather()
@@ -143,10 +143,9 @@ class TrackService : Service() {
 
    private fun beginTrack() {
       val trackParam = TrackParam(Constants.SERVICE_ID, terminalId)
-      // 自己创建一个前台服务,就不让高德地图创建了
-//      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//         trackParam.notification = createNotification()
-//      }
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         trackParam.notification = createNotification()
+      }
       aMapTrackClient.startTrack(trackParam, onTrackLifecycleListener)
    }
 
@@ -219,14 +218,15 @@ class TrackService : Service() {
             )
             channel.lightColor = Color.YELLOW
             channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-            val service = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            service.createNotificationChannel(channel)
+            val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
             Notification.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
          } else {
             Notification.Builder(applicationContext)
          }
+
       val intent = Intent(this, TimerActivity::class.java)
-//      intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+      intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
       val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
       return builder.setContentIntent(pendingIntent)
          .setContentTitle("水母运动")

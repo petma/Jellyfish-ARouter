@@ -67,7 +67,6 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
                } catch (e: Throwable) {
                   e.printStackTrace()
                }
-
             }
          }
 
