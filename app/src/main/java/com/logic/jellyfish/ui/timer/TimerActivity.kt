@@ -4,8 +4,6 @@ import android.content.Intent
 import android.view.KeyEvent
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
-import com.logic.jellyfish.data.entity.EventObserver
-import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.data.entity.TimerEvent
 import com.logic.jellyfish.databinding.TimerActivityBinding
 import com.logic.jellyfish.service.LocationService
@@ -20,16 +18,7 @@ class TimerActivity : BaseActivity<TimerViewModel, TimerActivityBinding>(R.layou
    override fun init() {
       binding.viewmodel = viewModel
       EventBus.getDefault().register(this)
-
       startLocationService()
-
-      viewModel.resumeGather.observe(this, EventObserver {
-         EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_RESUME_TRACK_SERVICE))
-      })
-
-      viewModel.pauseGather.observe(this, EventObserver {
-         EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_PAUSE_TRACK_SERVICE))
-      })
    }
 
    override fun onDestroy() {

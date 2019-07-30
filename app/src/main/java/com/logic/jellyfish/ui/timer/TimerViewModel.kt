@@ -4,7 +4,6 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.ui.map.MapActivity
 import com.logic.jellyfish.utils.ext.startActivity
@@ -28,18 +27,11 @@ class TimerViewModel : ViewModel() {
    private val _isPaused = MutableLiveData<Boolean>()
    val isPaused: LiveData<Boolean> = _isPaused
 
-   private val _resumeGather = MutableLiveData<Event<Unit>>()
-   val resumeGather: LiveData<Event<Unit>> = _resumeGather
-
-   private val _pauseGather = MutableLiveData<Event<Unit>>()
-   val pauseGather: LiveData<Event<Unit>> = _pauseGather
-
    /**
     * 继续按钮
     */
    fun resume() {
       _isPaused.value = false
-      _resumeGather.value = Event(Unit)
       EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_RESUME_TRACK_SERVICE))
    }
 
@@ -48,7 +40,6 @@ class TimerViewModel : ViewModel() {
     */
    fun pause() {
       _isPaused.value = true
-      _pauseGather.value = Event(Unit)
       EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_PAUSE_TRACK_SERVICE))
    }
 

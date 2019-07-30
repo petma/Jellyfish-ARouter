@@ -1,10 +1,7 @@
 package com.logic.jellyfish.service
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -19,6 +16,7 @@ import com.logic.jellyfish.R
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.data.entity.TimerEvent
 import com.logic.jellyfish.data.room.RoomFactory
+import com.logic.jellyfish.ui.timer.TimerActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,10 +31,12 @@ class LocationService : Service() {
 
    private var eventBus: EventBus? = null
 
+   private val notification: Notification by lazy { buildNotification() }
+
    override fun onCreate() {
       super.onCreate()
+      startForeground(2001, notification)
       initLocation()
-      startForeground(2001, buildNotification())
 
       eventBus = EventBus.getDefault()
       eventBus?.register(this)
@@ -47,6 +47,7 @@ class LocationService : Service() {
    override fun onDestroy() {
       super.onDestroy()
       locationClient?.stopLocation()
+      locationClient?.disableBackgroundLocation(true)
       eventBus?.unregister(this)
       eventBus = null
    }
@@ -76,6 +77,8 @@ class LocationService : Service() {
 
       // 启动定位
       locationClient?.startLocation()
+
+      locationClient?.enableBackgroundLocation(2002, notification)
    }
 
    private var currSpeed: Float = 0F
@@ -96,7 +99,7 @@ class LocationService : Service() {
       val mOption = AMapLocationClientOption()
       mOption.locationMode =
          AMapLocationClientOption.AMapLocationMode.Hight_Accuracy//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
-      mOption.isGpsFirst = false//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
+      mOption.isGpsFirst = true//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
       mOption.httpTimeOut = 30000//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
       mOption.interval = 5000//可选，设置定位间隔。默认为2秒
       mOption.isNeedAddress = true//可选，设置是否返回逆地理地址信息。默认是true
@@ -110,6 +113,9 @@ class LocationService : Service() {
       return mOption
    }
 
+   /**
+    * 将服务推到前台,已保证进程的存活以及服务的持续
+    */
    private fun buildNotification(): Notification {
       val builder: Notification.Builder
       val notification: Notification
@@ -132,7 +138,10 @@ class LocationService : Service() {
       } else {
          builder = Notification.Builder(applicationContext)
       }
-      builder.setSmallIcon(R.mipmap.logo)
+      val intent = Intent(this, TimerActivity::class.java)
+      val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+      builder.setContentIntent(pendingIntent)
+         .setSmallIcon(R.mipmap.logo)
          .setContentTitle("水母运动")
          .setContentText("正在后台运行")
          .setWhen(System.currentTimeMillis())
@@ -152,6 +161,7 @@ class LocationService : Service() {
       }
       timerHandler = @SuppressLint("HandlerLeak") object : Handler() {
          override fun handleMessage(msg: Message?) {
+            // 通过EventBus发送给TimerActivity当前的计时,速度,里程
             eventBus?.post(TimerEvent(minute, second, currSpeed))
             if (second >= 59) {
                second = 0
