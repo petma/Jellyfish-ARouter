@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.data.http.RetrofitFactory
+import com.logic.jellyfish.data.room.RoomFactory
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.ext.getAndroidId
 import com.logic.jellyfish.utils.ext.getString
@@ -24,8 +25,6 @@ class ReadyViewModel : ViewModel() {
 
    private val _showProgress = MutableLiveData<Boolean>()
    val showProgress: LiveData<Boolean> = _showProgress
-
-   val locationInfo = MutableLiveData<String>()
 
    fun startRunning(v: View) {
       // 先检查是否有提交过终端申请
@@ -75,18 +74,13 @@ class ReadyViewModel : ViewModel() {
          Cache.terminalName = terminalName
          _startEvent.value = Event(Unit)
       }
-
    }
 
-   fun showLocationInfo() {
-//      viewModelScope.launch {
-//         val latLngs = withContext(Dispatchers.IO) { RoomFactory.repository.getLatLngs() }
-//         for (latLng in latLngs) {
-//            locationInfo.value =
-//               "${locationInfo.value}\nlatitude: ${latLng.latitude}, longitude: ${latLng.longitude}"
-//         }
-//         locationInfo.value = "${locationInfo.value}\n你好呀"
-//      }
+   fun deleteTrack(v: View) {
+      viewModelScope.launch {
+         RoomFactory.repository.deleteLatLngs()
+         v.toast("删除成功")
+      }
    }
 
 }

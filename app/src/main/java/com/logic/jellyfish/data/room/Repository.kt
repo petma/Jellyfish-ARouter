@@ -11,6 +11,6 @@ interface Repository {
 
    suspend fun deleteLatLngs()
 
-   suspend fun getLatLngs(): List<LatLng>
+   suspend fun getOptimizedLatLngs(): List<LatLng>
 
 }

@@ -4,10 +4,12 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.UiSettings
 import com.amap.api.maps.model.*
+import com.amap.api.maps.model.LatLngBounds
 import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.query.entity.DriveMode
 import com.amap.api.track.query.entity.Point
@@ -17,6 +19,7 @@ import com.amap.api.track.query.model.QueryTrackRequest
 import com.amap.api.track.query.model.QueryTrackResponse
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
+import com.logic.jellyfish.data.room.RoomFactory
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.Constants.SHEN_ZHEN
@@ -24,6 +27,7 @@ import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.ext.createViewModel
 import com.logic.jellyfish.utils.ext.toast
 import kotlinx.android.synthetic.main.map_activity.*
+import kotlinx.coroutines.launch
 import java.util.*
 
 /**
@@ -39,9 +43,9 @@ class MapActivity : AppCompatActivity() {
    private lateinit var binding: MapActivityBinding
 
    // 地图相关的配置和服务
-   private lateinit var aMap: AMap
-   private lateinit var uiSettings: UiSettings
-   private lateinit var aMapTrackClient: AMapTrackClient
+   private var aMap: AMap? = null
+   private var uiSettings: UiSettings? = null
+   private var aMapTrackClient: AMapTrackClient? = null
 
    // 画轨迹相关的参数
    private val polyLines = LinkedList<Polyline>()
@@ -64,34 +68,49 @@ class MapActivity : AppCompatActivity() {
    private fun init() {
       aMapTrackClient = AMapTrackClient(applicationContext)
       aMap = map_view.map
-      uiSettings = aMap.uiSettings
+      uiSettings = aMap?.uiSettings
 
-      aMap.moveCamera(CameraUpdateFactory.newCameraPosition(SHEN_ZHEN))
+      aMap?.moveCamera(CameraUpdateFactory.newCameraPosition(SHEN_ZHEN))
 
       val myLocationStyle = MyLocationStyle()
       myLocationStyle.strokeColor(android.R.color.transparent)
       myLocationStyle.radiusFillColor(android.R.color.transparent)
-      aMap.myLocationStyle = myLocationStyle
+      aMap?.myLocationStyle = myLocationStyle
 
-      uiSettings.isMyLocationButtonEnabled = true
-      uiSettings.isTiltGesturesEnabled = false
+      uiSettings?.isMyLocationButtonEnabled = true
+      uiSettings?.isTiltGesturesEnabled = false
 
-      aMap.isMyLocationEnabled = true
-      aMap.moveCamera(CameraUpdateFactory.zoomTo(18f))
-   }
-
-   private fun initTrack() {
-//      val finishRun = intent.getBooleanExtra("finish_run", true)
-//      if (finishRun){
-//      paintTrack()
-//      }
+      aMap?.isMyLocationEnabled = true
+      aMap?.moveCamera(CameraUpdateFactory.zoomTo(18f))
    }
 
    private fun paintTrack() {
+      lifecycleScope.launch {
+         val latLngs = RoomFactory.repository.getOptimizedLatLngs()
+         if (latLngs.isNotEmpty()) {
+            val polyLine =
+               aMap?.addPolyline(PolylineOptions().addAll(latLngs).color(Color.parseColor("#FFC125")))
+            polyLine?.isVisible = true
+            aMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(getBounds(latLngs), 30))
+         }
+      }
+   }
+
+   private fun getBounds(pointList: List<LatLng>): LatLngBounds {
+      val builder = LatLngBounds.builder()
+      for (i in pointList.indices) {
+         builder.include(pointList[i])
+      }
+      return builder.build()
+
+   }
+
+
+   private fun Track() {
       clearTracksOnMap()
       // 先查询terminal id，然后用terminal id查询轨迹
       // 查询符合条件的所有轨迹，并分别绘制
-      aMapTrackClient.queryTerminal(
+      aMapTrackClient?.queryTerminal(
          QueryTerminalRequest(
             Constants.SERVICE_ID,
             Cache.terminalName
@@ -118,7 +137,7 @@ class MapActivity : AppCompatActivity() {
                         1, // page - 返回第1页数据，但由于未指定轨迹，分页将失效
                         100    // pageSize - 一页不超过100条
                      )
-                     aMapTrackClient.queryTerminalTrack(
+                     aMapTrackClient?.queryTerminalTrack(
                         queryTrackRequest,
                         object : SimpleOnTrackListener() {
                            override fun onQueryTrackCallback(queryTrackResponse: QueryTrackResponse) {
@@ -174,7 +193,7 @@ class MapActivity : AppCompatActivity() {
          val markerOptions = MarkerOptions()
             .position(latLng)
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-         endMarkers.add(aMap.addMarker(markerOptions))
+         endMarkers.add(aMap!!.addMarker(markerOptions))
       }
       if (points.size > 1) {
          // 终点
@@ -183,16 +202,16 @@ class MapActivity : AppCompatActivity() {
          val markerOptions = MarkerOptions()
             .position(latLng)
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-         endMarkers.add(aMap.addMarker(markerOptions))
+         endMarkers.add(aMap!!.addMarker(markerOptions))
       }
       for (p in points) {
          val latLng = LatLng(p.lat, p.lng)
          polylineOptions.add(latLng)
          boundsBuilder.include(latLng)
       }
-      val polyline = aMap.addPolyline(polylineOptions)
-      polyLines.add(polyline)
-      aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 30))
+      val polyline = aMap?.addPolyline(polylineOptions)
+      polyLines.add(polyline!!)
+      aMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 30))
    }
 
    private fun clearTracksOnMap() {

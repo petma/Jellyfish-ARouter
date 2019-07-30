@@ -25,6 +25,6 @@ object Constants {
       .target(LatLng(31.238068, 121.501654)).zoom(18f).bearing(0f).tilt(0f).build()
 
    val SHEN_ZHEN = CameraPosition.Builder()
-      .target(LatLng(114.085947, 22.547)).zoom(18f).bearing(0f).tilt(0f).build()
+      .target(LatLng(22.547, 114.085947)).zoom(18f).bearing(0f).tilt(0f).build()
 
 }

@@ -5,11 +5,11 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.text.method.ScrollingMovementMethod
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.databinding.ReadyActivityBinding
-import com.logic.jellyfish.service.LocationService
 import com.logic.jellyfish.ui.timer.TimerActivity
 
 class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layout.ready_activity) {
@@ -19,6 +19,7 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
 
    override fun init() {
       binding.viewmodel = viewModel
+      binding.textView.movementMethod = ScrollingMovementMethod.getInstance()
 
       viewModel.startEvent.observe(this, EventObserver {
          val needRequestPermissionList = findDeniedPermissions(needPermissions)
@@ -37,8 +38,6 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
             startActivity(Intent(this, TimerActivity::class.java))
          }
       })
-
-      startService(Intent(this, LocationService::class.java))
    }
 
    override fun onResume() {

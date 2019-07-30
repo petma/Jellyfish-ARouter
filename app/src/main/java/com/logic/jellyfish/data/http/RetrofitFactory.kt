@@ -39,19 +39,18 @@ object RetrofitFactory {
         // 500m 缓存
         val cache = Cache(cacheDir, 500 * 1024 * 1024)
         // Create an ssl socket factory radius8 our all-trusting manager
-        val okBuilder = OkHttpClient.Builder()
-        okBuilder // 添加缓存，无网访问时会拿缓存,只会缓存get请求
-            .addInterceptor(AddCacheInterceptor())
-            .cache(cache)
-            .addInterceptor(
-                HttpLoggingInterceptor().setLevel(
-                    if (BuildConfig.DEBUG)
-                        HttpLoggingInterceptor.Level.BODY
-                    else
-                        HttpLoggingInterceptor.Level.NONE
-                )
-            )
-        return okBuilder.build()
+       val httpLoggingInterceptor = HttpLoggingInterceptor()
+       return OkHttpClient.Builder()
+          .addInterceptor(AddCacheInterceptor())
+          .cache(cache)
+          .addInterceptor(
+             httpLoggingInterceptor.apply {
+                httpLoggingInterceptor.level = if (BuildConfig.DEBUG)
+                   HttpLoggingInterceptor.Level.BODY
+                else
+                   HttpLoggingInterceptor.Level.NONE
+             }
+          ).build()
     }
 
     private class AddCacheInterceptor : Interceptor {

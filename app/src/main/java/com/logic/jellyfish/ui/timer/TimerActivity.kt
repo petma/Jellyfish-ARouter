@@ -6,33 +6,36 @@ import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.data.entity.MessageEvent
+import com.logic.jellyfish.data.entity.TimerEvent
 import com.logic.jellyfish.databinding.TimerActivityBinding
-import com.logic.jellyfish.service.TrackService
+import com.logic.jellyfish.service.LocationService
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class TimerActivity : BaseActivity<TimerViewModel, TimerActivityBinding>(R.layout.timer_activity) {
 
-   private lateinit var trackIntent: Intent
+   private var locationIntent: Intent? = null
 
    override fun init() {
       binding.viewmodel = viewModel
-      viewModel.startCount()
-      startTrackService()
+      EventBus.getDefault().register(this)
+
+      startLocationService()
 
       viewModel.resumeGather.observe(this, EventObserver {
-         EventBus.getDefault()
-            .post(MessageEvent(MessageEvent.TYPE_RESUME_TRACK_SERVICE))
+         EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_RESUME_TRACK_SERVICE))
       })
 
       viewModel.pauseGather.observe(this, EventObserver {
-         EventBus.getDefault()
-            .post(MessageEvent(MessageEvent.TYPE_PAUSE_TRACK_SERVICE))
+         EventBus.getDefault().post(MessageEvent(MessageEvent.TYPE_PAUSE_TRACK_SERVICE))
       })
    }
 
    override fun onDestroy() {
       super.onDestroy()
-      stopTrackService()
+      EventBus.getDefault().unregister(this)
+      stopLocationService()
    }
 
    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -42,12 +45,20 @@ class TimerActivity : BaseActivity<TimerViewModel, TimerActivityBinding>(R.layou
       return super.onKeyDown(keyCode, event)
    }
 
-   private fun startTrackService() {
-      trackIntent = Intent(this, TrackService::class.java)
-      startService(trackIntent)
+   @Subscribe(threadMode = ThreadMode.MAIN)
+   fun onTimerEvent(event: TimerEvent) {
+      viewModel.timeCostNumber.value = "${event.minute}分${event.second}秒"
+      viewModel.speedNumber.value = "${event.speed}米/秒"
    }
 
-   private fun stopTrackService() {
-      stopService(trackIntent)
+   private fun startLocationService() {
+      locationIntent = Intent(this, LocationService::class.java)
+      startService(locationIntent)
+   }
+
+   private fun stopLocationService() {
+      locationIntent?.let {
+         stopService(it)
+      }
    }
 }
