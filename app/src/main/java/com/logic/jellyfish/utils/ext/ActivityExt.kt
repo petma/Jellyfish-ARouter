@@ -7,21 +7,21 @@ import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.utils.Constants.PREF_NAME
 
 fun <T : ViewModel> AppCompatActivity.createViewModel(clazz: Class<T>): T {
-   return ViewModelProviders.of(this).get(clazz)
+  return ViewModelProviders.of(this).get(clazz)
 }
 
 inline fun <reified T : ViewModel> AppCompatActivity.createViewModel(): T {
-   return ViewModelProviders.of(this).get(T::class.java)
+  return ViewModelProviders.of(this).get(T::class.java)
 }
 
 fun Context.saveString(key: String, value: String) {
-   val sharedPref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-   val editor = sharedPref.edit()
-   editor.putString(key, value)
-   editor.apply()
+  val sharedPref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+  val editor = sharedPref.edit()
+  editor.putString(key, value)
+  editor.apply()
 }
 
 fun Context.getString(key: String): String? {
-   val sharedPref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-   return sharedPref.getString(key, null)
+  val sharedPref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+  return sharedPref.getString(key, null)
 }

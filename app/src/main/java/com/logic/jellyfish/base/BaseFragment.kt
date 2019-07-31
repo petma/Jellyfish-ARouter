@@ -13,30 +13,30 @@ import androidx.lifecycle.ViewModelProviders
 import com.logic.jellyfish.utils.getViewModel
 
 abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
-   private val layout: Int
+  private val layout: Int
 ) : Fragment() {
 
-   protected val viewModel: VM by lazy { createViewModel() }
-   protected lateinit var binding: SV
+  protected val viewModel: VM by lazy { createViewModel() }
+  protected lateinit var binding: SV
 
-   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?
-   ): View? {
-      binding = DataBindingUtil.inflate(layoutInflater, layout, null, false)
-      binding.lifecycleOwner = viewLifecycleOwner
-      return binding.root
-   }
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    binding = DataBindingUtil.inflate(layoutInflater, layout, null, false)
+    binding.lifecycleOwner = viewLifecycleOwner
+    return binding.root
+  }
 
-   override fun onActivityCreated(savedInstanceState: Bundle?) {
-      super.onActivityCreated(savedInstanceState)
-      init()
-   }
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    init()
+  }
 
-   abstract fun init()
+  abstract fun init()
 
-   private fun createViewModel(): VM {
-      return ViewModelProviders.of(this).get(getViewModel(this))
-   }
+  private fun createViewModel(): VM {
+    return ViewModelProviders.of(this).get(getViewModel(this))
+  }
 }
 

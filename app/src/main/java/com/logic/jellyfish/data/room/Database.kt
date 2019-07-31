@@ -7,5 +7,5 @@ import com.logic.jellyfish.data.entity.LocalLatLng
 @Database(entities = [LocalLatLng::class], version = 1, exportSchema = false)
 abstract class Database : RoomDatabase() {
 
-   abstract fun dao(): Dao
+  abstract fun dao(): Dao
 }

@@ -2,136 +2,183 @@ package com.logic.jellyfish.ui.ready
 
 import android.Manifest
 import android.annotation.TargetApi
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
+import android.provider.Settings
 import android.text.method.ScrollingMovementMethod
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.databinding.ReadyActivityBinding
 import com.logic.jellyfish.ui.timer.TimerActivity
 
+
 class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layout.ready_activity) {
 
-   private var needCheckBackLocation = false
-   private var isNeedCheck = true
+  private var needCheckBackLocation = false
+  private var isNeedCheck = true
 
-   override fun init() {
-      binding.viewmodel = viewModel
-      binding.textView.movementMethod = ScrollingMovementMethod.getInstance()
+  override fun init() {
+    binding.viewmodel = viewModel
+    binding.textView.movementMethod = ScrollingMovementMethod.getInstance()
 
-      viewModel.startEvent.observe(this, EventObserver {
-         val needRequestPermissionList = findDeniedPermissions(needPermissions)
-         if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
-            try {
-               val array = needRequestPermissionList.toTypedArray()
-               val method = javaClass.getMethod(
-                  "requestPermissions",
-                  Array<String>::class.java, Int::class.javaPrimitiveType
-               )
-               method.invoke(this, array, 0)
-            } catch (e: Throwable) {
-               e.printStackTrace()
+    viewModel.startEvent.observe(this, EventObserver {
+      val needRequestPermissionList = findDeniedPermissions(needPermissions)
+      if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
+        try {
+          val array = needRequestPermissionList.toTypedArray()
+          val method = javaClass.getMethod(
+            "requestPermissions",
+            Array<String>::class.java, Int::class.javaPrimitiveType
+          )
+          method.invoke(this, array, 0)
+        } catch (e: Throwable) {
+          e.printStackTrace()
+        }
+      } else {
+        openGPSSetting()
+      }
+    })
+  }
+
+  override fun onResume() {
+    super.onResume()
+    try {
+      if (Build.VERSION.SDK_INT >= 23) {
+        if (isNeedCheck) {
+          checkPermissions(needPermissions)
+        }
+      }
+    } catch (e: Throwable) {
+      e.printStackTrace()
+    }
+  }
+
+  @TargetApi(23)
+  private fun checkPermissions(permissions: Array<String>) {
+    try {
+      if (Build.VERSION.SDK_INT >= 23 && applicationInfo.targetSdkVersion >= 23) {
+        val needRequestPermissionList = findDeniedPermissions(permissions)
+        if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
+          try {
+            val array = needRequestPermissionList.toTypedArray()
+            val method = javaClass.getMethod(
+              "requestPermissions",
+              Array<String>::class.java, Int::class.javaPrimitiveType
+            )
+            method.invoke(this, array, 0)
+          } catch (e: Throwable) {
+            e.printStackTrace()
+          }
+        }
+      }
+
+    } catch (e: Throwable) {
+      e.printStackTrace()
+    }
+
+  }
+
+  @TargetApi(23)
+  private fun findDeniedPermissions(permissions: Array<String>): List<String>? {
+    try {
+      val needRequestPermissionList = ArrayList<String>()
+      if (Build.VERSION.SDK_INT >= 23 && applicationInfo.targetSdkVersion >= 23) {
+        for (perm in permissions) {
+          if (checkMySelfPermission(perm) != PackageManager.PERMISSION_GRANTED ||
+            shouldShowMyRequestPermissionRationale(perm)
+          ) {
+            if (!needCheckBackLocation && BACK_LOCATION_PERMISSION == perm) {
+              continue
             }
-         } else {
-            startActivity(Intent(this, TimerActivity::class.java))
-         }
-      })
-   }
-
-   override fun onResume() {
-      super.onResume()
-      try {
-         if (Build.VERSION.SDK_INT >= 23) {
-            if (isNeedCheck) {
-               checkPermissions(needPermissions)
-            }
-         }
-      } catch (e: Throwable) {
-         e.printStackTrace()
+            needRequestPermissionList.add(perm)
+          }
+        }
       }
-   }
+      return needRequestPermissionList
+    } catch (e: Throwable) {
+      e.printStackTrace()
+    }
+    return null
+  }
 
-   @TargetApi(23)
-   private fun checkPermissions(permissions: Array<String>) {
-      try {
-         if (Build.VERSION.SDK_INT >= 23 && applicationInfo.targetSdkVersion >= 23) {
-            val needRequestPermissionList = findDeniedPermissions(permissions)
-            if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
-               try {
-                  val array = needRequestPermissionList.toTypedArray()
-                  val method = javaClass.getMethod(
-                     "requestPermissions",
-                     Array<String>::class.java, Int::class.javaPrimitiveType
-                  )
-                  method.invoke(this, array, 0)
-               } catch (e: Throwable) {
-                  e.printStackTrace()
-               }
-            }
-         }
+  private fun shouldShowMyRequestPermissionRationale(perm: String): Boolean {
+    try {
+      val method =
+        javaClass.getMethod("shouldShowRequestPermissionRationale", String::class.java)
+      return method.invoke(this, perm) as Boolean
+    } catch (e: Throwable) {
+      e.printStackTrace()
+    }
+    return false
+  }
 
-      } catch (e: Throwable) {
-         e.printStackTrace()
-      }
+  private fun checkMySelfPermission(perm: String): Int {
+    try {
+      val method = javaClass.getMethod("checkSelfPermission", String::class.java)
+      return method.invoke(this, perm) as Int
+    } catch (e: Throwable) {
+      e.printStackTrace()
+    }
+    return -1
+  }
 
-   }
+  private fun openGPSSetting() {
+    if (checkGpsIsOpen()) {
+      Toast.makeText(this, "true", Toast.LENGTH_SHORT).show()
+      startActivity(Intent(this, TimerActivity::class.java))
+    } else {
+      AlertDialog.Builder(this).setTitle("open GPS")
+        .setMessage("go to open")
+        //  取消选项
+        .setNegativeButton(
+          "cancel"
+        ) { dialogInterface, _ ->
+          Toast.makeText(this, "close", Toast.LENGTH_SHORT).show()
+          // 关闭dialog
+          dialogInterface.dismiss()
+        }
+        //  确认选项
+        .setPositiveButton(
+          "setting"
+        ) { _, _ ->
+          //跳转到手机原生设置页面
+          val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+          startActivityForResult(intent, 1)
+        }
+        .setCancelable(false)
+        .show()
+    }
+  }
 
-   @TargetApi(23)
-   private fun findDeniedPermissions(permissions: Array<String>): List<String>? {
-      try {
-         val needRequestPermissionList = ArrayList<String>()
-         if (Build.VERSION.SDK_INT >= 23 && applicationInfo.targetSdkVersion >= 23) {
-            for (perm in permissions) {
-               if (checkMySelfPermission(perm) != PackageManager.PERMISSION_GRANTED ||
-                  shouldShowMyRequestPermissionRationale(perm)
-               ) {
-                  if (!needCheckBackLocation && BACK_LOCATION_PERMISSION == perm) {
-                     continue
-                  }
-                  needRequestPermissionList.add(perm)
-               }
-            }
-         }
-         return needRequestPermissionList
-      } catch (e: Throwable) {
-         e.printStackTrace()
-      }
-      return null
-   }
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == 1) {
+      openGPSSetting()
+    }
+  }
 
-   private fun shouldShowMyRequestPermissionRationale(perm: String): Boolean {
-      try {
-         val method =
-            javaClass.getMethod("shouldShowRequestPermissionRationale", String::class.java)
-         return method.invoke(this, perm) as Boolean
-      } catch (e: Throwable) {
-         e.printStackTrace()
-      }
-      return false
-   }
+  private fun checkGpsIsOpen(): Boolean {
+    val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+  }
 
-   private fun checkMySelfPermission(perm: String): Int {
-      try {
-         val method = javaClass.getMethod("checkSelfPermission", String::class.java)
-         return method.invoke(this, perm) as Int
-      } catch (e: Throwable) {
-         e.printStackTrace()
-      }
-      return -1
-   }
+  private val needPermissions = arrayOf(
+    Manifest.permission.ACCESS_COARSE_LOCATION,
+    Manifest.permission.ACCESS_FINE_LOCATION,
+    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    Manifest.permission.READ_EXTERNAL_STORAGE,
+    Manifest.permission.READ_PHONE_STATE,
+    Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+    BACK_LOCATION_PERMISSION
+  )
 
-   private val needPermissions = arrayOf(
-      Manifest.permission.ACCESS_COARSE_LOCATION,
-      Manifest.permission.ACCESS_FINE_LOCATION,
-      Manifest.permission.WRITE_EXTERNAL_STORAGE,
-      Manifest.permission.READ_EXTERNAL_STORAGE,
-      Manifest.permission.READ_PHONE_STATE,
-      BACK_LOCATION_PERMISSION
-   )
-
-   companion object {
-      private const val BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION"
-   }
+  companion object {
+    private const val BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION"
+  }
 }

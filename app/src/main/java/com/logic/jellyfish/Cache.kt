@@ -10,18 +10,18 @@ import android.content.Context
 @SuppressLint("StaticFieldLeak")
 object Cache {
 
-   lateinit var context: Context
+  lateinit var context: Context
 
-   var serviceId: Long = 0
+  var serviceId: Long = 0
 
-   var terminalId: Long = 0
+  var terminalId: Long = 0
 
-   /**
-    * 终端名称，该名称可以根据使用方业务而定，比如可以是用户名、用户手机号等唯一标识
-    *
-    * 通常应该使用该名称查询对应终端id，确定该终端是否存在，如果不存在则创建，然后就可以开启轨迹上报，将上报的轨迹关联
-    * 到该终端
-    */
-   var terminalName: String = ""
+  /**
+   * 终端名称，该名称可以根据使用方业务而定，比如可以是用户名、用户手机号等唯一标识
+   *
+   * 通常应该使用该名称查询对应终端id，确定该终端是否存在，如果不存在则创建，然后就可以开启轨迹上报，将上报的轨迹关联
+   * 到该终端
+   */
+  var terminalName: String = ""
 
 }

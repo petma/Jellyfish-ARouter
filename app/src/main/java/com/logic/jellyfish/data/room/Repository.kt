@@ -7,10 +7,10 @@ import com.amap.api.maps.model.LatLng
  */
 interface Repository {
 
-   suspend fun insertLatLng(latitude: Double, longitude: Double)
+  suspend fun insertLatLng(latitude: Double, longitude: Double)
 
-   suspend fun deleteLatLngs()
+  suspend fun deleteLatLngs()
 
-   suspend fun getOptimizedLatLngs(): List<LatLng>
+  suspend fun getOptimizedLatLngs(): List<LatLng>
 
 }

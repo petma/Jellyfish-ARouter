@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity(tableName = "LocalLatLng")
 data class LocalLatLng(
-   @ColumnInfo(name = "latitude") var latitude: Double,
-   @ColumnInfo(name = "longitude") var longitude: Double,
-   @PrimaryKey @ColumnInfo(name = "entryid") var id: String = UUID.randomUUID().toString()
+  @ColumnInfo(name = "latitude") var latitude: Double,
+  @ColumnInfo(name = "longitude") var longitude: Double,
+  @PrimaryKey @ColumnInfo(name = "entryid") var id: String = UUID.randomUUID().toString()
 )

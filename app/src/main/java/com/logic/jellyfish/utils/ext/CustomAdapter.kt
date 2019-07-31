@@ -6,18 +6,18 @@ import com.logic.jellyfish.utils.AnimationUtils
 
 @BindingAdapter("visible")
 fun View.show(show: Boolean) {
-   if (show && this.visibility != View.VISIBLE) {
-      AnimationUtils.showAndHiddenAnimation(
-         this,
-         AnimationUtils.AnimationState.STATE_SHOW,
-         1000
-      )
-   }
-   if (!show && this.visibility == View.VISIBLE) {
-      AnimationUtils.showAndHiddenAnimation(
-         this,
-         AnimationUtils.AnimationState.STATE_HIDDEN,
-         300
-      )
-   }
+  if (show && this.visibility != View.VISIBLE) {
+    AnimationUtils.showAndHiddenAnimation(
+      this,
+      AnimationUtils.AnimationState.STATE_SHOW,
+      1000
+    )
+  }
+  if (!show && this.visibility == View.VISIBLE) {
+    AnimationUtils.showAndHiddenAnimation(
+      this,
+      AnimationUtils.AnimationState.STATE_HIDDEN,
+      300
+    )
+  }
 }

@@ -4,34 +4,34 @@ package com.logic.jellyfish.utils
 import com.amap.api.track.query.model.*
 
 open class SimpleOnTrackListener : OnTrackListener {
-   override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
-   }
+  override fun onQueryTerminalCallback(queryTerminalResponse: QueryTerminalResponse) {
+  }
 
-   override fun onCreateTerminalCallback(addTerminalResponse: AddTerminalResponse) {
+  override fun onCreateTerminalCallback(addTerminalResponse: AddTerminalResponse) {
 
-   }
+  }
 
-   override fun onDistanceCallback(distanceResponse: DistanceResponse) {
+  override fun onDistanceCallback(distanceResponse: DistanceResponse) {
 
-   }
+  }
 
-   override fun onLatestPointCallback(latestPointResponse: LatestPointResponse) {
+  override fun onLatestPointCallback(latestPointResponse: LatestPointResponse) {
 
-   }
+  }
 
-   override fun onHistoryTrackCallback(historyTrackResponse: HistoryTrackResponse) {
+  override fun onHistoryTrackCallback(historyTrackResponse: HistoryTrackResponse) {
 
-   }
+  }
 
-   override fun onQueryTrackCallback(queryTrackResponse: QueryTrackResponse) {
+  override fun onQueryTrackCallback(queryTrackResponse: QueryTrackResponse) {
 
-   }
+  }
 
-   override fun onAddTrackCallback(addTrackResponse: AddTrackResponse) {
+  override fun onAddTrackCallback(addTrackResponse: AddTrackResponse) {
 
-   }
+  }
 
-   override fun onParamErrorCallback(paramErrorResponse: ParamErrorResponse) {
+  override fun onParamErrorCallback(paramErrorResponse: ParamErrorResponse) {
 
-   }
+  }
 }

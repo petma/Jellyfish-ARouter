@@ -6,8 +6,8 @@ import com.logic.jellyfish.databinding.GoalActivityBinding
 
 class GoalActivity : BaseActivity<GoalViewModel, GoalActivityBinding>(R.layout.goal_activity) {
 
-   override fun init() {
-      binding.viewmodel = viewModel
-    }
+  override fun init() {
+    binding.viewmodel = viewModel
+  }
 
 }

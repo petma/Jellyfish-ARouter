@@ -7,9 +7,9 @@ import com.logic.jellyfish.ui.ready.ReadyActivity
 
 class X5Javascript(private val context: Context) {
 
-   @JavascriptInterface
-   fun navigateToMainActivity() {
-      val intent = Intent(context, ReadyActivity::class.java)
-      context.startActivity(intent)
-   }
+  @JavascriptInterface
+  fun navigateToMainActivity() {
+    val intent = Intent(context, ReadyActivity::class.java)
+    context.startActivity(intent)
+  }
 }

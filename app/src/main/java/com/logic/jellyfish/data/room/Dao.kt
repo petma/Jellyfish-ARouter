@@ -11,13 +11,13 @@ import com.logic.jellyfish.data.entity.LocalLatLng
 @Dao
 interface Dao {
 
-   @Query("SELECT * FROM LocalLatLng")
-   suspend fun getLatLngs(): List<LocalLatLng>
+  @Query("SELECT * FROM LocalLatLng")
+  suspend fun getLatLngs(): List<LocalLatLng>
 
-   @Query("DELETE FROM LocalLatLng")
-   suspend fun deleteLatLngs()
+  @Query("DELETE FROM LocalLatLng")
+  suspend fun deleteLatLngs()
 
-   @Insert
-   suspend fun insertLatLng(latLng: LocalLatLng)
+  @Insert
+  suspend fun insertLatLng(latLng: LocalLatLng)
 
 }
