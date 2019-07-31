@@ -24,4 +24,6 @@ object Cache {
    */
   var terminalName: String = ""
 
+  var trackId: Long = -1
+
 }

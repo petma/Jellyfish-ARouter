@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
 import android.provider.Settings
-import android.text.method.ScrollingMovementMethod
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.logic.jellyfish.R
@@ -17,7 +16,6 @@ import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.databinding.ReadyActivityBinding
 import com.logic.jellyfish.ui.timer.TimerActivity
 
-
 class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layout.ready_activity) {
 
   private var needCheckBackLocation = false
@@ -25,7 +23,6 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
 
   override fun init() {
     binding.viewmodel = viewModel
-    binding.textView.movementMethod = ScrollingMovementMethod.getInstance()
 
     viewModel.startEvent.observe(this, EventObserver {
       val needRequestPermissionList = findDeniedPermissions(needPermissions)

@@ -89,7 +89,7 @@ class TrackService : Service() {
               terminalId = queryTerminalResponse.tid
               // 是否要创建新的轨迹,还是在之前的轨迹的基础上继续上传
               if (uploadToTrack) {
-                // 添加新的轨迹
+                // 每次都添加新的轨迹
                 aMapTrackClient.addTrack(
                   AddTrackRequest(Constants.SERVICE_ID, terminalId),
                   object : SimpleOnTrackListener() {
@@ -97,6 +97,7 @@ class TrackService : Service() {
                     override fun onAddTrackCallback(addTrackResponse: AddTrackResponse) {
                       if (addTrackResponse.isSuccess) {
                         trackId = addTrackResponse.trid
+                        Cache.trackId = addTrackResponse.trid
                         beginTrack()
                       } else {
                         toast("网络请求失败,${addTrackResponse.errorMsg}")
