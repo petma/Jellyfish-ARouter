@@ -12,7 +12,6 @@ import android.os.SystemClock
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
-import com.amap.api.trace.LBSTraceClient
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.data.entity.TimerEvent
@@ -25,11 +24,14 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+/**
+ * 基于定位SDK的后台服务,把定位的数据存储到数据库
+ * 然后在地图Activity中获取数据,进行纠偏,然后画出轨迹
+ */
 class LocationService : Service() {
 
   private lateinit var locationClient: AMapLocationClient
   private lateinit var locationOption: AMapLocationClientOption
-  private lateinit var lbsTraceClient: LBSTraceClient
 
   private var eventBus: EventBus? = null
 
@@ -93,7 +95,14 @@ class LocationService : Service() {
     if (location != null && location.errorCode == 0) {
       currSpeed = location.speed
       CoroutineScope(Dispatchers.Main).launch {
-        RoomFactory.repository.insertLatLng(location.latitude, location.longitude)
+        RoomFactory.repository.insertPathRecord(
+          location.latitude,
+          location.longitude,
+          location.speed,
+          location.bearing,
+//          location.time // 此处如果位置没有改变会一直返回相同的时间
+          System.currentTimeMillis()
+        )
       }
     }
   }

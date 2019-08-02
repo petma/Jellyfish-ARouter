@@ -6,11 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.logic.jellyfish.utils.getViewModel
+import com.logic.jellyfish.utils.ClassUtils.getViewModel
+import me.jessyan.autosize.internal.CustomAdapt
 
 abstract class BaseActivity<out VM : ViewModel, BV : ViewDataBinding>(
   private val layout: Int
-) : AppCompatActivity() {
+) : AppCompatActivity(), CustomAdapt {
 
   protected val viewModel: VM by lazy { createViewModel() }
 
@@ -27,6 +28,14 @@ abstract class BaseActivity<out VM : ViewModel, BV : ViewDataBinding>(
 
   private fun createViewModel(): VM {
     return ViewModelProviders.of(this).get(getViewModel(this))
+  }
+
+  override fun isBaseOnWidth(): Boolean {
+    return false
+  }
+
+  override fun getSizeInDp(): Float {
+    return 640F
   }
 }
 

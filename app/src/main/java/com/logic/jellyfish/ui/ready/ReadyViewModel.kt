@@ -26,7 +26,13 @@ class ReadyViewModel : ViewModel() {
   private val _showProgress = MutableLiveData<Boolean>()
   val showProgress: LiveData<Boolean> = _showProgress
 
-  fun startRunning(v: View) {
+  fun startGPSLocation() {
+    Cache.isLocationSDK = true
+    _startEvent.value = Event(Unit)
+  }
+
+  fun startLieYing(v: View) {
+    Cache.isLocationSDK = false
     // 先检查是否有提交过终端申请
     val terminalName = v.getString(Constants.PREF_KEY_TERMINAL_NAME)
 
@@ -52,7 +58,7 @@ class ReadyViewModel : ViewModel() {
                 _startEvent.value = Event(Unit)
               }
             }
-            // 终端已存在,理论上应该不会走到这一条
+            // 终端已存在,说明之前保存的SharedPreferences记录被清掉了
             20009 -> {
               Cache.terminalName = name
               v.saveString(Constants.PREF_KEY_TERMINAL_NAME, name)

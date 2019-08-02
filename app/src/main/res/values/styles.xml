@@ -17,26 +17,15 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="MapTheme" parent="AppTheme">
-        <item name="android:windowAnimationStyle">@style/AnimationMapActivity</item>
-    </style>
-
     <style name="SplashTheme" parent="AppTheme">
         <!--<item name="windowActionBarOverlay">false</item>-->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 
-    <style name="AnimationMapActivity" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_bottom</item>
-        <item name="android:activityOpenExitAnimation">@anim/nav_default_exit_anim</item>
-        <item name="android:activityCloseEnterAnimation">@anim/nav_default_enter_anim</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_bottom</item>
-    </style>
-
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/nav_default_enter_anim</item>
-        <item name="android:activityOpenExitAnimation">@anim/nav_default_exit_anim</item>
-        <item name="android:activityCloseEnterAnimation">@anim/nav_default_enter_anim</item>
-        <item name="android:activityCloseExitAnimation">@anim/nav_default_exit_anim</item>
+      <item name="android:activityOpenEnterAnimation">@android:anim/fade_in</item>
+      <item name="android:activityOpenExitAnimation">@android:anim/fade_out</item>
+      <item name="android:activityCloseEnterAnimation">@android:anim/fade_in</item>
+      <item name="android:activityCloseExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>

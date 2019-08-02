@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
 import android.provider.Settings
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
@@ -127,20 +126,18 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layou
 
   private fun openGPSSetting() {
     if (checkGpsIsOpen()) {
-      Toast.makeText(this, "true", Toast.LENGTH_SHORT).show()
       startActivity(Intent(this, TimerActivity::class.java))
     } else {
       AlertDialog.Builder(this).setTitle("open GPS")
         .setMessage("go to open")
-        //  取消选项
+        // 取消选项
         .setNegativeButton(
           "cancel"
         ) { dialogInterface, _ ->
-          Toast.makeText(this, "close", Toast.LENGTH_SHORT).show()
           // 关闭dialog
           dialogInterface.dismiss()
         }
-        //  确认选项
+        // 确认选项
         .setPositiveButton(
           "setting"
         ) { _, _ ->

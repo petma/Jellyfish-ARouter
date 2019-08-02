@@ -30,21 +30,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.311" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:onClick="@{(v) -> viewmodel.startRunning(v)}"
-            android:text="开始运动"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.613" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -59,15 +44,39 @@
 
         <Button
             android:id="@+id/delete_track"
-            android:onClick="@{(v) -> viewmodel.deleteTrack(v)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
+          android:onClick="@{(v) -> viewmodel.deleteTrack(v)}"
             android:text="删除轨迹"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
-            app:layout_constraintStart_toStartOf="parent" />
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.8" />
+
+        <Button
+          android:id="@+id/lieying"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="@{(v) -> viewmodel.startLieYing(v)}"
+          android:text="猎鹰SDK"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.7" />
+
+        <Button
+          android:id="@+id/gps"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="@{() -> viewmodel.startGPSLocation()}"
+          android:text="地图SDK+定位SDK"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

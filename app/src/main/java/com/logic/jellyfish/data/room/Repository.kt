@@ -7,10 +7,18 @@ import com.amap.api.maps.model.LatLng
  */
 interface Repository {
 
-  suspend fun insertLatLng(latitude: Double, longitude: Double)
+  suspend fun insertPathRecord(
+    latitude: Double,
+    longitude: Double,
+    speed: Float,
+    bearing: Float,
+    time: Long
+  )
 
   suspend fun deleteLatLngs()
 
   suspend fun getOptimizedLatLngs(): List<LatLng>
+
+  suspend fun getPathRecords(): List<PathRecord>
 
 }

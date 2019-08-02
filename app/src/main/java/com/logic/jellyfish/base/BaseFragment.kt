@@ -10,11 +10,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.logic.jellyfish.utils.getViewModel
+import com.logic.jellyfish.utils.ClassUtils.getViewModel
+import me.jessyan.autosize.AutoSize
+import me.jessyan.autosize.internal.CustomAdapt
 
 abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
   private val layout: Int
-) : Fragment() {
+) : Fragment(), CustomAdapt {
 
   protected val viewModel: VM by lazy { createViewModel() }
   protected lateinit var binding: SV
@@ -23,7 +25,8 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = DataBindingUtil.inflate(layoutInflater, layout, null, false)
+    AutoSize.autoConvertDensity(requireActivity(), 640F, false)
+    binding = DataBindingUtil.inflate(inflater, layout, null, false)
     binding.lifecycleOwner = viewLifecycleOwner
     return binding.root
   }
@@ -37,6 +40,14 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
 
   private fun createViewModel(): VM {
     return ViewModelProviders.of(this).get(getViewModel(this))
+  }
+
+  override fun isBaseOnWidth(): Boolean {
+    return false
+  }
+
+  override fun getSizeInDp(): Float {
+    return 640F
   }
 }
 

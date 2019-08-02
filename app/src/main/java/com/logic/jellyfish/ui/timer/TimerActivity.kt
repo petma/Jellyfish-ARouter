@@ -2,6 +2,7 @@ package com.logic.jellyfish.ui.timer
 
 import android.content.Intent
 import android.view.KeyEvent
+import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.TimerEvent
@@ -20,14 +21,17 @@ class TimerActivity : BaseActivity<TimerViewModel, TimerActivityBinding>(R.layou
   override fun init() {
     binding.viewmodel = viewModel
     EventBus.getDefault().register(this)
-//      startLocationService()
-    startTrackService()
+    if (Cache.isLocationSDK) {
+      startLocationService()
+    } else {
+      startTrackService()
+    }
   }
 
   override fun onDestroy() {
     super.onDestroy()
     EventBus.getDefault().unregister(this)
-//      stopLocationService()
+    stopLocationService()
     stopTrackService()
   }
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewmodel"
+      type="com.logic.jellyfish.ui.login.LoginViewModel" />
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginFragment">
+
+    <ImageView
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_marginTop="56dp"
+      app:srcCompat="@mipmap/logo" />
+
+    <EditText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:background="@drawable/btn_rounded_translucent"
+      android:ems="12"
+      android:hint="请输入手机号码"
+      android:paddingLeft="20dp" />
+
+    <EditText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:background="@drawable/btn_rounded_translucent"
+      android:ems="12"
+      android:hint="请输入登陆密码"
+      android:paddingLeft="20dp" />
+
+    <Button
+      android:layout_width="240dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:background="@drawable/btn_rounded_green_300"
+      android:onClick="@{(v) -> viewmodel.login(v)}"
+      android:text="登陆" />
+
+  </LinearLayout>
+</layout>

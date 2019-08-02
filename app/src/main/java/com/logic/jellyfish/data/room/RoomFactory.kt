@@ -12,9 +12,8 @@ object RoomFactory {
       Room.databaseBuilder(
         App.app,
         Database::class.java,
-        "Location.db"
+        "TrackRecord.db"
       ).build().dao()
     )
-
   }
 }

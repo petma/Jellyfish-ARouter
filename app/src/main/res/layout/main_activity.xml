@@ -1,72 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-    <data>
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme"
+    android:visibility="gone" />
 
-        <variable
-            name="viewmodel"
-            type="com.logic.jellyfish.ui.main.MainViewModel" />
+  <FrameLayout
+    android:id="@+id/nav_host_container"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
 
-    </data>
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottom_nav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:minHeight="?attr/actionBarSize"
+    app:menu="@menu/menu_bottom_nav" />
 
-    <LinearLayout
-        android:id="@+id/hello"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:context=".ui.main.MainFragment">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> viewmodel.startRunning(v)}"
-            android:text="开始跑步" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v) -> viewmodel.createService(v)}"
-            android:text="创建服务" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{(v)-> viewmodel.createTerminal(v)}"
-            android:text="创建终端" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="服务name" />
-        <!--android:text="@={viewmodel.serviceName}" />-->
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="服务desc" />
-        <!--android:text="@={viewmodel.serviceDesc}" />-->
-
-        <Button
-            android:id="@+id/live"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewmodel.clearData()}"
-            android:text="清空日志" />
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{viewmodel.aMapServiceDataString}" />
-        </androidx.core.widget.NestedScrollView>
-
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

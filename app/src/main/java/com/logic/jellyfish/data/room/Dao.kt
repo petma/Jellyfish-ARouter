@@ -3,7 +3,6 @@ package com.logic.jellyfish.data.room
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.logic.jellyfish.data.entity.LocalLatLng
 
 /**
  * 这里面都是直接对数据库的操作
@@ -11,13 +10,13 @@ import com.logic.jellyfish.data.entity.LocalLatLng
 @Dao
 interface Dao {
 
-  @Query("SELECT * FROM LocalLatLng")
-  suspend fun getLatLngs(): List<LocalLatLng>
+  @Query("SELECT * FROM PathRecord")
+  suspend fun getPathRecords(): List<PathRecord>
 
-  @Query("DELETE FROM LocalLatLng")
-  suspend fun deleteLatLngs()
+  @Query("DELETE FROM PathRecord")
+  suspend fun deletePathRecords()
 
   @Insert
-  suspend fun insertLatLng(latLng: LocalLatLng)
+  suspend fun insertPathRecord(pathRecord: PathRecord)
 
 }

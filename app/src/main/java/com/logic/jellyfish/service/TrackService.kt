@@ -24,11 +24,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 /**
- * 轨迹上报服务,在跑步的时候手机一般是熄屏的,需要创建一个能稳定在后台运行的前台服务,
- * 以实时上报当前的位置到高德地图的服务器
- *
- * 在这里集成轨迹服务的开启和采集的开启
- * 在这里不需要绘制地图
+ * 基于猎鹰SDK的后台服务,在后台一直上报
  */
 class TrackService : Service() {
 
@@ -47,10 +43,6 @@ class TrackService : Service() {
     EventBus.getDefault().register(this)
     aMapTrackClient = AMapTrackClient(applicationContext)
     startTrack()
-  }
-
-  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    return START_STICKY
   }
 
   override fun onDestroy() {

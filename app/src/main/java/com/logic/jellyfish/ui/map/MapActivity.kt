@@ -1,25 +1,32 @@
 package com.logic.jellyfish.ui.map
 
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
 import com.amap.api.maps.model.LatLngBounds
+import com.amap.api.trace.LBSTraceClient
+import com.amap.api.trace.TraceListener
 import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.query.entity.DriveMode
 import com.amap.api.track.query.entity.Point
 import com.amap.api.track.query.model.*
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
+import com.logic.jellyfish.data.room.RoomFactory
 import com.logic.jellyfish.databinding.MapActivityBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.SimpleOnTrackListener
+import com.logic.jellyfish.utils.Utils
 import com.logic.jellyfish.utils.ext.createViewModel
 import com.logic.jellyfish.utils.ext.toast
 import kotlinx.android.synthetic.main.map_activity.*
+import kotlinx.coroutines.launch
 import java.util.*
 
 /**
@@ -29,7 +36,7 @@ import java.util.*
  * 2. 画出跑步的轨迹
  * 3. 截屏分享
  */
-class MapActivity : AppCompatActivity() {
+class MapActivity : AppCompatActivity(), TraceListener {
 
   private val viewModel: MapViewModel by lazy { createViewModel<MapViewModel>() }
   private lateinit var binding: MapActivityBinding
@@ -42,6 +49,12 @@ class MapActivity : AppCompatActivity() {
   private val polyLines = LinkedList<Polyline>()
   private val endMarkers = LinkedList<Marker>()
 
+  private var graspStartMarker: Marker? = null
+  private var graspEndMarker: Marker? = null
+  private var graspRoleMarker: Marker? = null
+  private var graspPolyline: Polyline? = null
+  private var mGraspLatLngList: List<LatLng>? = null
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.setContentView(this, R.layout.map_activity)
@@ -51,8 +64,15 @@ class MapActivity : AppCompatActivity() {
     }
     map_view.onCreate(savedInstanceState)
 
+    init()
+  }
+
+  private fun init() {
     initMap()
-    getQueryTrack()
+    if (Cache.isLocationSDK)
+      paintTrack()
+    else
+      getQueryTrack()
   }
 
   private fun initMap() {
@@ -90,7 +110,70 @@ class MapActivity : AppCompatActivity() {
     aMap.moveCamera(CameraUpdateFactory.zoomTo(18f))
   }
 
-//  private fun paintTrack() {
+  private fun paintTrack() {
+    val traceClient = LBSTraceClient(applicationContext)
+    lifecycleScope.launch {
+      val pathRecords = RoomFactory.repository.getPathRecords()
+      val traceLocations = Utils.parseTraceLocationList(pathRecords)
+      traceClient.queryProcessedTrace(1, traceLocations, LBSTraceClient.TYPE_AMAP, this@MapActivity)
+    }
+  }
+
+  override fun onRequestFailed(p0: Int, p1: String?) {
+    toast("轨迹纠偏失败")
+  }
+
+  override fun onTraceProcessing(p0: Int, p1: Int, list: MutableList<LatLng>) {
+  }
+
+  override fun onFinished(p0: Int, list: MutableList<LatLng>, p2: Int, p3: Int) {
+    toast("轨迹纠偏完成")
+    addGraspTrace(list)
+    mGraspLatLngList = list
+  }
+
+  /**
+   * 地图上添加纠偏后轨迹线路及起终点、轨迹动画小人
+   *
+   */
+  private fun addGraspTrace(graspList: List<LatLng>?) {
+    if (graspList == null || graspList.size < 2) {
+      return
+    }
+    val startPoint = graspList[0]
+    val endPoint = graspList[graspList.size - 1]
+
+    graspPolyline = aMap.addPolyline(
+      PolylineOptions()
+        .setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.grasp_trace_line))
+        .width(40f).addAll(graspList)
+    )
+
+    graspStartMarker = aMap.addMarker(
+      MarkerOptions().position(startPoint).icon(
+        BitmapDescriptorFactory.fromResource(R.drawable.start)
+      )
+    )
+
+    graspEndMarker = aMap.addMarker(
+      MarkerOptions().position(endPoint).icon(
+        BitmapDescriptorFactory.fromResource(R.drawable.end)
+      )
+    )
+
+    graspRoleMarker = aMap.addMarker(
+      MarkerOptions().position(startPoint).icon(
+        BitmapDescriptorFactory.fromBitmap(
+          BitmapFactory.decodeResource(
+            resources, R.drawable.walk
+          )
+        )
+      )
+    )
+  }
+
+
+  //  private fun paintTrack() {
 //    lifecycleScope.launch {
 //      val latLngs = RoomFactory.repository.getOptimizedLatLngs()
 //      if (latLngs.isNotEmpty()) {
@@ -101,7 +184,7 @@ class MapActivity : AppCompatActivity() {
 //      }
 //    }
 //  }
-
+//
 //  private fun getBounds(pointList: List<LatLng>): LatLngBounds {
 //    val builder = LatLngBounds.builder()
 //    for (i in pointList.indices) {

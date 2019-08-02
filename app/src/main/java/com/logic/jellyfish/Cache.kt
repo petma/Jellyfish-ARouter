@@ -26,4 +26,6 @@ object Cache {
 
   var trackId: Long = -1
 
+  var isLocationSDK = false
+
 }
