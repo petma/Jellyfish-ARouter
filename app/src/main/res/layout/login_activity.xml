@@ -16,7 +16,7 @@
     android:background="@mipmap/login_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.login.LoginFragment">
+    tools:context=".ui.login.LoginActivity">
 
     <ImageView
       android:layout_width="120dp"

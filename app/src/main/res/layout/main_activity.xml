@@ -11,11 +11,10 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:minHeight="?attr/actionBarSize"
-    android:theme="?attr/actionBarTheme"
-    android:visibility="gone" />
+    android:theme="?attr/actionBarTheme" />
 
-  <FrameLayout
-    android:id="@+id/nav_host_container"
+  <com.logic.jellyfish.view.NoScrollViewPager
+    android:id="@+id/view_pager"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1" />
@@ -26,6 +25,8 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
+    app:backgroundTint="@android:color/white"
+    app:labelVisibilityMode="labeled"
     app:menu="@menu/menu_bottom_nav" />
 
 </LinearLayout>
