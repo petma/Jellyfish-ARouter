@@ -6,18 +6,13 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.databinding.FindFragmentBinding" />
+      type="com.logic.jellyfish.ui.main.MainViewModel" />
   </data>
 
   <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.find.FindFragment">
-
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:text="Find" />
+    tools:context=".ui.main.MainFragment">
 
   </FrameLayout>
 </layout>

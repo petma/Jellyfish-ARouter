@@ -3,6 +3,7 @@ package com.logic.jellyfish.ui
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -13,14 +14,14 @@ import com.logic.jellyfish.ui.message.MessageFragment
 import com.logic.jellyfish.ui.mine.MineFragment
 import com.logic.jellyfish.ui.sport.SportFragment
 import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.activity_main.*
 import me.jessyan.autosize.internal.CustomAdapt
 
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.main_activity)
+    setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
 
     initFragment()
@@ -28,10 +29,17 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   }
 
   private fun initFragment() {
+    val fragments = arrayOf<Fragment>(
+      HomeFragment(),
+      SportFragment(),
+      MessageFragment(),
+      FindFragment(),
+      MineFragment()
+    )
     view_pager.apply {
-      adapter = MainPageAdapter(supportFragmentManager)
+      adapter = MainPageAdapter(fragments, supportFragmentManager)
+      offscreenPageLimit = 3
       setNoScroll(true)
-      offscreenPageLimit = 4
       addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
         override fun onPageScrollStateChanged(state: Int) {
         }
@@ -88,16 +96,12 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
     return 640F
   }
 
-  inner class MainPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+  class MainPageAdapter(
+    private val fragments: Array<Fragment>,
+    fm: FragmentManager
+  ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getItem(position: Int) = when (position) {
-      0 -> HomeFragment()
-      1 -> SportFragment()
-      2 -> MessageFragment()
-      3 -> FindFragment()
-      4 -> MineFragment()
-      else -> HomeFragment()
-    }
+    override fun getItem(position: Int) = fragments[position]
 
     override fun getCount() = 5
   }

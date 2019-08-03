@@ -70,6 +70,11 @@
       android:launchMode="singleTask"
       android:theme="@style/TimerTheme" />
     <activity android:name=".ui.goal.GoalActivity" />
+    <activity android:name=".ui.mine.event.EventActivity" />
+    <activity android:name=".ui.mine.following.FollowingActivity" />
+    <activity android:name=".ui.mine.my_message.MyMessageActivity" />
+    <activity android:name=".ui.mine.record.RecordActivity" />
+    <activity android:name=".ui.mine.settings.SettingsActivity" />
 
     <service android:name=".service.TrackService" />
     <service android:name=".service.LocationService" />

@@ -12,7 +12,7 @@ import com.logic.jellyfish.utils.ext.log
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import kotlinx.android.synthetic.main.web_activity.*
+import kotlinx.android.synthetic.main.activity_web.*
 
 class X5WebViewActivity : AppCompatActivity() {
 
@@ -20,7 +20,7 @@ class X5WebViewActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.web_activity)
+    setContentView(R.layout.activity_web)
     initWebView()
     web_view.loadUrl("file:///android_asset/jellyfish-web/index.html")
   }

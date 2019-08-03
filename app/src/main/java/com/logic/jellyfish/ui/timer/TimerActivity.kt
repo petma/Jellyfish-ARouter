@@ -6,14 +6,14 @@ import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.TimerEvent
-import com.logic.jellyfish.databinding.TimerActivityBinding
+import com.logic.jellyfish.databinding.ActivityTimerBinding
 import com.logic.jellyfish.service.LocationService
 import com.logic.jellyfish.service.TrackService
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class TimerActivity : BaseActivity<TimerViewModel, TimerActivityBinding>(R.layout.timer_activity) {
+class TimerActivity : BaseActivity<TimerViewModel, ActivityTimerBinding>(R.layout.activity_timer) {
 
   private var locationIntent: Intent? = null
   private var trackIntent: Intent? = null

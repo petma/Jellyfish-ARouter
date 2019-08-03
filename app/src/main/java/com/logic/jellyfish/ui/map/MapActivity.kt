@@ -19,13 +19,13 @@ import com.amap.api.track.query.model.*
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.room.RoomFactory
-import com.logic.jellyfish.databinding.MapActivityBinding
+import com.logic.jellyfish.databinding.ActivityMapBinding
 import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.Utils
 import com.logic.jellyfish.utils.ext.createViewModel
 import com.logic.jellyfish.utils.ext.toast
-import kotlinx.android.synthetic.main.map_activity.*
+import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -39,7 +39,7 @@ import java.util.*
 class MapActivity : AppCompatActivity(), TraceListener {
 
   private val viewModel: MapViewModel by lazy { createViewModel<MapViewModel>() }
-  private lateinit var binding: MapActivityBinding
+  private lateinit var binding: ActivityMapBinding
 
   // 地图相关的配置和服务
   private lateinit var aMap: AMap
@@ -57,7 +57,7 @@ class MapActivity : AppCompatActivity(), TraceListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.map_activity)
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_map)
     binding.apply {
       viewmodel = viewModel
       lifecycleOwner = this@MapActivity

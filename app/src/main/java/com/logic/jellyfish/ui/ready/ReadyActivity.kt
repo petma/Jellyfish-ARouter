@@ -12,10 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.EventObserver
-import com.logic.jellyfish.databinding.ReadyActivityBinding
+import com.logic.jellyfish.databinding.ActivityReadyBinding
 import com.logic.jellyfish.ui.timer.TimerActivity
 
-class ReadyActivity : BaseActivity<ReadyViewModel, ReadyActivityBinding>(R.layout.ready_activity) {
+class ReadyActivity : BaseActivity<ReadyViewModel, ActivityReadyBinding>(R.layout.activity_ready) {
 
   private var needCheckBackLocation = false
   private var isNeedCheck = true

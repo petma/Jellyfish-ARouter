@@ -2,10 +2,12 @@ package com.logic.jellyfish.ui.find
 
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseFragment
-import com.logic.jellyfish.databinding.FindFragmentBinding
+import com.logic.jellyfish.databinding.FragmentFindBinding
 
-class FindFragment : BaseFragment<FindViewModel, FindFragmentBinding>(R.layout.find_fragment) {
+class FindFragment : BaseFragment<FindViewModel, FragmentFindBinding>(R.layout.fragment_find) {
+
   override fun init() {
+    binding.viewmodel = viewModel
   }
 
 
