@@ -21,7 +21,15 @@ import me.jessyan.autosize.internal.CustomAdapt
 
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
-  private lateinit var fragments: Array<Fragment>
+  private val fragments: Array<Fragment> by lazy {
+    arrayOf(
+      HomeFragment(),
+      SportFragment(),
+      MessageFragment(),
+      FindFragment(),
+      MineFragment()
+    )
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,13 +41,6 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   }
 
   private fun initFragment() {
-    fragments = arrayOf(
-      HomeFragment(),
-      SportFragment(),
-      MessageFragment(),
-      FindFragment(),
-      MineFragment()
-    )
     view_pager.apply {
       adapter = MainPageAdapter(fragments, supportFragmentManager)
       offscreenPageLimit = 5
@@ -67,23 +68,23 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
       when (it.itemId) {
         R.id.home -> {
           changeFragment(it, 0)
-          toolbar.title = resources.getString(R.string.home)
+          toolbar.title = getString(R.string.home)
         }
         R.id.sport -> {
           changeFragment(it, 1)
-          toolbar.title = resources.getString(R.string.sport)
+          toolbar.title = getString(R.string.sport)
         }
         R.id.message -> {
           changeFragment(it, 2)
-          toolbar.title = resources.getString(R.string.message)
+          toolbar.title = getString(R.string.message)
         }
         R.id.find -> {
           changeFragment(it, 3)
-          toolbar.title = resources.getString(R.string.find)
+          toolbar.title = getString(R.string.find)
         }
         R.id.mine -> {
           changeFragment(it, 4)
-          toolbar.title = resources.getString(R.string.mine)
+          toolbar.title = getString(R.string.mine)
         }
       }
       true

@@ -136,4 +136,9 @@ abstract class WebFragment(
     return false
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    webView.destroy()
+  }
+
 }
