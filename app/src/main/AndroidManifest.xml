@@ -41,7 +41,7 @@
       android:name="com.amap.api.v2.apikey"
       android:value="b6ffa70584e636c36229251ea26e13af" />
 
-    <activity android:name=".ui.login.LoginActivity">
+    <activity android:name=".ui.login.login.LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -61,7 +61,7 @@
       android:name=".ui.map.MapActivity"
       android:launchMode="singleTop" />
     <activity
-      android:name=".ui.web.X5WebViewActivity"
+      android:name=".base.WebViewActivity"
       android:configChanges="orientation|screenSize|keyboardHidden"
       android:launchMode="singleTask"
       android:theme="@style/SplashTheme" />
@@ -75,6 +75,9 @@
     <activity android:name=".ui.mine.my_message.MyMessageActivity" />
     <activity android:name=".ui.mine.record.RecordActivity" />
     <activity android:name=".ui.mine.settings.SettingsActivity" />
+    <activity android:name=".ui.login.forget.ForgetActivity" />
+    <activity android:name=".ui.login.register.NewActivity" />
+    <activity android:name=".ui.login.register.RegisterActivity" />
 
     <service android:name=".service.TrackService" />
     <service android:name=".service.LocationService" />

@@ -7,7 +7,7 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.login.login.LoginViewModel" />
+      type="com.logic.jellyfish.ui.login.forget.ForgetViewModel" />
   </data>
 
   <LinearLayout
@@ -19,6 +19,7 @@
     tools:context=".ui.login.login.LoginActivity">
 
     <ImageView
+      android:contentDescription="@null"
       android:layout_width="@dimen/login_ic"
       android:layout_height="@dimen/login_ic"
       android:layout_marginTop="56dp"
@@ -27,9 +28,10 @@
     <EditText
       android:layout_width="@dimen/login_edit_text_width"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="24dp"
       android:background="@drawable/btn_rounded_translucent"
-      android:hint="请输入手机号码"
+      android:hint="@string/hint_phone_number"
+      android:text="@={viewmodel.phoneNumber}"
       android:paddingLeft="20dp" />
 
     <EditText
@@ -37,43 +39,30 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="24dp"
       android:background="@drawable/btn_rounded_translucent"
-      android:hint="请输入登陆密码"
-      android:paddingLeft="20dp" />
+      android:hint="@string/hint_verification_code"
+      android:paddingLeft="20dp"
+      android:text="@={viewmodel.verificationCode}" />
+
+    <EditText
+      android:layout_width="@dimen/login_edit_text_width"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:background="@drawable/btn_rounded_translucent"
+      android:hint="@string/hint_password"
+      android:paddingLeft="20dp"
+      android:text="@={viewmodel.password}" />
+
 
     <Button
-      android:textColor="@color/white"
       android:layout_width="@dimen/login_btn_width"
       android:layout_height="wrap_content"
       android:layout_marginTop="32dp"
       android:background="@drawable/btn_rounded_green_300"
-      android:onClick="@{(v) -> viewmodel.login(v)}"
-      android:text="登陆" />
+      android:onClick="@{(v) -> viewmodel.confirm(v)}"
+      android:text="@string/confirm"
+      android:textColor="@color/white" />
 
-    <RelativeLayout
-      android:layout_marginTop="20dp"
-      android:layout_width="240dp"
-      android:layout_height="wrap_content">
-
-      <TextView
-        android:onClick="@{(v) -> viewmodel.newUser(v)}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:text="注册新用户"
-        android:textColor="@color/white" />
-
-      <TextView
-        android:onClick="@{(v) -> viewmodel.forgetPassword(v)}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
-        android:text="忘记密码"
-        android:textColor="@color/colorPrimary" />
-
-
-    </RelativeLayout>
 
   </LinearLayout>
+
 </layout>

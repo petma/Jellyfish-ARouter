@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.web
+package com.logic.jellyfish.utils
 
 import android.content.Context
 import android.content.Intent

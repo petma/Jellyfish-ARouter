@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <data>
 
@@ -12,6 +13,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/border_bottom_1dp"
+      android:minHeight="?attr/actionBarSize"
+      android:text="@string/system_settings"
+      android:theme="?attr/actionBarTheme" />
+
+    <com.logic.jellyfish.view.SettingsItem
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:icon_src="@mipmap/mine_icon"
+      app:text="更换手机号"
+      app:text_color="@color/grey_700"
+      app:text_gravity_end="true" />
+
+    <com.logic.jellyfish.view.SettingsItem
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:text="意见反馈"
+      app:text_color="@color/grey_700" />
+
+    <com.logic.jellyfish.view.SettingsItem
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:text="关于我们"
+      app:text_color="@color/grey_700" />
+
+    <com.logic.jellyfish.view.SettingsItem
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:text="联系客服"
+      app:text_color="@color/grey_700" />
+
+    <com.logic.jellyfish.view.SettingsItem
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:text="推送通知"
+      app:text_color="@color/grey_700" />
 
   </LinearLayout>
 </layout>

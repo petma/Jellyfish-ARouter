@@ -1,23 +1,18 @@
 package com.logic.jellyfish.ui.home
 
 import com.logic.jellyfish.R
-import com.logic.jellyfish.base.BaseFragment
-import com.logic.jellyfish.databinding.FragmentHomeBinding
+import com.logic.jellyfish.base.WebFragment
+import com.tencent.smtt.sdk.WebView
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : WebFragment(R.layout.fragment_home) {
 
-  override fun init() {
-//    banner.apply {
-//      setImageLoader(object : ImageLoader() {
-//        override fun displayImage(context: Context, path: Any?, imageView: ImageView) {
-//          Glide.with(context).load(path).into(imageView)
-//        }
-//      })
-//      setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
-//      setDelayTime(3000)
-//      setBannerAnimation(Transformer.DepthPage)
-//    }
+  override fun setWebView(): WebView {
+    return web_view
   }
 
+  override fun init() {
+    webView.loadUrl("https://m.weibo.cn/")
+  }
 
 }

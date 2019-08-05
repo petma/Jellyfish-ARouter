@@ -12,7 +12,7 @@ public class GpsCorrect {
     final static double ee = 0.00669342162296594323;
 
     public static void transform(double wgLat, double wgLon, double[] latlng) {
-        if(outOfChina(wgLat, wgLon)) {
+        if (outOfChina(wgLat, wgLon)) {
             latlng[0] = wgLat;
             latlng[1] = wgLon;
             return;
@@ -30,7 +30,7 @@ public class GpsCorrect {
     }
 
     private static boolean outOfChina(double lat, double lon) {
-        if(lon < 72.004 || lon > 137.8347)
+        if (lon < 72.004 || lon > 137.8347)
             return true;
         return lat < 0.8293 || lat > 55.8271;
     }

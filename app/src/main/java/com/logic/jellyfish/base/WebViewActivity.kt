@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui.web
+package com.logic.jellyfish.base
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -7,28 +7,30 @@ import android.os.Handler
 import android.text.TextUtils
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
-import com.logic.jellyfish.R
+import com.logic.jellyfish.utils.X5Javascript
 import com.logic.jellyfish.utils.ext.log
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
-import kotlinx.android.synthetic.main.activity_web.*
 
-class X5WebViewActivity : AppCompatActivity() {
+abstract class WebViewActivity(
+  private val layout: Int,
+  private val webView: WebView
+) : AppCompatActivity() {
 
   private var isFirstLoadFinished = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_web)
+    setContentView(layout)
     initWebView()
-    web_view.loadUrl("file:///android_asset/jellyfish-web/index.html")
+    webView.loadUrl("file:///android_asset/jellyfish-web/index.html")
   }
 
   @SuppressLint("SetJavaScriptEnabled")
   private fun initWebView() {
 //        web_view.setBackgroundColor(Color.DKGRAY)
-    val settings = web_view.settings
+    val settings = webView.settings
 
     settings.apply {
       // 默认false
@@ -57,7 +59,7 @@ class X5WebViewActivity : AppCompatActivity() {
       useWideViewPort = true
 
       // 不缩放, 100%原始比例
-      web_view.setInitialScale(100)
+      webView.setInitialScale(100)
 
       // 告诉WebView启用JavaScript执行。默认false。
       javaScriptEnabled = true
@@ -82,8 +84,8 @@ class X5WebViewActivity : AppCompatActivity() {
       textZoom = 100
     }
 
-    web_view.webViewClient = X5WebViewClient()
-    web_view.addJavascriptInterface(X5Javascript(this), "Android")
+    webView.webViewClient = X5WebViewClient()
+    webView.addJavascriptInterface(X5Javascript(this), "Android")
   }
 
   inner class X5WebViewClient : WebViewClient() {
@@ -115,8 +117,8 @@ class X5WebViewActivity : AppCompatActivity() {
   }
 
   override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-    if (keyCode == KeyEvent.KEYCODE_BACK && web_view.canGoBack()) {
-      web_view.goBack()
+    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+      webView.goBack()
       return true
     }
     return super.onKeyDown(keyCode, event)

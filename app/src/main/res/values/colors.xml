@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#696969</color>
-    <color name="timber_button_resume">#2DD4CC</color>
-    <color name="timber_button_stop">#F75050</color>
+  <color name="colorPrimary">#29C3BB</color>
+  <color name="colorPrimaryLight">#ff2dd4cc</color>
+  <color name="colorPrimaryDark">#000000</color>
+  <color name="colorAccent">#696969</color>
+  <color name="timber_button_resume">#2DD4CC</color>
+  <color name="timber_button_stop">#F75050</color>
 
-    <color name="DimGray">#696969</color>
+  <color name="DimGray">#696969</color>
 
 
   <!--Material color list from https://material.io/guidelines/style/color.html-->
@@ -324,6 +325,7 @@
   <color name="grey_900">#212121</color>
   <color name="grey_1000">#1a1a1a</color>
   <color name="white">#FFFFFFFF</color>
+  <color name="transparent">#00000000</color>
 
 
   <!--for random color generator -->

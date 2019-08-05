@@ -116,7 +116,7 @@ public class PathSmoothTool {
      */
     private List<LatLng> kalmanFilterPath(List<LatLng> originlist, int intensity) {
         List<LatLng> kalmanFilterList = new ArrayList<LatLng>();
-        if(originlist == null || originlist.size() <= 2)
+        if (originlist == null || originlist.size() <= 2)
             return kalmanFilterList;
         initial();//初始化滤波参数
         LatLng latLng = null;
@@ -125,7 +125,7 @@ public class PathSmoothTool {
         for (int i = 1; i < originlist.size(); i++) {
             LatLng curLoc = originlist.get(i);
             latLng = kalmanFilterPoint(lastLoc, curLoc, intensity);
-            if(latLng != null) {
+            if (latLng != null) {
                 kalmanFilterList.add(latLng);
                 lastLoc = latLng;
             }
@@ -142,16 +142,16 @@ public class PathSmoothTool {
      * @return 滤波后本次定位点坐标值
      */
     private LatLng kalmanFilterPoint(LatLng lastLoc, LatLng curLoc, int intensity) {
-        if(pdelt_x == 0 || pdelt_y == 0) {
+        if (pdelt_x == 0 || pdelt_y == 0) {
             initial();
         }
         LatLng kalmanLatlng = null;
-        if(lastLoc == null || curLoc == null) {
+        if (lastLoc == null || curLoc == null) {
             return kalmanLatlng;
         }
-        if(intensity < 1) {
+        if (intensity < 1) {
             intensity = 1;
-        } else if(intensity > 5) {
+        } else if (intensity > 5) {
             intensity = 5;
         }
         for (int j = 0; j < intensity; j++) {
@@ -216,23 +216,23 @@ public class PathSmoothTool {
     /***************************抽稀算法*************************************/
     private List<LatLng> reducerVerticalThreshold(List<LatLng> inPoints,
                                                   float threshHold) {
-        if(inPoints == null) {
+        if (inPoints == null) {
             return null;
         }
-        if(inPoints.size() <= 2) {
+        if (inPoints.size() <= 2) {
             return inPoints;
         }
         List<LatLng> ret = new ArrayList<LatLng>();
         for (int i = 0; i < inPoints.size(); i++) {
             LatLng pre = getLastLocation(ret);
             LatLng cur = inPoints.get(i);
-            if(pre == null || i == inPoints.size() - 1) {
+            if (pre == null || i == inPoints.size() - 1) {
                 ret.add(cur);
                 continue;
             }
             LatLng next = inPoints.get(i + 1);
             double distance = calculateDistanceFromPoint(cur, pre, next);
-            if(distance > threshHold) {
+            if (distance > threshHold) {
                 ret.add(cur);
             }
         }
@@ -240,7 +240,7 @@ public class PathSmoothTool {
     }
 
     private static LatLng getLastLocation(List<LatLng> oneGraspList) {
-        if(oneGraspList == null || oneGraspList.size() == 0) {
+        if (oneGraspList == null || oneGraspList.size() == 0) {
             return null;
         }
         int locListSize = oneGraspList.size();
@@ -268,12 +268,12 @@ public class PathSmoothTool {
 
         double xx, yy;
 
-        if(param < 0 || (lineBegin.longitude == lineEnd.longitude
+        if (param < 0 || (lineBegin.longitude == lineEnd.longitude
                 && lineBegin.latitude == lineEnd.latitude)) {
             xx = lineBegin.longitude;
             yy = lineBegin.latitude;
 //            return -1;
-        } else if(param > 1) {
+        } else if (param > 1) {
             xx = lineEnd.longitude;
             yy = lineEnd.latitude;
 //            return -1;
@@ -287,23 +287,23 @@ public class PathSmoothTool {
     /***************************抽稀算法结束*********************************/
 
     private List<LatLng> reduceNoisePoint(List<LatLng> inPoints, float threshHold) {
-        if(inPoints == null) {
+        if (inPoints == null) {
             return null;
         }
-        if(inPoints.size() <= 2) {
+        if (inPoints.size() <= 2) {
             return inPoints;
         }
         List<LatLng> ret = new ArrayList<LatLng>();
         for (int i = 0; i < inPoints.size(); i++) {
             LatLng pre = getLastLocation(ret);
             LatLng cur = inPoints.get(i);
-            if(pre == null || i == inPoints.size() - 1) {
+            if (pre == null || i == inPoints.size() - 1) {
                 ret.add(cur);
                 continue;
             }
             LatLng next = inPoints.get(i + 1);
             double distance = calculateDistanceFromPoint(cur, pre, next);
-            if(distance < threshHold) {
+            if (distance < threshHold) {
                 ret.add(cur);
             }
         }

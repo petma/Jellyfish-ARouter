@@ -5,12 +5,9 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
 
-class NoScrollViewPager : ViewPager {
+class NoScrollViewPager(context: Context, attrs: AttributeSet) : ViewPager(context, attrs) {
+
   private var noScroll = false
-
-  constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-  constructor(context: Context) : super(context)
 
   fun setNoScroll(noScroll: Boolean) {
     this.noScroll = noScroll
