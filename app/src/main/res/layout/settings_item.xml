@@ -25,6 +25,7 @@
     android:layout_marginLeft="12dp"
     android:layout_weight="1"
     android:textColor="@color/grey_1000"
+    android:textSize="15sp"
     tools:text="@string/my_sport" />
 
   <ImageButton

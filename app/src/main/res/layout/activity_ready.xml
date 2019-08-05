@@ -9,13 +9,13 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.ready.ReadyViewModel" />
+      type="com.logic.jellyfish.ui.sport.ready.ReadyViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ready.ReadyActivity">
+    tools:context=".ui.sport.ready.ReadyActivity">
 
     <TextView
       android:id="@+id/textView"

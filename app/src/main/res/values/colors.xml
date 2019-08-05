@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#29C3BB</color>
-  <color name="colorPrimaryLight">#ff2dd4cc</color>
+  <color name="colorPrimary">#56BAAF</color>
+  <color name="colorPrimaryLight">#2DD4CC</color>
   <color name="colorPrimaryDark">#000000</color>
   <color name="colorAccent">#696969</color>
   <color name="timber_button_resume">#2DD4CC</color>

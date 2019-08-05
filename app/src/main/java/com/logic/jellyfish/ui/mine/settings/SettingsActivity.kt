@@ -10,5 +10,6 @@ class SettingsActivity : BaseActivity<SettingsViewModel, ActivitySettingsBinding
 
   override fun init() {
     binding.viewmodel = viewModel
+    setToolbar(R.id.toolbar, R.string.setting)
   }
 }

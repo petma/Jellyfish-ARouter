@@ -16,7 +16,7 @@ import com.logic.jellyfish.R
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.data.entity.TimerEvent
 import com.logic.jellyfish.data.room.RoomFactory
-import com.logic.jellyfish.ui.timer.TimerActivity
+import com.logic.jellyfish.ui.sport.timer.TimerActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -5,7 +5,7 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.map.MapViewModel" />
+      type="com.logic.jellyfish.ui.sport.map.MapViewModel" />
   </data>
 
   <FrameLayout

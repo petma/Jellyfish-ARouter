@@ -26,34 +26,50 @@
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:onClick="@{(v) -> viewmodel.navToChangePhoneNumber(v)}"
       app:icon_src="@mipmap/mine_icon"
-      app:text="更换手机号"
+      app:text="@string/change_phone_number"
       app:text_color="@color/grey_700"
       app:text_gravity_end="true" />
 
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:text="意见反馈"
+      android:onClick="@{(v) -> viewmodel.navToFeedback(v)}"
+      app:text="@string/feedback"
       app:text_color="@color/grey_700" />
 
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:text="关于我们"
+      android:onClick="@{(v) -> viewmodel.navToAboutUs(v)}"
+      app:text="@string/about_us"
       app:text_color="@color/grey_700" />
 
-    <com.logic.jellyfish.view.SettingsItem
+    <LinearLayout
+      android:id="@+id/container"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:text="联系客服"
-      app:text_color="@color/grey_700" />
+      android:background="@drawable/border_bottom_1dp"
+      android:gravity="center_vertical"
+      android:orientation="horizontal">
 
-    <com.logic.jellyfish.view.SettingsItem
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:text="推送通知"
-      app:text_color="@color/grey_700" />
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_weight="1"
+        android:text="推送通知"
+        android:textColor="@color/grey_1000"
+        android:textSize="15sp" />
+
+      <androidx.appcompat.widget.SwitchCompat
+        android:checked="@={viewmodel.pushNotification}"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="12dp" />
+    </LinearLayout>
+
 
   </LinearLayout>
 </layout>

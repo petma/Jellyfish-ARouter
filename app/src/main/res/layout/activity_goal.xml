@@ -6,13 +6,13 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.goal.GoalViewModel" />
+      type="com.logic.jellyfish.ui.home.goal.GoalViewModel" />
   </data>
 
   <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.goal.GoalActivity">
+    tools:context=".ui.home.goal.GoalActivity">
 
 
   </FrameLayout>

@@ -10,6 +10,7 @@ class FollowingActivity : BaseActivity<FollowingViewModel, ActivityFollowingBind
 
   override fun init() {
     binding.viewmodel = viewModel
+    setToolbar(R.id.toolbar, R.string.my_following)
   }
 
 }

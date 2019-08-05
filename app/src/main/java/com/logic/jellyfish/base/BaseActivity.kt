@@ -2,6 +2,7 @@ package com.logic.jellyfish.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -36,6 +37,12 @@ abstract class BaseActivity<out VM : ViewModel, BV : ViewDataBinding>(
 
   override fun getSizeInDp(): Float {
     return 640F
+  }
+
+  protected fun setToolbar(layoutId: Int, stringId: Int) {
+    val toolbar = binding.root.findViewById<Toolbar>(layoutId)
+    toolbar.title = getString(stringId)
+    setSupportActionBar(toolbar)
   }
 }
 

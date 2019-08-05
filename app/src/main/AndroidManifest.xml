@@ -26,6 +26,7 @@
     android:largeHeap="true"
     android:networkSecurityConfig="@xml/network_security_config"
     android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
     tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
@@ -54,30 +55,50 @@
       android:name=".ui.MainActivity"
       android:launchMode="singleTask" />
 
-    <activity android:name=".ui.ready.ReadyActivity">
+    <activity android:name="com.logic.jellyfish.ui.sport.ready.ReadyActivity">
 
     </activity>
     <activity
-      android:name=".ui.map.MapActivity"
+      android:name="com.logic.jellyfish.ui.sport.map.MapActivity"
       android:launchMode="singleTop" />
+
     <activity
-      android:name=".base.WebViewActivity"
-      android:configChanges="orientation|screenSize|keyboardHidden"
-      android:launchMode="singleTask"
-      android:theme="@style/SplashTheme" />
-    <activity
-      android:name=".ui.timer.TimerActivity"
+      android:name="com.logic.jellyfish.ui.sport.timer.TimerActivity"
       android:launchMode="singleTask"
       android:theme="@style/TimerTheme" />
-    <activity android:name=".ui.goal.GoalActivity" />
-    <activity android:name=".ui.mine.event.EventActivity" />
-    <activity android:name=".ui.mine.following.FollowingActivity" />
-    <activity android:name=".ui.mine.my_message.MyMessageActivity" />
-    <activity android:name=".ui.mine.record.RecordActivity" />
-    <activity android:name=".ui.mine.settings.SettingsActivity" />
-    <activity android:name=".ui.login.forget.ForgetActivity" />
-    <activity android:name=".ui.login.register.NewActivity" />
-    <activity android:name=".ui.login.register.RegisterActivity" />
+    <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
+
+    <activity
+      android:name=".ui.mine.event.EventActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.following.FollowingActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.my_message.MyMessageActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.record.RecordActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.settings.SettingsActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.settings.about_us.AboutUsActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.settings.change_phone.ChangePhoneActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.mine.settings.feedback.FeedbackActivity"
+      android:launchMode="singleTop" />
+
+    <activity
+      android:name=".ui.login.forget.ForgetActivity"
+      android:launchMode="singleTop" />
+    <activity
+      android:name=".ui.login.register.RegisterActivity"
+      android:launchMode="singleTop" />
 
     <service android:name=".service.TrackService" />
     <service android:name=".service.LocationService" />

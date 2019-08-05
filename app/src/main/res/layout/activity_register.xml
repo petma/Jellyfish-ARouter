@@ -21,25 +21,20 @@
     <ImageView
       android:layout_width="@dimen/login_ic"
       android:layout_height="@dimen/login_ic"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="@dimen/logo_margin_top"
+      android:contentDescription="@null"
       app:srcCompat="@mipmap/logo" />
 
     <EditText
-      android:layout_width="@dimen/login_edit_text_width"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="24dp"
-      android:background="@drawable/btn_rounded_translucent"
-      android:hint="请输入手机号码"
-      android:paddingLeft="20dp"
+      style="@style/LoginEditText"
+      android:hint="@string/hint_phone_number"
+      android:inputType="number"
       android:text="@={viewmodel.phoneNumber}" />
 
     <EditText
-      android:layout_width="@dimen/login_edit_text_width"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="24dp"
-      android:background="@drawable/btn_rounded_translucent"
-      android:hint="请输入验证码"
-      android:paddingLeft="20dp"
+      style="@style/LoginEditText"
+      android:hint="@string/hint_verification_code"
+      android:inputType="number"
       android:text="@={viewmodel.verificationCode}" />
 
     <LinearLayout
@@ -55,18 +50,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/transparent"
-        android:hint="请输入登陆密码"
+        android:hint="@string/hint_input_password"
         android:inputType="textPassword"
-        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
         android:text="@={viewmodel.password}" />
-
-      <!--<ImageButton-->
-      <!--android:layout_width="50dp"-->
-      <!--android:layout_height="match_parent"-->
-      <!--android:layout_marginRight="30dp"-->
-      <!--android:adjustViewBounds="true"-->
-      <!--android:background="@color/transparent"-->
-      <!--app:srcCompat="@mipmap/mm_icon" />-->
 
     </LinearLayout>
 
@@ -82,9 +70,10 @@
         android:layout_width="@dimen/login_edit_text_width"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
-        android:hint="请再次确认密码"
+        android:hint="@string/hint_confirm_password"
         android:inputType="textPassword"
-        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
         android:text="@={viewmodel.confirmPassword}" />
     </LinearLayout>
 
@@ -95,12 +84,12 @@
       android:gravity="center_vertical"
       android:orientation="horizontal">
 
-      <CheckBox
+      <androidx.appcompat.widget.AppCompatCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/white"
         android:checked="@={viewmodel.agreement}"
-        android:text="已阅读并同意"
+        android:text="@string/read_and_agree"
         android:textColor="@color/white"
         android:textSize="14sp" />
 
@@ -108,31 +97,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{(v) -> viewmodel.navigateToAgreement(v)}"
-        android:text="《用户服务协议》"
+        android:text="@string/user_services_agreement"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
 
     </LinearLayout>
 
     <Button
-      android:layout_width="@dimen/login_btn_width"
+      android:layout_width="@dimen/login_edit_text_width"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
       android:background="@drawable/btn_rounded_green_300"
       android:onClick="@{(v) -> viewmodel.register(v)}"
-      android:text="注册"
+      android:text="@string/register"
       android:textColor="@color/white" />
 
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
       android:layout_marginStart="0dp"
       android:layout_marginTop="20dp"
       android:onClick="@{(v) -> viewmodel.navigateToLogin(v)}"
-      android:text="已有账号，立即登录"
-      android:textColor="@color/white" />
+      android:text="@string/login_now"
+      android:textColor="@color/grey_200"
+      android:textSize="16sp" />
 
 
   </LinearLayout>

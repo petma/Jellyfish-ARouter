@@ -9,7 +9,7 @@ package com.logic.jellyfish.utils
 //import androidx.lifecycle.viewModelScope
 //import com.google.gson.Gson
 //import com.logic.jellyfish.data.http.RetrofitFactory
-//import com.logic.jellyfish.ui.timer.TimerActivity
+//import com.logic.jellyfish.ui.sport.timer.TimerActivity
 //import com.logic.jellyfish.utils.Constants.TRACK_SERVICE_KEY
 //import com.logic.jellyfish.utils.ext.startActivity
 //import com.logic.jellyfish.utils.ext.toast

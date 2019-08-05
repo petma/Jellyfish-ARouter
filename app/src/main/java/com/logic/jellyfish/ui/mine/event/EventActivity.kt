@@ -10,6 +10,7 @@ class EventActivity : BaseActivity<EventViewModel, ActivityEventBinding>(
 
   override fun init() {
     binding.viewmodel = viewModel
+    setToolbar(R.id.toolbar, R.string.my_event)
   }
 
 }

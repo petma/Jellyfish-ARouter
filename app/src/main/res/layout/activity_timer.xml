@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".ui.timer.TimerActivity">
+  tools:context=".ui.sport.timer.TimerActivity">
 
   <data>
 
@@ -10,7 +10,7 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.timer.TimerViewModel" />
+      type="com.logic.jellyfish.ui.sport.timer.TimerViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
