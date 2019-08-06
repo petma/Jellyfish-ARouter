@@ -44,18 +44,18 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ActivityReadyBinding>(R.layou
     })
   }
 
-  override fun onResume() {
-    super.onResume()
-    try {
-      if (Build.VERSION.SDK_INT >= 23) {
-        if (isNeedCheck) {
-          checkPermissions(needPermissions)
-        }
-      }
-    } catch (e: Throwable) {
-      e.printStackTrace()
-    }
-  }
+//  override fun onResume() {
+//    super.onResume()
+//    try {
+//      if (Build.VERSION.SDK_INT >= 23) {
+//        if (isNeedCheck) {
+//          checkPermissions(needPermissions)
+//        }
+//      }
+//    } catch (e: Throwable) {
+//      e.printStackTrace()
+//    }
+//  }
 
   @TargetApi(23)
   private fun checkPermissions(permissions: Array<String>) {

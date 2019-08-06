@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
-//        arg("AROUTER_GENERATE_DOC", "enable")
     }
 }
 
@@ -20,7 +19,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+//        multiDexEnabled true
     }
 
     signingConfigs {
@@ -82,6 +81,13 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(include: ['*.aar'], dir: 'libs')
+    if (!LOGIN_IS_APPLICATION.toBoolean()) {
+        implementation project(':login')
+    }
+
+    // ARouter
+    implementation "com.alibaba:arouter-api:$aRouterMainVersion"
+    kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
     // AndroidX
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.core:core-ktx:$coreKtxVersion"
@@ -114,9 +120,6 @@ dependencies {
     implementation "com.youth.banner:banner:$bannerVersion"
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    // ARouter
-    implementation "com.alibaba:arouter-api:$aRouterMainVersion"
-    kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
     // DataBinding RecyclerView
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"

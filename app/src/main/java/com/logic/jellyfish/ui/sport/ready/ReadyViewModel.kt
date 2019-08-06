@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alibaba.android.arouter.launcher.ARouter
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.data.http.RetrofitFactory
@@ -27,8 +28,9 @@ class ReadyViewModel : ViewModel() {
   val showProgress: LiveData<Boolean> = _showProgress
 
   fun startGPSLocation() {
-    Cache.isLocationSDK = true
-    _startEvent.value = Event(Unit)
+//    Cache.isLocationSDK = true
+//    _startEvent.value = Event(Unit)
+    ARouter.getInstance().build("/login/login").navigation()
   }
 
   fun startLieYing(v: View) {

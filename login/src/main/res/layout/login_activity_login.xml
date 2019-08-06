@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="viewmodel"
+      type="com.sweet.login.login.LoginViewModel"/>
+  </data>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.sweet.login.login.LoginActivity">
+
+    <ImageView
+      android:layout_width="@dimen/login_ic"
+      android:layout_height="@dimen/login_ic"
+      android:layout_marginTop="@dimen/login_logo_margin_top"
+      android:contentDescription="@null"
+      app:srcCompat="@mipmap/login_logo"/>
+
+    <EditText
+      style="@style/login_LoginEditText"
+      android:hint="@string/login_hint_phone_number"/>
+
+    <EditText
+      style="@style/login_LoginEditText"
+      android:hint="@string/login_hint_input_password"/>
+
+    <Button
+      style="@style/login_ConfirmButton"
+      android:onClick="@{(v) -> viewmodel.login(v)}"
+      android:text="登陆" />
+
+    <RelativeLayout
+      android:layout_width="240dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:onClick="@{(v) -> viewmodel.newUser(v)}"
+        android:text="注册新用户"
+        android:textColor="@color/login_grey_200"
+        android:textSize="16sp" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:onClick="@{(v) -> viewmodel.forgetPassword(v)}"
+        android:text="忘记密码"
+        android:textColor="@color/login_colorPrimary"
+        android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="50dp"
+      android:text="@string/login_other_login_way"
+      android:textColor="@color/login_grey_200"
+      android:textSize="14sp" />
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:orientation="horizontal">
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/login_transparent"
+        android:contentDescription="@null"
+        android:padding="15dp"
+        app:srcCompat="@mipmap/login_qq"/>
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/login_transparent"
+        android:contentDescription="@null"
+        android:padding="15dp"
+        app:srcCompat="@mipmap/login_wechat"/>
+
+      <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/login_transparent"
+        android:contentDescription="@null"
+        android:padding="15dp"
+        app:srcCompat="@mipmap/login_weibo"/>
+    </LinearLayout>
+  </LinearLayout>
+</layout>

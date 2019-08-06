@@ -134,7 +134,7 @@
       android:layout_height="53dp"
       android:layout_marginStart="32dp"
       android:layout_marginLeft="32dp"
-      android:onClick="@{(v) -> viewmodel.openMap(v)}"
+      android:onClick="@{() -> viewmodel.openMap()}"
       android:src="@mipmap/ic_mini_map"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"

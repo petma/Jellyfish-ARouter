@@ -22,7 +22,7 @@
     android:allowClearUserData="true"
     android:fullBackupContent="@xml/backup_descriptor"
     android:icon="@mipmap/logo"
-    android:label="@string/app_name"
+    android:label="@string/login_app_name"
     android:largeHeap="true"
     android:networkSecurityConfig="@xml/network_security_config"
     android:roundIcon="@mipmap/ic_launcher_round"
@@ -43,15 +43,6 @@
       android:name="com.amap.api.v2.apikey"
       android:value="b6ffa70584e636c36229251ea26e13af" />
 
-    <activity android:name=".ui.login.login.LoginActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-
-
     <activity
       android:name=".ui.MainActivity"
       android:launchMode="singleTask" />
@@ -66,7 +57,9 @@
     <activity
       android:name="com.logic.jellyfish.ui.sport.timer.TimerActivity"
       android:launchMode="singleTask"
-      android:theme="@style/TimerTheme" />
+      android:theme="@style/TimerTheme">
+
+    </activity>
     <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
 
     <activity
@@ -94,12 +87,6 @@
       android:name=".ui.mine.settings.feedback.FeedbackActivity"
       android:launchMode="singleTop" />
 
-    <activity
-      android:name=".ui.login.forget.ForgetActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.login.register.RegisterActivity"
-      android:launchMode="singleTop" />
     <activity android:name=".ui.mine.my_message.friend_message.FriendMessageActivity"/>
     <activity android:name=".ui.mine.my_message.group_message.GroupMessageActivity"/>
     <activity android:name=".ui.mine.my_message.notification_message.NotificationMessageActivity"/>

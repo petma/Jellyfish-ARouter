@@ -19,10 +19,6 @@ inline fun <reified T> View.startService() {
   this.context.startService(Intent(this.context, T::class.java))
 }
 
-inline fun <reified T> View.startForegroundService() {
-  this.context.startForegroundService(Intent(this.context, T::class.java))
-}
-
 fun View.saveString(key: String, value: String) {
   val sharedPref = this.context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
   val editor = sharedPref.edit()

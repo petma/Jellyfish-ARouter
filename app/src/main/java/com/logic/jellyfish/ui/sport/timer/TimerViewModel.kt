@@ -4,9 +4,8 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alibaba.android.arouter.launcher.ARouter
 import com.logic.jellyfish.data.entity.MessageEvent
-import com.logic.jellyfish.ui.sport.map.MapActivity
-import com.logic.jellyfish.utils.ext.startActivity
 import org.greenrobot.eventbus.EventBus
 
 class TimerViewModel : ViewModel() {
@@ -50,8 +49,8 @@ class TimerViewModel : ViewModel() {
     (v.context as TimerActivity).finish()
   }
 
-  fun openMap(v: View) {
-    v.startActivity<MapActivity>()
+  fun openMap() {
+    ARouter.getInstance().build("/app/sport/map").navigation()
   }
 
   fun lock() {
