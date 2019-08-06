@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.WebFragment
 import com.logic.jellyfish.ui.find.FindFragment
@@ -19,6 +20,7 @@ import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
 import kotlinx.android.synthetic.main.activity_main.*
 import me.jessyan.autosize.internal.CustomAdapt
 
+@Route(path = "/app/main")
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
   private val fragments: Array<Fragment> by lazy {

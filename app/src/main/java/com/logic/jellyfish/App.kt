@@ -1,6 +1,7 @@
 package com.logic.jellyfish
 
 import android.app.Application
+import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.smtt.sdk.QbSdk
 
 class App : Application() {
@@ -9,7 +10,16 @@ class App : Application() {
     super.onCreate()
     app = this
     Cache.context = this
+    initARouter()
     initX5()
+  }
+
+  private fun initARouter() {
+    if (BuildConfig.DEBUG) {
+      ARouter.openDebug()
+      ARouter.openLog()
+    }
+    ARouter.init(this)
   }
 
   private fun initX5() {
