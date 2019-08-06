@@ -7,7 +7,7 @@ import com.logic.jellyfish.databinding.ActivityRegisterBinding
 
 @Route(path = "/app/login/register")
 class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding>(
-    R.layout.activity_register
+        R.layout.activity_register, false
 ) {
 
     override fun init() {

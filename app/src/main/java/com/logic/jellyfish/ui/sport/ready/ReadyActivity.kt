@@ -9,12 +9,14 @@ import android.location.LocationManager
 import android.os.Build
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.EventObserver
 import com.logic.jellyfish.databinding.ActivityReadyBinding
 import com.logic.jellyfish.ui.sport.timer.TimerActivity
 
+@Route(path = "/app/sport/ready")
 class ReadyActivity : BaseActivity<ReadyViewModel, ActivityReadyBinding>(R.layout.activity_ready) {
 
   private var needCheckBackLocation = false

@@ -1,26 +1,22 @@
 package com.logic.jellyfish.ui.mine.settings
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.ui.mine.settings.about_us.AboutUsActivity
-import com.logic.jellyfish.ui.mine.settings.change_phone.ChangePhoneActivity
-import com.logic.jellyfish.ui.mine.settings.feedback.FeedbackActivity
-import com.logic.jellyfish.utils.ext.startActivity
+import com.alibaba.android.arouter.launcher.ARouter
 
 class SettingsViewModel : ViewModel() {
 
   val pushNotification = MutableLiveData<Boolean>()
 
-  fun navToAboutUs(v: View) {
-    v.startActivity<AboutUsActivity>()
+  fun navToAboutUs() {
+    ARouter.getInstance().build("/app/mine/settings/about_us").navigation()
   }
 
-  fun navToFeedback(v: View) {
-    v.startActivity<FeedbackActivity>()
+  fun navToFeedback() {
+    ARouter.getInstance().build("/app/mine/settings/feedback").navigation()
   }
 
-  fun navToChangePhoneNumber(v: View) {
-    v.startActivity<ChangePhoneActivity>()
+  fun navToChangePhoneNumber() {
+    ARouter.getInstance().build("/app/mine/settings/change_phone").navigation()
   }
 }

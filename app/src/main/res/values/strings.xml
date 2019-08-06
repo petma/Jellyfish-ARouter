@@ -34,4 +34,7 @@
   <string name="read_and_agree">已阅读并同意</string>
   <string name="user_services_agreement">《用户服务协议》</string>
   <string name="hint_confirm_password">请再次确认密码</string>
+  <string name="group_msg">团消息</string>
+  <string name="friend_msg">好友消息</string>
+  <string name="notification_msg">通知消息</string>
 </resources>

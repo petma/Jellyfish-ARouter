@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
@@ -36,6 +37,7 @@ import java.util.*
  * 2. 画出跑步的轨迹
  * 3. 截屏分享
  */
+@Route(path = "/app/sport/map")
 class MapActivity : AppCompatActivity(), TraceListener {
 
   private val viewModel: MapViewModel by lazy { createViewModel<MapViewModel>() }

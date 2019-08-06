@@ -1,34 +1,28 @@
 package com.logic.jellyfish.ui.mine
 
-import android.view.View
 import androidx.lifecycle.ViewModel
-import com.logic.jellyfish.ui.mine.event.EventActivity
-import com.logic.jellyfish.ui.mine.following.FollowingActivity
-import com.logic.jellyfish.ui.mine.my_message.MyMessageActivity
-import com.logic.jellyfish.ui.mine.record.RecordActivity
-import com.logic.jellyfish.ui.mine.settings.SettingsActivity
-import com.logic.jellyfish.utils.ext.startActivity
+import com.alibaba.android.arouter.launcher.ARouter
 
 class MineViewModel : ViewModel() {
 
-  fun navigateToRecord(v: View) {
-    v.startActivity<RecordActivity>()
+  fun navigateToRecord() {
+    ARouter.getInstance().build("/app/mine/my_sport").navigation()
   }
 
-  fun navigateToEvent(v: View) {
-    v.startActivity<EventActivity>()
+  fun navigateToEvent() {
+    ARouter.getInstance().build("/app/mine/my_event").navigation()
   }
 
-  fun navigateToFollowing(v: View) {
-    v.startActivity<FollowingActivity>()
+  fun navigateToFollowing() {
+    ARouter.getInstance().build("/app/mine/my_following").navigation()
   }
 
-  fun navigateToMyMessage(v: View) {
-    v.startActivity<MyMessageActivity>()
+  fun navigateToMyMessage() {
+    ARouter.getInstance().build("/app/mine/my_message").navigation()
   }
 
-  fun navigateToSettings(v: View) {
-    v.startActivity<SettingsActivity>()
+  fun navigateToSettings() {
+    ARouter.getInstance().build("/app/mine/settings").navigation()
   }
 
 }

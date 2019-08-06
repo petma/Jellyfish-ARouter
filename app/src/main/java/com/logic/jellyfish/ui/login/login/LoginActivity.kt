@@ -7,7 +7,7 @@ import com.logic.jellyfish.databinding.ActivityLoginBinding
 
 @Route(path = "/app/login/login")
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>(
-    R.layout.activity_login
+        R.layout.activity_login, false
 ) {
 
     override fun init() {

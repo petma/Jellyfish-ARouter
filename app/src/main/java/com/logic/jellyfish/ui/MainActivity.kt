@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   private fun initFragment() {
     view_pager.apply {
       adapter = MainPageAdapter(fragments, supportFragmentManager)
-      offscreenPageLimit = 5
+      offscreenPageLimit = 3
       setNoScroll(true)
       addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
         override fun onPageScrollStateChanged(state: Int) {

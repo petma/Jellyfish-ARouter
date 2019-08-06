@@ -70,16 +70,16 @@
     <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
 
     <activity
-      android:name=".ui.mine.event.EventActivity"
+      android:name=".ui.mine.my_event.EventActivity"
       android:launchMode="singleTop" />
     <activity
-      android:name=".ui.mine.following.FollowingActivity"
+      android:name=".ui.mine.my_following.FollowingActivity"
       android:launchMode="singleTop" />
     <activity
       android:name=".ui.mine.my_message.MyMessageActivity"
       android:launchMode="singleTop" />
     <activity
-      android:name=".ui.mine.record.RecordActivity"
+      android:name=".ui.mine.my_sport.RecordActivity"
       android:launchMode="singleTop" />
     <activity
       android:name=".ui.mine.settings.SettingsActivity"
@@ -100,6 +100,9 @@
     <activity
       android:name=".ui.login.register.RegisterActivity"
       android:launchMode="singleTop" />
+    <activity android:name=".ui.mine.my_message.friend_message.FriendMessageActivity"/>
+    <activity android:name=".ui.mine.my_message.group_message.GroupMessageActivity"/>
+    <activity android:name=".ui.mine.my_message.notification_message.NotificationMessageActivity"/>
 
     <service android:name=".service.TrackService" />
     <service android:name=".service.LocationService" />

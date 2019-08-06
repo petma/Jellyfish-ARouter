@@ -11,7 +11,7 @@ class App : Application() {
     app = this
     Cache.context = this
     initARouter()
-    initX5()
+    initX5Environment()
   }
 
   private fun initARouter() {
@@ -22,7 +22,7 @@ class App : Application() {
     ARouter.init(this)
   }
 
-  private fun initX5() {
+  private fun initX5Environment() {
     QbSdk.setDownloadWithoutWifi(true)
     QbSdk.initX5Environment(applicationContext, null)
   }

@@ -5,7 +5,7 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.jellyfish.ui.mine.settings.change_phone.ChangePhoneViewModel" />
+      type="com.logic.jellyfish.ui.mine.my_message.group_message.GroupMessageViewModel"/>
   </data>
 
   <LinearLayout

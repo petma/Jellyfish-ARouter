@@ -2,6 +2,7 @@ package com.logic.jellyfish.ui.sport.timer
 
 import android.content.Intent
 import android.view.KeyEvent
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.jellyfish.Cache
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
@@ -13,6 +14,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+@Route(path = "/app/sport/timer")
 class TimerActivity : BaseActivity<TimerViewModel, ActivityTimerBinding>(R.layout.activity_timer) {
 
   private var locationIntent: Intent? = null

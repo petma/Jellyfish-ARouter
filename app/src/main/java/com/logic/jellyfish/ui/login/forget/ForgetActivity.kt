@@ -7,7 +7,7 @@ import com.logic.jellyfish.databinding.ActivityForgetBinding
 
 @Route(path = "/app/login/forget")
 class ForgetActivity : BaseActivity<ForgetViewModel, ActivityForgetBinding>(
-    R.layout.activity_forget
+        R.layout.activity_forget, false
 ) {
 
     override fun init() {

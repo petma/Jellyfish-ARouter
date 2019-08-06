@@ -61,7 +61,7 @@
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="@{(v) -> viewmodel.navigateToRecord(v)}"
+      android:onClick="@{() -> viewmodel.navigateToRecord()}"
       app:des="最近的公里数"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/my_sport" />
@@ -69,21 +69,21 @@
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="@{(v) -> viewmodel.navigateToEvent(v)}"
+      android:onClick="@{() -> viewmodel.navigateToEvent()}"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/my_event" />
 
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="@{(v) -> viewmodel.navigateToFollowing(v)}"
+      android:onClick="@{() -> viewmodel.navigateToFollowing()}"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/my_following" />
 
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="@{(v) -> viewmodel.navigateToMyMessage(v)}"
+      android:onClick="@{() -> viewmodel.navigateToMyMessage()}"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/my_message" />
 
@@ -95,7 +95,7 @@
     <com.logic.jellyfish.view.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="@{(v) -> viewmodel.navigateToSettings(v)}"
+      android:onClick="@{() -> viewmodel.navigateToSettings()}"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/setting" />
 

@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
-        arg("AROUTER_GENERATE_DOC", "enable")
+//        arg("AROUTER_GENERATE_DOC", "enable")
     }
 }
 
@@ -20,7 +20,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-//        multiDexEnabled true
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -92,7 +92,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
     implementation "com.google.android.material:material:$materialVersion"
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -117,4 +117,9 @@ dependencies {
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
+    // DataBinding RecyclerView
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
+    // CircleImageView
+    implementation "com.mikhaellopez:circularimageview:$circularImageview"
 }

@@ -38,7 +38,7 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
   abstract fun init()
 
   private fun createViewModel(): VM {
-    return ViewModelProviders.of(this).get(getViewModel(this))
+    return ViewModelProviders.of(this)[getViewModel(this)]
   }
 
   override fun isBaseOnWidth(): Boolean {
