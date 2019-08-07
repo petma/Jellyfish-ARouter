@@ -20,13 +20,7 @@
       android:name="design_height_in_dp"
       android:value="640"/>
 
-    <activity android:name=".login.LoginActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
+    <activity android:name=".login.LoginActivity" />
     <activity android:name=".forget.ForgetActivity"/>
     <activity android:name=".register.RegisterActivity"/>
 

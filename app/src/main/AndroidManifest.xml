@@ -48,7 +48,11 @@
       android:launchMode="singleTask" />
 
     <activity android:name="com.logic.jellyfish.ui.sport.ready.ReadyActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
     </activity>
     <activity
       android:name="com.logic.jellyfish.ui.sport.map.MapActivity"
@@ -61,35 +65,6 @@
 
     </activity>
     <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
-
-    <activity
-      android:name=".ui.mine.my_event.EventActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.my_following.FollowingActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.my_message.MyMessageActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.my_sport.RecordActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.settings.SettingsActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.settings.about_us.AboutUsActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.settings.change_phone.ChangePhoneActivity"
-      android:launchMode="singleTop" />
-    <activity
-      android:name=".ui.mine.settings.feedback.FeedbackActivity"
-      android:launchMode="singleTop" />
-
-    <activity android:name=".ui.mine.my_message.friend_message.FriendMessageActivity"/>
-    <activity android:name=".ui.mine.my_message.group_message.GroupMessageActivity"/>
-    <activity android:name=".ui.mine.my_message.notification_message.NotificationMessageActivity"/>
 
     <service android:name=".service.TrackService" />
     <service android:name=".service.LocationService" />

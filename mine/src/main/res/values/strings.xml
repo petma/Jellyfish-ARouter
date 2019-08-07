@@ -1,13 +1,28 @@
 <resources>
-  <string name="login_app_name">水母运动</string>
-  <string name="login_confirm">确认</string>
-  <string name="login_hint_verification_code">请输入验证码</string>
-  <string name="login_hint_phone_number">请输入手机号码</string>
-  <string name="login_hint_input_password">请输入密码</string>
-  <string name="login_other_login_way">其他登陆方式</string>
-  <string name="login_now">已有账号，立即登录</string>
-  <string name="login_register">注册</string>
-  <string name="login_read_and_agree">已阅读并同意</string>
-  <string name="login_user_services_agreement">《用户服务协议》</string>
-  <string name="login_hint_confirm_password">请再次确认密码</string>
+  <string name="app_name">水母运动</string>
+
+  <string name="resume">继续</string>
+  <string name="suspend">暂停</string>
+  <string name="stop">停止</string>
+  <string name="speed">配速</string>
+  <string name="time_cost">用时</string>
+  <string name="consume">消耗</string>
+  <string name="kilo">公里</string>
+
+  <string name="my_sport">我的运动</string>
+  <string name="my_event">我的赛事</string>
+  <string name="my_following">我的关注</string>
+  <string name="my_message">我的消息</string>
+  <string name="setting">设置</string>
+  <string name="home">首页</string>
+  <string name="sport">运动</string>
+  <string name="message">消息</string>
+  <string name="find">发现</string>
+  <string name="mine">我的</string>
+  <string name="change_phone_number">更换手机号</string>
+  <string name="feedback">意见反馈</string>
+  <string name="about_us">关于我们</string>
+  <string name="group_msg">团消息</string>
+  <string name="friend_msg">好友消息</string>
+  <string name="notification_msg">通知消息</string>
 </resources>

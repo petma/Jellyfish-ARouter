@@ -1,1 +1,4 @@
-include ':app', ':login', ':mine', ':utils'
+include ':app',
+        ':login',
+        ':mine',
+        ':utils'

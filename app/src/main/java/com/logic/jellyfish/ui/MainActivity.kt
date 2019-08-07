@@ -14,24 +14,16 @@ import com.logic.jellyfish.base.WebFragment
 import com.logic.jellyfish.ui.find.FindFragment
 import com.logic.jellyfish.ui.home.HomeFragment
 import com.logic.jellyfish.ui.message.MessageFragment
-import com.logic.jellyfish.ui.mine.MineFragment
 import com.logic.jellyfish.ui.sport.SportFragment
 import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
+import com.logic.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import me.jessyan.autosize.internal.CustomAdapt
 
 @Route(path = "/app/main")
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
-  private val fragments: Array<Fragment> by lazy {
-    arrayOf(
-      HomeFragment(),
-      SportFragment(),
-      MessageFragment(),
-      FindFragment(),
-      MineFragment()
-    )
-  }
+  private lateinit var fragments: Array<Fragment>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -43,6 +35,14 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   }
 
   private fun initFragment() {
+    fragments = arrayOf<Fragment>(
+      HomeFragment(),
+      SportFragment(),
+      MessageFragment(),
+      FindFragment(),
+      MineFragment()
+    )
+
     view_pager.apply {
       adapter = MainPageAdapter(fragments, supportFragmentManager)
       offscreenPageLimit = 3
