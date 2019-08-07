@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alibaba.android.arouter.launcher.ARouter
-import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.data.http.RetrofitFactory
 import com.logic.jellyfish.data.room.RoomFactory

@@ -3,7 +3,6 @@ package com.logic.jellyfish.ui.sport.timer
 import android.content.Intent
 import android.view.KeyEvent
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.TimerEvent

@@ -6,6 +6,7 @@ import android.content.Context
 /**
  * 全局的缓存,是一个单例类,用来存放一些不占控件,但是很重要的一些变量
  * 传入Application的Context保证Cache的生命周期与Application一致
+ * 注意: 不要在这里存入过多数据,会影响性能
  */
 @SuppressLint("StaticFieldLeak")
 object Cache {

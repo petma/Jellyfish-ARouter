@@ -10,7 +10,6 @@ import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.ErrorCode
 import com.amap.api.track.TrackParam
 import com.amap.api.track.query.model.*
-import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.ui.sport.timer.TimerActivity
