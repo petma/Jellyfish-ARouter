@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="login_colorPrimary">#56BAAF</color>
+  <color name="login_colorPrimaryDark">#000000</color>
+  <color name="login_colorAccent">#696969</color>
+
+
+  <!--Material color list from https://material.io/guidelines/style/color.html-->
+
+  <color name="login_translucent">#80ffffff</color>
+
+
+  <!--Material color list from https://material.io/guidelines/style/color.html-->
+
+  <color name="login_grey_100">#F5F5F5</color>
+  <color name="login_grey_200">#EEEEEE</color>
+  <color name="login_white">#FFFFFFFF</color>
+  <color name="login_transparent">#00000000</color>
+
+
+  <!--for random color generator -->
+
+
+  <!--for random color generator -->
+</resources>

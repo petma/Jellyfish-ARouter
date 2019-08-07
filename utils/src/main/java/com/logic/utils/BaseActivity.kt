@@ -1,4 +1,4 @@
-package com.sweet.utils
+package com.logic.utils
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.sweet.utils.ClassUtils.getViewModel
+import com.logic.utils.ClassUtils.getViewModel
 
 abstract class BaseActivity<VM : ViewModel, BV : ViewDataBinding>(
   private val layout: Int

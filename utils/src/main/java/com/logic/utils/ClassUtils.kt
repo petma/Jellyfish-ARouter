@@ -1,4 +1,4 @@
-package com.sweet.utils
+package com.logic.utils
 
 import androidx.lifecycle.ViewModel
 import java.lang.reflect.ParameterizedType

@@ -1,4 +1,4 @@
-if (LOGIN_IS_APPLICATION.toBoolean()) {
+if (MINE_IS_APPLICATION.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -16,11 +16,11 @@ kapt {
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
-    resourcePrefix "login_"
+//    resourcePrefix "login_"
 
     defaultConfig {
-        if (LOGIN_IS_APPLICATION.toBoolean()) {
-            applicationId "com.logic.login"
+        if (MINE_IS_APPLICATION.toBoolean()) {
+            applicationId "com.logic.mine"
         }
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
@@ -50,7 +50,7 @@ android {
 
     sourceSets {
         main {
-            if (LOGIN_IS_APPLICATION.toBoolean()) {
+            if (MINE_IS_APPLICATION.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
@@ -68,7 +68,7 @@ dependencies {
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
 
-    if (LOGIN_IS_APPLICATION.toBoolean()) {
+    if (MINE_IS_APPLICATION.toBoolean()) {
         implementation "me.jessyan:autosize:$autoSizeVersion"
     }
 }

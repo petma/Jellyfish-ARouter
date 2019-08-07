@@ -7,7 +7,7 @@
 
     <variable
       name="viewmodel"
-      type="com.sweet.login.login.LoginViewModel"/>
+      type="com.logic.login.login.LoginViewModel"/>
   </data>
 
   <LinearLayout
@@ -16,7 +16,7 @@
     android:background="@mipmap/login_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.sweet.login.login.LoginActivity">
+    tools:context="com.logic.login.login.LoginActivity">
 
     <ImageView
       android:layout_width="@dimen/login_ic"

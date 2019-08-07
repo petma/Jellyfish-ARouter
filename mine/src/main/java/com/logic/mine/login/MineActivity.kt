@@ -1,15 +1,15 @@
-package com.sweet.login.login
+package com.logic.mine.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.sweet.login.BuildConfig
-import com.sweet.login.R
-import com.sweet.login.databinding.LoginActivityLoginBinding
-import com.sweet.utils.BaseActivity
+import com.logic.mine.BuildConfig
+import com.logic.mine.R
+import com.logic.mine.databinding.ActivityMineBinding
+import com.logic.utils.BaseActivity
 
 @Route(path = "/login/login")
-class LoginActivity : BaseActivity<LoginViewModel, LoginActivityLoginBinding>(
-  R.layout.login_activity_login
+class MineActivity : BaseActivity<MineViewModel, ActivityMineBinding>(
+  R.layout.activity_mine
 ) {
 
   override fun init() {

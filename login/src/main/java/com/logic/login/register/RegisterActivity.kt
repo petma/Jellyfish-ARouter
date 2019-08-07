@@ -1,9 +1,9 @@
-package com.sweet.login.register
+package com.logic.login.register
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.sweet.login.R
-import com.sweet.login.databinding.LoginActivityRegisterBinding
-import com.sweet.utils.BaseActivity
+import com.logic.login.R
+import com.logic.login.databinding.LoginActivityRegisterBinding
+import com.logic.utils.BaseActivity
 
 @Route(path = "/login/register")
 class RegisterActivity : BaseActivity<RegisterViewModel, LoginActivityRegisterBinding>(

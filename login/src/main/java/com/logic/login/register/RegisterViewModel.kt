@@ -1,4 +1,4 @@
-package com.sweet.login.register
+package com.logic.login.register
 
 import android.text.TextUtils
 import android.view.View

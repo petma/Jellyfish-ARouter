@@ -1,14 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.logic.login">
+          package="com.logic.mine">
   <application>
-    <activity android:name="com.logic.login.login.LoginActivity">
+    <activity android:name=".login.MineActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name="com.logic.login.forget.ForgetActivity"/>
-    <activity android:name="com.logic.login.register.RegisterActivity"/>
   </application>
 </manifest>

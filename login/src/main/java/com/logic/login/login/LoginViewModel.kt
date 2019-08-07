@@ -1,4 +1,4 @@
-package com.sweet.login.login
+package com.logic.login.login
 
 import android.view.View
 import androidx.lifecycle.ViewModel

@@ -1,9 +1,9 @@
-package com.sweet.login.forget
+package com.logic.login.forget
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.sweet.login.R
-import com.sweet.login.databinding.LoginActivityForgetBinding
-import com.sweet.utils.BaseActivity
+import com.logic.login.R
+import com.logic.login.databinding.LoginActivityForgetBinding
+import com.logic.utils.BaseActivity
 
 @Route(path = "/login/forget")
 class ForgetActivity : BaseActivity<ForgetViewModel, LoginActivityForgetBinding>(

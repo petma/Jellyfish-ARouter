@@ -14,7 +14,7 @@ class HomeFragment : WebFragment(R.layout.fragment_home) {
   }
 
   override fun init() {
-    webView.loadUrl("https://m.login_weibo.cn/")
+    webView.loadUrl("https://www.baidu.com/")
   }
 
 }

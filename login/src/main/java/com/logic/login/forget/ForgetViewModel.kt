@@ -1,4 +1,4 @@
-package com.sweet.login.forget
+package com.logic.login.forget
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
