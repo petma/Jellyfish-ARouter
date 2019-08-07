@@ -6,6 +6,7 @@ import com.logic.login.BuildConfig
 import com.logic.login.R
 import com.logic.login.databinding.LoginActivityLoginBinding
 import com.logic.utils.BaseActivity
+import com.logic.utils.Cache
 
 @Route(path = "/login/login")
 class LoginActivity : BaseActivity<LoginViewModel, LoginActivityLoginBinding>(
@@ -16,6 +17,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityLoginBinding>(
     if (BuildConfig.DEBUG) {
       ARouter.openLog()
       ARouter.openDebug()
+      Cache.init(application)
     }
     ARouter.init(application)
     binding.viewmodel = viewModel

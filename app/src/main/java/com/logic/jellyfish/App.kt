@@ -3,7 +3,8 @@ package com.logic.jellyfish
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
 import com.logic.utils.Cache
-import com.tencent.smtt.sdk.QbSdk
+import com.logic.web.WebApp
+import me.jessyan.autosize.AutoSizeConfig
 
 class App : Application() {
 
@@ -11,8 +12,9 @@ class App : Application() {
     super.onCreate()
     app = this
     Cache.init(this)
+    WebApp.onCreate(this)
+    AutoSizeConfig.getInstance().isCustomFragment = true
     initARouter()
-    initX5Environment()
   }
 
   private fun initARouter() {
@@ -21,11 +23,6 @@ class App : Application() {
       ARouter.openLog()
     }
     ARouter.init(this)
-  }
-
-  private fun initX5Environment() {
-    QbSdk.setDownloadWithoutWifi(true)
-    QbSdk.initX5Environment(applicationContext, null)
   }
 
   companion object {

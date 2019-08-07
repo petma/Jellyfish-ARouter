@@ -23,7 +23,7 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
     savedInstanceState: Bundle?
   ): View? {
 //    AutoSize.autoConvertDensity(requireActivity(), 640F, false)
-    binding = DataBindingUtil.inflate(inflater, layout, null, false)
+    binding = DataBindingUtil.inflate(inflater, layout, container, false)
     binding.lifecycleOwner = viewLifecycleOwner
     viewModel = ViewModelProviders.of(this)[getViewModel(this)]
     return binding.root
@@ -36,5 +36,12 @@ abstract class BaseFragment<VM : ViewModel, SV : ViewDataBinding>(
 
   abstract fun init()
 
+//  override fun isBaseOnWidth(): Boolean {
+//    return false
+//  }
+//
+//  override fun getSizeInDp(): Float {
+//    return 640F
+//  }
 }
 

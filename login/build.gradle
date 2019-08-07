@@ -67,6 +67,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     if (LOGIN_IS_APPLICATION.toBoolean()) {
         implementation "me.jessyan:autosize:$autoSizeVersion"

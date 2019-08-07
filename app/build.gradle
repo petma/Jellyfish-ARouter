@@ -89,6 +89,9 @@ dependencies {
     if (!MINE_IS_APPLICATION.toBoolean()) {
         implementation project(':mine')
     }
+    if (!WEB_IS_APPLICATION.toBoolean()) {
+        implementation project(':web')
+    }
 
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"

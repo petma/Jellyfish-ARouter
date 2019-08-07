@@ -7,7 +7,7 @@
 
     <variable
       name="viewmodel"
-      type="com.logic.login.login.LoginViewModel"/>
+      type="com.logic.login.login.LoginViewModel" />
   </data>
 
   <LinearLayout
@@ -23,15 +23,19 @@
       android:layout_height="@dimen/login_ic"
       android:layout_marginTop="@dimen/login_logo_margin_top"
       android:contentDescription="@null"
-      app:srcCompat="@mipmap/login_logo"/>
+      app:srcCompat="@mipmap/login_logo" />
 
     <EditText
+      android:text="@={viewmodel.phoneNumber}"
       style="@style/login_LoginEditText"
-      android:hint="@string/login_hint_phone_number"/>
+      android:hint="@string/login_hint_phone_number"
+      android:inputType="number" />
 
     <EditText
+      android:text="@={viewmodel.password}"
       style="@style/login_LoginEditText"
-      android:hint="@string/login_hint_input_password"/>
+      android:hint="@string/login_hint_input_password"
+      android:inputType="textPassword" />
 
     <Button
       style="@style/login_ConfirmButton"
@@ -86,7 +90,7 @@
         android:background="@color/login_transparent"
         android:contentDescription="@null"
         android:padding="15dp"
-        app:srcCompat="@mipmap/login_qq"/>
+        app:srcCompat="@mipmap/login_qq" />
 
       <ImageButton
         android:layout_width="wrap_content"
@@ -94,7 +98,7 @@
         android:background="@color/login_transparent"
         android:contentDescription="@null"
         android:padding="15dp"
-        app:srcCompat="@mipmap/login_wechat"/>
+        app:srcCompat="@mipmap/login_wechat" />
 
       <ImageButton
         android:layout_width="wrap_content"
@@ -102,7 +106,7 @@
         android:background="@color/login_transparent"
         android:contentDescription="@null"
         android:padding="15dp"
-        app:srcCompat="@mipmap/login_weibo"/>
+        app:srcCompat="@mipmap/login_weibo" />
     </LinearLayout>
   </LinearLayout>
 </layout>

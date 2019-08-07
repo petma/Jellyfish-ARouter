@@ -10,13 +10,13 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.jellyfish.R
-import com.logic.jellyfish.base.WebFragment
 import com.logic.jellyfish.ui.find.FindFragment
-import com.logic.jellyfish.ui.home.HomeFragment
 import com.logic.jellyfish.ui.message.MessageFragment
 import com.logic.jellyfish.ui.sport.SportFragment
 import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
 import com.logic.mine.MineFragment
+import com.logic.web.HomeFragment
+import com.logic.web.WebFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import me.jessyan.autosize.internal.CustomAdapt
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   }
 
   private fun initFragment() {
-    fragments = arrayOf<Fragment>(
+    fragments = arrayOf(
       HomeFragment(),
       SportFragment(),
       MessageFragment(),
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
       when (it.itemId) {
         R.id.home -> {
           changeFragment(it, 0)
-          toolbar.title = getString(R.string.home)
+          toolbar.title = getString(R.string.title)
         }
         R.id.sport -> {
           changeFragment(it, 1)

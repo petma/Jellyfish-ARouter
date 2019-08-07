@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.mine.R
 import com.logic.mine.databinding.ActivityGroupMessageBinding
 import com.logic.utils.BaseActivity
+import kotlinx.android.synthetic.main.toolbar.*
 
 @Route(path = "/mine/my_message/group_message")
 class GroupMessageActivity : BaseActivity<GroupMessageViewModel, ActivityGroupMessageBinding>(
@@ -12,6 +13,6 @@ class GroupMessageActivity : BaseActivity<GroupMessageViewModel, ActivityGroupMe
 
   override fun init() {
     binding.viewmodel = viewModel
-//    toolbar.title = getString(R.string.group_msg)
+    setToolbar(toolbar, R.string.group_msg)
   }
 }

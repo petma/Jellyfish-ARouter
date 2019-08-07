@@ -24,8 +24,8 @@ import com.logic.jellyfish.utils.Constants
 import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.Utils
 import com.logic.jellyfish.utils.ext.createViewModel
-import com.logic.jellyfish.utils.ext.toast
 import com.logic.utils.Cache
+import com.logic.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.coroutines.launch
 import java.util.*

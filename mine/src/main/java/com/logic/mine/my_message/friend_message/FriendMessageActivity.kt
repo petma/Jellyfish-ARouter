@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.mine.R
 import com.logic.mine.databinding.ActivityFriendMessageBinding
 import com.logic.utils.BaseActivity
+import kotlinx.android.synthetic.main.toolbar.*
 
 @Route(path = "/mine/my_message/friend_message")
 class FriendMessageActivity : BaseActivity<FriendMessageViewModel, ActivityFriendMessageBinding>(
@@ -12,6 +13,6 @@ class FriendMessageActivity : BaseActivity<FriendMessageViewModel, ActivityFrien
 
   override fun init() {
     binding.viewmodel = viewModel
-//    toolbar.title = getString(R.string.friend_msg)
+    setToolbar(toolbar, R.string.friend_msg)
   }
 }

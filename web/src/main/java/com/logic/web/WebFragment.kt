@@ -1,31 +1,43 @@
-package com.logic.jellyfish.base
+package com.logic.web
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
-import android.view.KeyEvent
-import androidx.appcompat.app.AppCompatActivity
-import com.logic.jellyfish.utils.X5Javascript
-import com.logic.jellyfish.utils.ext.log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 
-abstract class WebViewActivity(
-  private val layout: Int,
-  private val webView: WebView
-) : AppCompatActivity() {
+abstract class WebFragment(
+  private val layout: Int
+) : Fragment() {
 
+  protected lateinit var webView: WebView
   private var isFirstLoadFinished = false
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(layout)
-    initWebView()
-    webView.loadUrl("file:///android_asset/jellyfish-web/index.html")
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return inflater.inflate(layout, container, false)
   }
+
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    webView = setWebView()
+    initWebView()
+    init()
+  }
+
+  abstract fun setWebView(): WebView
+
+  abstract fun init()
 
   @SuppressLint("SetJavaScriptEnabled")
   private fun initWebView() {
@@ -50,7 +62,7 @@ abstract class WebViewActivity(
       // 启动应用缓存, 这个方法只有在设置了缓存路径后才有用, 默认false
       setAppCacheEnabled(true)
       // 设置缓存路径
-      setAppCachePath(cacheDir.absolutePath)
+      setAppCachePath(requireContext().cacheDir.absolutePath)
 
       // 设置缓存模式, 默认LOAD_DEFAULT
       cacheMode = WebSettings.LOAD_DEFAULT
@@ -85,7 +97,7 @@ abstract class WebViewActivity(
     }
 
     webView.webViewClient = X5WebViewClient()
-    webView.addJavascriptInterface(X5Javascript(this), "Android")
+    webView.addJavascriptInterface(X5Javascript(requireContext()), "Android")
   }
 
   inner class X5WebViewClient : WebViewClient() {
@@ -112,15 +124,20 @@ abstract class WebViewActivity(
         }, 1000)
         isFirstLoadFinished = true
       }
-      log("onPageFinished, $s")
     }
   }
 
-  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+  fun onKeyBack(): Boolean {
+    if (webView.canGoBack()) {
       webView.goBack()
       return true
     }
-    return super.onKeyDown(keyCode, event)
+    return false
   }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    webView.destroy()
+  }
+
 }

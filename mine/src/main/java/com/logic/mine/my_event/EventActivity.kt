@@ -4,6 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.mine.R
 import com.logic.mine.databinding.ActivityEventBinding
 import com.logic.utils.BaseActivity
+import kotlinx.android.synthetic.main.toolbar.*
 
 @Route(path = "/mine/my_event")
 class EventActivity : BaseActivity<EventViewModel, ActivityEventBinding>(
@@ -12,7 +13,7 @@ class EventActivity : BaseActivity<EventViewModel, ActivityEventBinding>(
 
   override fun init() {
     binding.viewmodel = viewModel
-//    toolbar.title = getString(R.string.my_following)
+    setToolbar(toolbar, R.string.my_event)
   }
 
 }

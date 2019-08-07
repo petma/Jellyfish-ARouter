@@ -31,6 +31,8 @@
     <activity android:name=".my_message.friend_message.FriendMessageActivity" />
     <activity android:name=".my_message.group_message.GroupMessageActivity" />
     <activity android:name=".my_message.notification_message.NotificationMessageActivity" />
+
+    <activity android:name=".user.UserActivity" />
   </application>
 
 </manifest>

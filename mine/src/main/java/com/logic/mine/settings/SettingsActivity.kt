@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.mine.R
 import com.logic.mine.databinding.ActivitySettingsBinding
 import com.logic.utils.BaseActivity
-
+import kotlinx.android.synthetic.main.toolbar.*
 @Route(path = "/mine/settings")
 class SettingsActivity : BaseActivity<SettingsViewModel, ActivitySettingsBinding>(
   R.layout.activity_settings
@@ -12,6 +12,6 @@ class SettingsActivity : BaseActivity<SettingsViewModel, ActivitySettingsBinding
 
   override fun init() {
     binding.viewmodel = viewModel
-//    toolbar.title = getString(R.string.setting)
+    setToolbar(toolbar, R.string.setting)
   }
 }

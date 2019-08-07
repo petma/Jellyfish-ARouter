@@ -1,7 +1,5 @@
-package com.logic.jellyfish.ui.home
+package com.logic.web
 
-import com.logic.jellyfish.R
-import com.logic.jellyfish.base.WebFragment
 import com.tencent.smtt.sdk.WebView
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -12,7 +10,7 @@ class HomeFragment : WebFragment(R.layout.fragment_home) {
   }
 
   override fun init() {
-    webView.loadUrl("https://www.baidu.com/")
+    webView.loadUrl("http://192.168.1.63:90/")
   }
 
 }

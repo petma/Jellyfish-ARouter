@@ -1,44 +1,29 @@
-package com.logic.jellyfish.base
+package com.logic.web
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.logic.jellyfish.utils.ext.log
+import android.view.KeyEvent
+import androidx.appcompat.app.AppCompatActivity
 import com.tencent.smtt.sdk.WebSettings
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 
-abstract class WebFragment(
-  private val layout: Int
-) : Fragment() {
+abstract class WebViewActivity(
+  private val layout: Int,
+  private val webView: WebView
+) : AppCompatActivity() {
 
-  protected lateinit var webView: WebView
   private var isFirstLoadFinished = false
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(layout, container, false)
-  }
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    webView = setWebView()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(layout)
     initWebView()
-    init()
+    webView.loadUrl("file:///android_asset/jellyfish-web/index.html")
   }
-
-  abstract fun setWebView(): WebView
-
-  abstract fun init()
 
   @SuppressLint("SetJavaScriptEnabled")
   private fun initWebView() {
@@ -63,7 +48,7 @@ abstract class WebFragment(
       // 启动应用缓存, 这个方法只有在设置了缓存路径后才有用, 默认false
       setAppCacheEnabled(true)
       // 设置缓存路径
-      setAppCachePath(requireContext().cacheDir.absolutePath)
+      setAppCachePath(cacheDir.absolutePath)
 
       // 设置缓存模式, 默认LOAD_DEFAULT
       cacheMode = WebSettings.LOAD_DEFAULT
@@ -98,6 +83,7 @@ abstract class WebFragment(
     }
 
     webView.webViewClient = X5WebViewClient()
+    webView.addJavascriptInterface(X5Javascript(this), "Android")
   }
 
   inner class X5WebViewClient : WebViewClient() {
@@ -124,21 +110,14 @@ abstract class WebFragment(
         }, 1000)
         isFirstLoadFinished = true
       }
-      log("onPageFinished, $s")
     }
   }
 
-  fun onKeyBack(): Boolean {
-    if (webView.canGoBack()) {
+  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
       webView.goBack()
       return true
     }
-    return false
+    return super.onKeyDown(keyCode, event)
   }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    webView.destroy()
-  }
-
 }

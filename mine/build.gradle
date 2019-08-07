@@ -63,6 +63,7 @@ dependencies {
     // DataBinding RecyclerView
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
+
     // CircleImageView
     implementation "com.mikhaellopez:circularimageview:$circularImageview"
 
