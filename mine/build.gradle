@@ -16,8 +16,6 @@ kapt {
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
-//    resourcePrefix "login_"
-
     defaultConfig {
         if (MINE_IS_APPLICATION.toBoolean()) {
             applicationId "com.logic.mine"
@@ -26,13 +24,6 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
 
     compileOptions {
@@ -65,6 +56,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "com.google.android.material:material:$materialVersion"
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
 

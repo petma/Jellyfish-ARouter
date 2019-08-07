@@ -1,4 +1,4 @@
-package com.logic.jellyfish
+package com.logic.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +11,10 @@ import android.content.Context
 object Cache {
 
   lateinit var context: Context
+
+  fun init(context: Context) {
+    this.context = context
+  }
 
   var serviceId: Long = 0
 

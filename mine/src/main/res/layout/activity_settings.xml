@@ -20,7 +20,7 @@
       android:onClick="@{() -> viewmodel.navToChangePhoneNumber()}"
       app:icon_src="@mipmap/mine_icon"
       app:text="@string/change_phone_number"
-      app:text_color="@color/grey_700"
+      app:text_color="@color/mine_grey_700"
       app:text_gravity_end="true" />
 
     <com.logic.mine.SettingsItem
@@ -28,20 +28,20 @@
       android:layout_height="wrap_content"
       android:onClick="@{() -> viewmodel.navToFeedback()}"
       app:text="@string/feedback"
-      app:text_color="@color/grey_700" />
+      app:text_color="@color/mine_grey_700" />
 
     <com.logic.mine.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="@{() -> viewmodel.navToAboutUs()}"
       app:text="@string/about_us"
-      app:text_color="@color/grey_700" />
+      app:text_color="@color/mine_grey_700" />
 
     <LinearLayout
       android:id="@+id/container"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@drawable/border_bottom_1dp"
+      android:background="@drawable/mine_border_bottom_1dp"
       android:gravity="center_vertical"
       android:orientation="horizontal">
 
@@ -51,7 +51,7 @@
         android:layout_marginLeft="12dp"
         android:layout_weight="1"
         android:text="推送通知"
-        android:textColor="@color/grey_1000"
+        android:textColor="@color/mine_grey_1000"
         android:textSize="15sp" />
 
       <androidx.appcompat.widget.SwitchCompat

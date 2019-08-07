@@ -2,6 +2,7 @@ package com.logic.jellyfish
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import com.logic.utils.Cache
 import com.tencent.smtt.sdk.QbSdk
 
 class App : Application() {
@@ -9,7 +10,7 @@ class App : Application() {
   override fun onCreate() {
     super.onCreate()
     app = this
-    Cache.context = this
+    Cache.init(this)
     initARouter()
     initX5Environment()
   }

@@ -10,7 +10,7 @@ import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.ErrorCode
 import com.amap.api.track.TrackParam
 import com.amap.api.track.query.model.*
-import com.logic.jellyfish.Cache
+import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.entity.MessageEvent
 import com.logic.jellyfish.ui.sport.timer.TimerActivity
@@ -19,6 +19,7 @@ import com.logic.jellyfish.utils.SimpleOnTrackLifecycleListener
 import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.ext.log
 import com.logic.jellyfish.utils.ext.toast
+import com.logic.utils.Cache
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

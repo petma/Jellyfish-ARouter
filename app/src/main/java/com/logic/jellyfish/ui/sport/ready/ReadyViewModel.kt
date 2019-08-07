@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alibaba.android.arouter.launcher.ARouter
-import com.logic.jellyfish.Cache
+import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.data.entity.Event
 import com.logic.jellyfish.data.http.RetrofitFactory
 import com.logic.jellyfish.data.room.RoomFactory
@@ -15,6 +15,7 @@ import com.logic.jellyfish.utils.ext.getAndroidId
 import com.logic.jellyfish.utils.ext.getString
 import com.logic.jellyfish.utils.ext.saveString
 import com.logic.jellyfish.utils.ext.toast
+import com.logic.utils.Cache
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,7 +29,7 @@ class ReadyViewModel : ViewModel() {
   val showProgress: LiveData<Boolean> = _showProgress
 
   fun startGPSLocation() {
-//    Cache.isLocationSDK = true
+//    CacheD.isLocationSDK = true
 //    _startEvent.value = Event(Unit)
     ARouter.getInstance().build("/login/login").navigation()
   }

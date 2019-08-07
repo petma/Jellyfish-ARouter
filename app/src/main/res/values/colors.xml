@@ -7,12 +7,6 @@
   <color name="timber_button_stop">#F75050</color>
 
   <color name="DimGray">#696969</color>
-  <color name="grey_10">#e6e6e6</color>
-  <color name="deep_purple_500">#673AB7</color>
-  <color name="green_600">#43A047</color>
   <color name="grey_300">#E0E0E0</color>
-  <color name="grey_700">#616161</color>
-  <color name="grey_1000">#1a1a1a</color>
   <color name="white">#FFFFFFFF</color>
-  <color name="transparent">#00000000</color>
 </resources>

@@ -1,15 +1,12 @@
 <resources>
 
   <!-- Base application theme. -->
+
   <style name="login_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/login_colorPrimary</item>
     <item name="colorPrimaryDark">@color/login_colorPrimaryDark</item>
     <item name="colorAccent">@color/login_colorAccent</item>
     <item name="android:textSize">15sp</item>
-    <!--<item name="android:windowAnimationStyle">@style/AnimationActivity</item>-->
-    <!--<item name="android:windowTranslucentStatus">true</item>-->
-    <!--<item name="android:windowTranslucentNavigation">true</item>-->
-    <!--<item name="android:textColor">@android:color/white</item>-->
   </style>
 
   <style name="login_LoginEditText">

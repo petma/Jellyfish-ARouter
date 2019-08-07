@@ -2,14 +2,10 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorPrimary">@color/mine_colorPrimary</item>
+    <item name="colorPrimaryDark">@color/mine_colorPrimaryDark</item>
+    <item name="colorAccent">@color/mine_colorAccent</item>
     <item name="android:textSize">15sp</item>
-    <!--<item name="android:windowAnimationStyle">@style/AnimationActivity</item>-->
-    <!--<item name="android:windowTranslucentStatus">true</item>-->
-    <!--<item name="android:windowTranslucentNavigation">true</item>-->
-    <!--<item name="android:textColor">@android:color/white</item>-->
   </style>
 
 

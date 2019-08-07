@@ -17,7 +17,7 @@ import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.query.entity.DriveMode
 import com.amap.api.track.query.entity.Point
 import com.amap.api.track.query.model.*
-import com.logic.jellyfish.Cache
+import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.R
 import com.logic.jellyfish.data.room.RoomFactory
 import com.logic.jellyfish.databinding.ActivityMapBinding
@@ -26,6 +26,7 @@ import com.logic.jellyfish.utils.SimpleOnTrackListener
 import com.logic.jellyfish.utils.Utils
 import com.logic.jellyfish.utils.ext.createViewModel
 import com.logic.jellyfish.utils.ext.toast
+import com.logic.utils.Cache
 import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.coroutines.launch
 import java.util.*

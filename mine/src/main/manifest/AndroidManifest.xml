@@ -3,7 +3,6 @@
   package="com.logic.mine">
 
   <application>
-
     <activity
       android:name=".my_event.EventActivity"
       android:launchMode="singleTop" />

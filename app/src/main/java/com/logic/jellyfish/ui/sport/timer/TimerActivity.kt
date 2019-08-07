@@ -3,13 +3,14 @@ package com.logic.jellyfish.ui.sport.timer
 import android.content.Intent
 import android.view.KeyEvent
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.logic.jellyfish.Cache
+import com.logic.jellyfish.CacheD
 import com.logic.jellyfish.R
 import com.logic.jellyfish.base.BaseActivity
 import com.logic.jellyfish.data.entity.TimerEvent
 import com.logic.jellyfish.databinding.ActivityTimerBinding
 import com.logic.jellyfish.service.LocationService
 import com.logic.jellyfish.service.TrackService
+import com.logic.utils.Cache
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
