@@ -54,7 +54,7 @@
                     android:layout_marginStart="0dp"
                     android:onClick="@{(v) -> viewmodel.newUser(v)}"
                     android:text="注册新用户"
-                    android:textColor="@color/login_grey_200"
+                    android:textColor="@color/grey_200"
                     android:textSize="16sp"/>
 
             <TextView
@@ -64,7 +64,7 @@
                     android:layout_marginEnd="0dp"
                     android:onClick="@{(v) -> viewmodel.forgetPassword(v)}"
                     android:text="忘记密码"
-                    android:textColor="@color/login_colorPrimary"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp"/>
 
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="@string/login_other_login_way"
-                android:textColor="@color/login_grey_200"
+                android:textColor="@color/grey_200"
                 android:textSize="14sp"/>
 
         <LinearLayout
@@ -87,7 +87,7 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/login_transparent"
+                    android:background="@color/transparent"
                     android:contentDescription="@null"
                     android:padding="15dp"
                     app:srcCompat="@mipmap/login_qq"/>
@@ -95,7 +95,7 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/login_transparent"
+                    android:background="@color/transparent"
                     android:contentDescription="@null"
                     android:padding="15dp"
                     app:srcCompat="@mipmap/login_wechat"/>
@@ -103,7 +103,7 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/login_transparent"
+                    android:background="@color/transparent"
                     android:contentDescription="@null"
                     android:padding="15dp"
                     app:srcCompat="@mipmap/login_weibo"/>

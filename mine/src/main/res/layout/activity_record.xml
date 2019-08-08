@@ -48,10 +48,10 @@
       android:orientation="horizontal">
 
       <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/mine_transparent"
-        app:srcCompat="@mipmap/mine_history_best_icon" />
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@color/transparent"
+              app:srcCompat="@mipmap/mine_history_best_icon" />
 
       <TextView
         android:layout_width="wrap_content"
@@ -61,10 +61,10 @@
     </LinearLayout>
 
     <View
-      android:layout_width="match_parent"
-      android:layout_height="0.5dp"
-      android:layout_marginTop="12dp"
-      android:background="@color/mine_grey_700" />
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/grey_700"/>
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -90,10 +90,10 @@
     </LinearLayout>
 
     <View
-      android:layout_width="match_parent"
-      android:layout_height="0.5dp"
-      android:layout_marginTop="12dp"
-      android:background="@color/mine_grey_700" />
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/grey_700"/>
 
     <LinearLayout
       android:layout_width="match_parent"

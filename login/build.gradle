@@ -16,8 +16,6 @@ kapt {
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
-    resourcePrefix "login_"
-
     defaultConfig {
         if (LOGIN_IS_APPLICATION.toBoolean()) {
             applicationId "com.logic.login"
@@ -62,7 +60,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':utils')
+    implementation project(':base')
 
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"

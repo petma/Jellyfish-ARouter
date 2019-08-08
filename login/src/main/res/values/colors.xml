@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <color name="login_colorPrimary">#56BAAF</color>
-    <color name="login_translucent">#80ffffff</color>
-  <color name="login_grey_100">#F5F5F5</color>
-  <color name="login_grey_200">#EEEEEE</color>
-  <color name="login_white">#FFFFFFFF</color>
-  <color name="login_transparent">#00000000</color>
-</resources>

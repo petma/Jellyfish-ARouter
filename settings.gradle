@@ -4,4 +4,4 @@ include ':app',
         ':web',
         ':login',
         ':mine',
-        ':utils'
+        ':base'
