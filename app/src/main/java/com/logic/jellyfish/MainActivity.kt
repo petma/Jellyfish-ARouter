@@ -60,14 +60,11 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
         if (lastFragment != null)
           transaction.hide(lastFragment)
       }
-
       if (!it.isAdded) {
         transaction.add(R.id.container, it, tag)
       } else {
         transaction.show(it)
       }
-
-
       transaction.commit()
       lastActiveFragmentTag = tag
     }
