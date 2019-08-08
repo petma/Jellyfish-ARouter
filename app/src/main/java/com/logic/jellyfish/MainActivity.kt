@@ -1,4 +1,4 @@
-package com.logic.jellyfish.ui
+package com.logic.jellyfish
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,8 +10,6 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.chat.ChatFragment
-import com.logic.jellyfish.R
-import com.logic.jellyfish.ui.find.FindFragment
 import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
 import com.logic.mine.MineFragment
 import com.logic.sport.SportFragment

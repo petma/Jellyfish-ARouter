@@ -78,10 +78,8 @@
       android:value="b6ffa70584e636c36229251ea26e13af" />
 
     <activity
-      android:name=".ui.MainActivity"
+            android:name=".MainActivity"
       android:launchMode="singleTask" />
-
-    <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
 
 
     <!--&lt;!&ndash;网易IM&ndash;&gt;-->
