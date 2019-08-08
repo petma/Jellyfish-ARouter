@@ -2,6 +2,7 @@ package com.logic.chat
 
 import com.logic.chat.databinding.FragmentChatBinding
 import com.logic.utils.BaseFragment
+import com.logic.utils.Cache
 import com.logic.utils.ext.toast
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
@@ -22,15 +23,15 @@ class ChatFragment : BaseFragment<ChatViewModel, FragmentChatBinding>(
     NIMClient.getService(AuthService::class.java).login(loginInfo)
       .setCallback(object : RequestCallback<LoginInfo> {
         override fun onSuccess(param: LoginInfo?) {
-          toast("IM登陆成功")
+          toast("账号${Cache.imAccount},密码${Cache.imPassword}, IM登陆成功")
         }
 
         override fun onFailed(code: Int) {
-          toast("IM登陆失败")
+          toast("账号${Cache.imAccount},密码${Cache.imPassword}IM登陆失败")
         }
 
         override fun onException(exception: Throwable?) {
-          toast("IM登陆异常")
+          toast("账号${Cache.imAccount},密码${Cache.imPassword}IM登陆异常")
         }
 
       })

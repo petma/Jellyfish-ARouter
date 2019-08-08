@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.logic.chat.ChatFragment
 import com.logic.jellyfish.R
 import com.logic.jellyfish.ui.find.FindFragment
-import com.logic.jellyfish.ui.message.MessageFragment
 import com.logic.jellyfish.ui.sport.SportFragment
 import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
 import com.logic.mine.MineFragment
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
     fragments = arrayOf(
       HomeFragment(),
       SportFragment(),
-      MessageFragment(),
+      ChatFragment(),
       FindFragment(),
       MineFragment()
     )

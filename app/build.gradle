@@ -136,6 +136,6 @@ dependencies {
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
     // CircleImageView
     implementation "com.mikhaellopez:circularimageview:$circularImageview"
-    //IM
-    implementation 'com.netease.nimlib:basesdk:6.1.1'
+//    //IM
+//    implementation 'com.netease.nimlib:basesdk:6.1.1'
 }
