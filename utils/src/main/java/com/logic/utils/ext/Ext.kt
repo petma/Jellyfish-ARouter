@@ -1,18 +1,22 @@
 package com.logic.utils.ext
 
-import android.app.Activity
-import android.view.View
+import android.annotation.SuppressLint
+import android.content.Context
+import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import com.logic.utils.Cache
 
-fun View.toast(content: String) {
-  Toast.makeText(this.context, content, Toast.LENGTH_LONG).show()
-}
-
-fun Activity.toast(content: String) {
+fun Context.toast(content: String) {
   Toast.makeText(this, content, Toast.LENGTH_LONG).show()
+    log(content)
 }
 
-fun Fragment.toast(content: String) {
-  Toast.makeText(requireContext(), content, Toast.LENGTH_LONG).show()
+fun log(content: String) {
+    Log.v("测试", "\n$content\n")
+}
+
+@SuppressLint("HardwareIds")
+fun getAndroidId(): String {
+    return Settings.Secure.getString(Cache.app.contentResolver, Settings.Secure.ANDROID_ID)
 }

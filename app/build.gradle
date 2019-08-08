@@ -73,11 +73,11 @@ android {
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+//repositories {
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -94,6 +94,9 @@ dependencies {
     }
     if (!CHAT_IS_APPLICATION.toBoolean()) {
         implementation project(':chat')
+    }
+    if (!SPORT_IS_APPLICATION.toBoolean()) {
+        implementation project(':sport')
     }
 
     // ARouter

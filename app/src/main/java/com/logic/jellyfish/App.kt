@@ -11,18 +11,16 @@ class App : Application() {
 
   override fun onCreate() {
     super.onCreate()
-    app = this
-    Cache.init(this)
-    AutoSizeConfig.getInstance().isCustomFragment = true
-
-    initChildApp()
-    initARouter()
+      init()
   }
 
-  private fun initChildApp() {
-    WebApp.onCreate(this)
-    ChatApp.onCreate(this)
-  }
+    private fun init() {
+        app = this
+        AutoSizeConfig.getInstance().isCustomFragment = true
+        Cache.init(this)
+        initARouter()
+        initChildApp()
+    }
 
   private fun initARouter() {
     if (BuildConfig.DEBUG) {
@@ -31,6 +29,11 @@ class App : Application() {
     }
     ARouter.init(this)
   }
+
+    private fun initChildApp() {
+        WebApp.onCreate(this)
+        ChatApp.onCreate(this)
+    }
 
   companion object {
     lateinit var app: App private set

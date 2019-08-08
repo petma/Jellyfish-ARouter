@@ -81,23 +81,8 @@
       android:name=".ui.MainActivity"
       android:launchMode="singleTask" />
 
-    <activity android:name="com.logic.jellyfish.ui.sport.ready.ReadyActivity" />
-    <activity
-      android:name="com.logic.jellyfish.ui.sport.map.MapActivity"
-      android:launchMode="singleTop" />
-
-    <activity
-      android:name="com.logic.jellyfish.ui.sport.timer.TimerActivity"
-      android:launchMode="singleTask"
-      android:theme="@style/TimerTheme">
-
-    </activity>
     <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
 
-    <service android:name=".service.TrackService" />
-    <service android:name=".service.LocationService" />
-    <service android:name="com.amap.api.track.AMapTrackService" />
-    <service android:name="com.amap.api.location.APSService" />
 
     <!--&lt;!&ndash;网易IM&ndash;&gt;-->
     <!--<meta-data-->

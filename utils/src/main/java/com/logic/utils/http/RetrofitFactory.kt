@@ -19,9 +19,16 @@ import java.util.concurrent.TimeUnit
  */
 object RetrofitFactory {
 
-  val jellyfishService: JellyfishService by lazy { createJellyfishService() }
-
+    private const val A_MAP_URL = "https://tsapi.amap.com"
   private const val JELLYFISH_URL = "http://120.78.169.68:1479/jellyfish"
+
+    val aMapService: AMapService by lazy { createAMapService() }
+
+    val jellyfishService: JellyfishService by lazy { createJellyfishService() }
+
+    private fun createAMapService(): AMapService {
+        return createRetrofit(A_MAP_URL).create(AMapService::class.java)
+    }
 
   private fun createJellyfishService(): JellyfishService {
     return createRetrofit(JELLYFISH_URL).create(JellyfishService::class.java)
