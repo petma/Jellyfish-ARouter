@@ -4,13 +4,13 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.logic.login.BuildConfig
 import com.logic.login.R
-import com.logic.login.databinding.LoginActivityLoginBinding
+import com.logic.login.databinding.ActivityLoginBinding
 import com.logic.utils.BaseActivity
 import com.logic.utils.Cache
 
 @Route(path = "/login/login")
-class LoginActivity : BaseActivity<LoginViewModel, LoginActivityLoginBinding>(
-  R.layout.login_activity_login
+class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>(
+  R.layout.activity_login
 ) {
 
   override fun init() {
