@@ -19,7 +19,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-//        multiDexEnabled true
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -92,6 +92,9 @@ dependencies {
     if (!WEB_IS_APPLICATION.toBoolean()) {
         implementation project(':web')
     }
+    if (!CHAT_IS_APPLICATION.toBoolean()) {
+        implementation project(':chat')
+    }
 
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
@@ -133,4 +136,6 @@ dependencies {
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
     // CircleImageView
     implementation "com.mikhaellopez:circularimageview:$circularImageview"
+    //IM
+    implementation 'com.netease.nimlib:basesdk:6.1.1'
 }

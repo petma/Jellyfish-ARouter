@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.logic.jellyfish">
-  <!-- 允许访问网络 -->
-  <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序获取网络状态 -->
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许程序访问WiFi网络信息 -->
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 允许程序读写手机状态和身份 -->
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于申请调用A-GPS模块 -->
-  <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
-  <uses-permission android:name="android.permission.BLUETOOTH" />
-  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 运动时会使用前台服务 -->
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  package="com.logic.chat">
 
-  <!--网易IM-->
+  <!-- 权限声明 -->
+  <!-- 在sdcard中创建/删除文件的权限 -->
   <uses-permission
     android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
     tools:ignore="ProtectedPermissions" /> <!-- 访问网络状态 -->
@@ -45,24 +33,18 @@
     android:required="true" /> <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
   <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
   <permission
-    android:name="com.logic.jellyfish.permission.RECEIVE_MSG"
+    android:name="com.logic.chat.permission.RECEIVE_MSG"
     android:protectionLevel="signature" /> <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
-  <uses-permission android:name="com.logic.jellyfish.permission.RECEIVE_MSG" />
-  <!--网易IM-->
+  <uses-permission android:name="com.logic.chat.permission.RECEIVE_MSG" />
 
   <application
-    android:name=".App"
-    android:allowBackup="true"
-    android:allowClearUserData="true"
-    android:fullBackupContent="@xml/backup_descriptor"
+    android:name=".cApp"
     android:icon="@mipmap/logo"
-    android:label="@string/login_app_name"
+    android:label="@string/app_name"
     android:largeHeap="true"
-    android:networkSecurityConfig="@xml/network_security_config"
-    android:roundIcon="@mipmap/ic_launcher_round"
+    android:roundIcon="@mipmap/logo"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    android:usesCleartextTraffic="true"
     tools:ignore="GoogleAppIndexingWarning"
     tools:targetApi="n">
 
@@ -73,39 +55,15 @@
       android:name="design_height_in_dp"
       android:value="640" />
 
-    <meta-data
-      android:name="com.amap.api.v2.apikey"
-      android:value="b6ffa70584e636c36229251ea26e13af" />
+    <activity android:name=".DebugActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
-    <activity
-      android:name=".ui.MainActivity"
-      android:launchMode="singleTask" />
-
-    <activity android:name="com.logic.jellyfish.ui.sport.ready.ReadyActivity">
-      <!--<intent-filter>-->
-      <!--<action android:name="android.intent.action.MAIN" />-->
-
-      <!--<category android:name="android.intent.category.LAUNCHER" />-->
-      <!--</intent-filter>-->
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
     </activity>
-    <activity
-      android:name="com.logic.jellyfish.ui.sport.map.MapActivity"
-      android:launchMode="singleTop" />
+    <activity android:name=".chatroom.ChatRoomActivity" />
 
-    <activity
-      android:name="com.logic.jellyfish.ui.sport.timer.TimerActivity"
-      android:launchMode="singleTask"
-      android:theme="@style/TimerTheme">
-
-    </activity>
-    <activity android:name="com.logic.jellyfish.ui.home.goal.GoalActivity" />
-
-    <service android:name=".service.TrackService" />
-    <service android:name=".service.LocationService" />
-    <service android:name="com.amap.api.track.AMapTrackService" />
-    <service android:name="com.amap.api.location.APSService" />
-
-    <!--网易IM-->
     <meta-data
       android:name="com.netease.nim.appKey"
       android:value="07887bbbbd9bbaa62162da9e90a91d62" /> <!-- 云信后台服务，请使用独立进程。 -->
@@ -134,10 +92,9 @@
     <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
     <provider
       android:name="com.netease.nimlib.ipc.NIMContentProvider"
-      android:authorities="com.logic.jellyfish.sample.ipc.provider"
+      android:authorities="com.logic.chat.ipc.provider"
       android:exported="false"
       android:process=":core" />
-    <!--网易IM-->
   </application>
 
 </manifest>

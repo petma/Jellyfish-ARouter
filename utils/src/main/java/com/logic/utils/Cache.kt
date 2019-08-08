@@ -33,4 +33,7 @@ object Cache {
 
   var isLocationSDK = false
 
+  var imAccount: String? = ""
+  var imPassword: String? = ""
+
 }

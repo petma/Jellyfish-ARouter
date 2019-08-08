@@ -1,4 +1,4 @@
-if (WEB_IS_APPLICATION.toBoolean()) {
+if (CHAT_IS_APPLICATION.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -17,14 +17,21 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        if (WEB_IS_APPLICATION.toBoolean()) {
-            applicationId "com.logic.web"
+        if (CHAT_IS_APPLICATION.toBoolean()) {
+            applicationId "com.logic.chat"
         }
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 
     compileOptions {
@@ -42,7 +49,7 @@ android {
 
     sourceSets {
         main {
-            if (WEB_IS_APPLICATION.toBoolean()) {
+            if (CHAT_IS_APPLICATION.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
@@ -52,11 +59,28 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':utils')
-    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
 
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
+
+    // DataBinding RecyclerView
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
+
+    if (CHAT_IS_APPLICATION.toBoolean()) {
+        implementation "me.jessyan:autosize:$autoSizeVersion"
+    }
+
+    //IM
+    implementation 'com.netease.nimlib:basesdk:6.1.1'
+
+    // CircleImageView
+    implementation "com.mikhaellopez:circularimageview:$circularImageview"
 }
