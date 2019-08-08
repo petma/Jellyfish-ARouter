@@ -45,8 +45,8 @@ class SettingsItem(context: Context, attrs: AttributeSet) : FrameLayout(context,
     // 设置icon
     val image = view.findViewById<ImageButton>(R.id.image)
     val iconSrc = typedArray.getDrawable(R.styleable.SettingsItem_icon_src)
-    if (iconSrc==null)
-      // 如果没有设置icon，就腾出位置
+    if (iconSrc == null)
+    // 如果没有设置icon，就腾出位置
       image.visibility = View.GONE
     else
       image.setImageDrawable(iconSrc)

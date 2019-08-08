@@ -15,6 +15,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
+
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="60dp"
@@ -27,12 +28,12 @@
         android:layout_marginStart="32dp"
         android:layout_weight="1"
         android:text="建议"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
       <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"/>
+        android:layout_marginEnd="24dp" />
 
     </LinearLayout>
 
@@ -48,12 +49,12 @@
         android:layout_marginStart="32dp"
         android:layout_weight="1"
         android:text="投诉"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
       <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"/>
+        android:layout_marginEnd="24dp" />
 
     </LinearLayout>
 
@@ -62,26 +63,26 @@
       android:layout_height="300dp">
 
       <EditText
-              android:inputType="text"
-              android:hint="请写下您对水母运动的感受以及建议，感谢！"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/transparent"/>
+        android:inputType="text"
+        android:hint="请写下您对水母运动的感受以及建议，感谢！"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent" />
 
       <ImageView
-              android:layout_width="50dp"
-              android:layout_height="50dp"
-              android:layout_gravity="start|bottom"
-              android:layout_marginStart="32dp"
-              android:layout_marginBottom="32dp"
-              android:src="@color/green_600"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="start|bottom"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:src="@color/green_600" />
 
     </FrameLayout>
 
     <Button
       android:layout_width="100dp"
       android:layout_height="50dp"
-      android:text="提交"/>
+      android:text="提交" />
 
 
   </LinearLayout>

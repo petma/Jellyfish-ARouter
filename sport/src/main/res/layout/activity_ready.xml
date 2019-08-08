@@ -8,8 +8,8 @@
     <import type="android.view.View" />
 
     <variable
-            name="viewmodel"
-            type="com.logic.sport.ready.ReadyViewModel"/>
+      name="viewmodel"
+      type="com.logic.sport.ready.ReadyViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

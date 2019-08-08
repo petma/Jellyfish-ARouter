@@ -2,7 +2,7 @@
 
   <!-- Base application theme. -->
 
-    <style name="login_LoginEditText">
+  <style name="login_LoginEditText">
     <item name="android:layout_width">@dimen/login_edit_text_width</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_marginTop">24dp</item>

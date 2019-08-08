@@ -5,6 +5,7 @@ import com.logic.mine.R
 import com.logic.mine.databinding.ActivityNotificationMessageBinding
 import com.logic.utils.BaseActivity
 import kotlinx.android.synthetic.main.toolbar.*
+
 @Route(path = "/mine/my_message/notification_message")
 class NotificationMessageActivity : BaseActivity<NotificationMessageViewModel, ActivityNotificationMessageBinding>(
   R.layout.activity_notification_message

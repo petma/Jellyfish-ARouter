@@ -5,7 +5,7 @@
 
     <variable
       name="item"
-      type="String"/>
+      type="String" />
   </data>
 
   <LinearLayout
@@ -23,19 +23,19 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{item}"/>
+        android:text="@{item}" />
 
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这是一段平台有关的赛事简介"/>
+        android:text="这是一段平台有关的赛事简介" />
 
     </LinearLayout>
 
     <Button
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="进行中"/>
+      android:text="进行中" />
 
   </LinearLayout>
 </layout>

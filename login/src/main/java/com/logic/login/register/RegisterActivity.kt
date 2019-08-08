@@ -7,12 +7,12 @@ import com.logic.utils.BaseActivity
 
 @Route(path = "/login/register")
 class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding>(
-    R.layout.activity_register
+  R.layout.activity_register
 ) {
 
-    override fun init() {
-        binding.viewmodel = viewModel
-    }
+  override fun init() {
+    binding.viewmodel = viewModel
+  }
 
 
 }

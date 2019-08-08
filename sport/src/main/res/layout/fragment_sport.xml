@@ -5,8 +5,8 @@
   <data>
 
     <variable
-            name="viewmodel"
-            type="com.logic.sport.SportViewModel"/>
+      name="viewmodel"
+      type="com.logic.sport.SportViewModel" />
   </data>
 
   <FrameLayout

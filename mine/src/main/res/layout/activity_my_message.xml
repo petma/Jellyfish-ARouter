@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <data>
 
@@ -15,19 +15,20 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
+
     <com.logic.mine.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="@{() -> viewmodel.navToGroupMessage()}"
       app:des="安琪拉邀请你加入团"
-      app:text="@string/group_msg"/>
+      app:text="@string/group_msg" />
 
     <com.logic.mine.SettingsItem
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:onClick="@{() -> viewmodel.navToFriendMessage()}"
       app:des="安琪拉邀请你加入团"
-      app:text="@string/friend_msg"/>
+      app:text="@string/friend_msg" />
 
 
     <com.logic.mine.SettingsItem
@@ -35,7 +36,7 @@
       android:layout_height="wrap_content"
       android:onClick="@{() -> viewmodel.navToNotificationMessage()}"
       app:des="安琪拉邀请你加入团"
-      app:text="@string/notification_msg"/>
+      app:text="@string/notification_msg" />
 
   </LinearLayout>
 </layout>
