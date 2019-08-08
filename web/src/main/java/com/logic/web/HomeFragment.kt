@@ -10,7 +10,7 @@ class HomeFragment : WebFragment(R.layout.fragment_home) {
   }
 
   override fun init() {
-    webView.loadUrl("http://192.168.1.63:90/")
+    webView.loadUrl("https://m.weibo.cn/")
   }
 
 }

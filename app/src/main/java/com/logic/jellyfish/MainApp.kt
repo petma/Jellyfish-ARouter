@@ -7,7 +7,7 @@ import com.logic.utils.Cache
 import com.logic.web.WebApp
 import me.jessyan.autosize.AutoSizeConfig
 
-class App : Application() {
+class MainApp : Application() {
 
   override fun onCreate() {
     super.onCreate()
@@ -36,7 +36,7 @@ class App : Application() {
   }
 
   companion object {
-    lateinit var app: App private set
+    lateinit var app: MainApp private set
   }
 
 }

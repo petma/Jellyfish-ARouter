@@ -51,7 +51,7 @@
   <!--网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM网易IM-->
 
   <application
-    android:name=".App"
+    android:name=".MainApp"
     android:allowBackup="true"
     android:allowClearUserData="true"
     android:fullBackupContent="@xml/backup_descriptor"

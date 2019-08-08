@@ -23,4 +23,9 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>(
     binding.viewmodel = viewModel
   }
 
+  override fun onStart() {
+    super.onStart()
+//    viewModel.progress.value = false
+  }
+
 }

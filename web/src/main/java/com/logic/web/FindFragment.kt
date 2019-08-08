@@ -1,4 +1,4 @@
-package com.logic.jellyfish
+package com.logic.web
 
 import android.os.Bundle
 import android.view.LayoutInflater

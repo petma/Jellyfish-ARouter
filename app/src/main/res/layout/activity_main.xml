@@ -14,12 +14,11 @@
     android:theme="?attr/actionBarTheme"
     app:title="@string/home" />
 
-
-  <com.logic.jellyfish.view.NoScrollViewPager
-    android:id="@+id/view_pager"
+  <FrameLayout
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:layout_height="0dp"/>
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_nav"

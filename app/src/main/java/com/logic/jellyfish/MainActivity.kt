@@ -2,17 +2,13 @@ package com.logic.jellyfish
 
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.logic.chat.ChatFragment
-import com.logic.jellyfish.utils.ViewAnimation.fadeOutIn
 import com.logic.mine.MineFragment
 import com.logic.sport.SportFragment
+import com.logic.web.FindFragment
 import com.logic.web.HomeFragment
 import com.logic.web.WebFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,82 +17,97 @@ import me.jessyan.autosize.internal.CustomAdapt
 @Route(path = "/app/main")
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
-  private lateinit var fragments: Array<Fragment>
+  private var lastActiveFragmentTag: String? = null
+  var fragment: Fragment? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
 
-    initFragment()
+    toolbar.title = getString(R.string.home)
+    loadFragment(R.id.home)
     initBottomNavigation()
   }
 
-  private fun initFragment() {
-    fragments = arrayOf(
-      HomeFragment(),
-      SportFragment(),
-      ChatFragment(),
-      FindFragment(),
-      MineFragment()
-    )
+  private fun loadFragment(itemId: Int) {
+    val tag = itemId.toString()
+    fragment = supportFragmentManager.findFragmentByTag(tag) ?: when (itemId) {
+      R.id.home -> {
+        HomeFragment()
+      }
+      R.id.sport -> {
+        SportFragment()
+      }
+      R.id.message -> {
+        ChatFragment()
+      }
+      R.id.find -> {
+        FindFragment()
+      }
+      R.id.mine -> {
+        MineFragment()
+      }
+      else -> {
+        null
+      }
+    }
+    fragment?.let {
+      val transaction = supportFragmentManager.beginTransaction()
+      transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+      if (lastActiveFragmentTag != null) {
+        val lastFragment = supportFragmentManager.findFragmentByTag(lastActiveFragmentTag)
+        if (lastFragment != null)
+          transaction.hide(lastFragment)
+      }
 
-    view_pager.apply {
-      adapter = MainPageAdapter(fragments, supportFragmentManager)
-      offscreenPageLimit = 3
-      setNoScroll(true)
-      addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-        override fun onPageScrollStateChanged(state: Int) {
-        }
+      if (!it.isAdded) {
+        transaction.add(R.id.container, it, tag)
+      } else {
+        transaction.show(it)
+      }
 
-        override fun onPageScrolled(
-          position: Int,
-          positionOffset: Float,
-          positionOffsetPixels: Int
-        ) {
-        }
 
-        override fun onPageSelected(position: Int) {
-          bottom_nav.menu.getItem(position).isChecked = true
-        }
-      })
+      transaction.commit()
+      lastActiveFragmentTag = tag
     }
   }
+
 
   private fun initBottomNavigation() {
     bottom_nav.setOnNavigationItemSelectedListener {
       when (it.itemId) {
         R.id.home -> {
-          changeFragment(it, 0)
-          toolbar.title = getString(R.string.title)
+          toolbar.title = getString(R.string.home)
         }
         R.id.sport -> {
-          changeFragment(it, 1)
           toolbar.title = getString(R.string.sport)
         }
         R.id.message -> {
-          changeFragment(it, 2)
           toolbar.title = getString(R.string.message)
         }
         R.id.find -> {
-          changeFragment(it, 3)
           toolbar.title = getString(R.string.find)
         }
         R.id.mine -> {
-          changeFragment(it, 4)
           toolbar.title = getString(R.string.mine)
         }
       }
+      loadFragment(it.itemId)
       true
     }
   }
 
-  private fun changeFragment(item: MenuItem, count: Int) {
-    item.isChecked = true
-    view_pager.setCurrentItem(count, false)
-    fadeOutIn(view_pager)
+  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+    if (keyCode == KeyEvent.KEYCODE_BACK) {
+      fragment?.let {
+        if (it is WebFragment && it.onKeyBack()) {
+          return true
+        }
+      }
+    }
+    return super.onKeyDown(keyCode, event)
   }
-
 
   override fun isBaseOnWidth(): Boolean {
     return false
@@ -105,24 +116,4 @@ class MainActivity : AppCompatActivity(), CustomAdapt {
   override fun getSizeInDp(): Float {
     return 640F
   }
-
-  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-    if (view_pager.currentItem == 0 && keyCode == KeyEvent.KEYCODE_BACK) {
-      if (fragments[0] is WebFragment && (fragments[0] as WebFragment).onKeyBack()) {
-        return true
-      }
-    }
-    return super.onKeyDown(keyCode, event)
-  }
-
-  class MainPageAdapter(
-    private val fragments: Array<Fragment>,
-    fm: FragmentManager
-  ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-    override fun getItem(position: Int) = fragments[position]
-
-    override fun getCount() = 5
-  }
-
 }

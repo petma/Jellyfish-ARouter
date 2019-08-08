@@ -8,6 +8,7 @@ import com.logic.utils.Cache
 
 class LoginViewModel : ViewModel() {
 
+  val progress = MutableLiveData<Boolean>()
   val phoneNumber = MutableLiveData<String>()
   val password = MutableLiveData<String>()
 
@@ -27,6 +28,7 @@ class LoginViewModel : ViewModel() {
 //        v.toast("网络错误")
 //      }
 //    }
+//    progress.value = true
     Cache.imAccount = phoneNumber.value
     Cache.imPassword = password.value
     ARouter.getInstance().build("/app/main").navigation()
