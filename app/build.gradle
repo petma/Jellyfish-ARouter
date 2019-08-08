@@ -73,6 +73,7 @@ android {
     }
 }
 
+// 可以不手动输入第三方库
 //repositories {
 //    flatDir {
 //        dirs 'libs'
@@ -104,41 +105,14 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
     // AndroidX
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
     implementation "com.google.android.material:material:$materialVersion"
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    // Okhttp
-    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-    // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    // Gson
-    implementation "com.google.code.gson:gson:$gsonVersion"
-    // EventBus
-    implementation "org.greenrobot:eventbus:$eventBusVersion"
     // AutoSize
     implementation "me.jessyan:autosize:$autoSizeVersion"
-    // Banner
-    implementation "com.youth.banner:banner:$bannerVersion"
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    // DataBinding RecyclerView
-    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
-    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
-    // CircleImageView
-    implementation "com.mikhaellopez:circularimageview:$circularImageview"
-//    //IM
-//    implementation 'com.netease.nimlib:basesdk:6.1.1'
 }
