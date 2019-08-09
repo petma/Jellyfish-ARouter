@@ -37,4 +37,12 @@ class ChatViewModel : ViewModel() {
     items.add("李四")
     items.add("王五")
   }
+
+  fun navToSportGroup(){
+    ARouter.getInstance().build("/chat/sport_group").navigation()
+  }
+
+  fun navToContact(){
+    ARouter.getInstance().build("/chat/contact").navigation()
+  }
 }

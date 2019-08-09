@@ -61,6 +61,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
+    implementation project(':uikit')
 
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     // ViewModel
@@ -80,7 +81,12 @@ dependencies {
 
     //IM
     implementation 'com.netease.nimlib:basesdk:6.1.1'
+    implementation 'com.netease.nimlib:chatroom:6.1.1'
 
     // CircleImageView
     implementation "com.mikhaellopez:circularimageview:$circularImageview"
+
+    // FancyButton
+    implementation 'com.github.medyo:fancybuttons:1.9.1'
+
 }

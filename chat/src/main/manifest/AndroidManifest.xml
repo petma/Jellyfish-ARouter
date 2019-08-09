@@ -3,6 +3,8 @@
 
   <application>
     <activity android:name=".chatroom.ChatRoomActivity" />
+    <activity android:name=".contact.ContactActivity" />
+    <activity android:name=".sport_group.SportGroupActivity" />
     <!--网易IM-->
     <meta-data
       android:name="com.netease.nim.appKey"
