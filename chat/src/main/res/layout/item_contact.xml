@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
   <data>
 
@@ -33,11 +34,19 @@
       app:civ_shadow_radius="0" />
 
     <TextView
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
+      android:textColor="@color/grey_800"
       android:layout_height="wrap_content"
       android:layout_marginStart="20dp"
-      android:text="@{item}" />
+      android:layout_weight="1"
+      android:text="@{item}"
+      android:textSize="18sp"
+      tools:text="安琪拉" />
 
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="添加" />
 
   </LinearLayout>
 </layout>

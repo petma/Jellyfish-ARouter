@@ -1,7 +1,8 @@
-package com.logic.chat
+package com.logic.chat.debug
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.logic.chat.R
 
 class DebugActivity : AppCompatActivity() {
 

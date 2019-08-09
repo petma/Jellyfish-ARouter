@@ -62,6 +62,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
 //    implementation project(':uikit')
+    implementation "com.google.android.material:material:$materialVersion"
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"

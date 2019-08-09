@@ -10,5 +10,4 @@ class SportFragment : BaseFragment<SportViewModel, FragmentSportBinding>(
     binding.viewmodel = viewModel
   }
 
-
 }

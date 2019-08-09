@@ -1,4 +1,4 @@
-package com.logic.chat
+package com.logic.chat.utils
 
 interface OnItemClickListener {
 

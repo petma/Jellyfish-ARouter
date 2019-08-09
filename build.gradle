@@ -49,4 +49,5 @@ ext {
     aRouterCompilerVersion = '1.2.2'
     bindingCollectionAdapterVersion = '3.1.0'
     circularImageview = '3.2.0'
+    fancyButtonsVersion = '1.9.1'
 }
