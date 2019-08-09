@@ -99,15 +99,9 @@ dependencies {
     if (!SPORT_IS_APPLICATION.toBoolean()) {
         implementation project(':sport')
     }
-
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
     // AndroidX
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    // AutoSize
-    implementation "me.jessyan:autosize:$autoSizeVersion"
 }

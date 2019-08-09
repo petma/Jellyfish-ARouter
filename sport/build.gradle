@@ -54,20 +54,14 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':base')
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation files('libs/AMap3DMap_6.9.2_AMapSearch_6.9.2_AMapTrack_1.1.0_AMapLocation_4.7.0_20190709.jar')
+    // AndroidX
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "com.google.android.material:material:$materialVersion"
+    // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
     // EventBus
     implementation "org.greenrobot:eventbus:$eventBusVersion"
-
-    if (SPORT_IS_APPLICATION.toBoolean()) {
-        implementation "me.jessyan:autosize:$autoSizeVersion"
-    }
-    implementation files('libs/AMap3DMap_6.9.2_AMapSearch_6.9.2_AMapTrack_1.1.0_AMapLocation_4.7.0_20190709.jar')
 }

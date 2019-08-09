@@ -61,14 +61,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
-
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-
-    if (LOGIN_IS_APPLICATION.toBoolean()) {
-        implementation "me.jessyan:autosize:$autoSizeVersion"
-    }
 }

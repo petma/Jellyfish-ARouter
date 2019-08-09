@@ -61,31 +61,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
-    implementation project(':uikit')
-
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+//    implementation project(':uikit')
     // ARouter
     implementation "com.alibaba:arouter-api:$aRouterMainVersion"
     kapt "com.alibaba:arouter-compiler:$aRouterCompilerVersion"
-
     // DataBinding RecyclerView
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingCollectionAdapterVersion"
     implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingCollectionAdapterVersion"
-
-    if (CHAT_IS_APPLICATION.toBoolean()) {
-        implementation "me.jessyan:autosize:$autoSizeVersion"
-    }
-
     //IM
     implementation 'com.netease.nimlib:basesdk:6.1.1'
     implementation 'com.netease.nimlib:chatroom:6.1.1'
-
     // CircleImageView
     implementation "com.mikhaellopez:circularimageview:$circularImageview"
-
     // FancyButton
     implementation 'com.github.medyo:fancybuttons:1.9.1'
 

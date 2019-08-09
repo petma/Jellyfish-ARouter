@@ -14,7 +14,7 @@ class ChatViewModel : ViewModel() {
   init {
     itemBinding.bindExtra(BR.listener, object : OnItemClickListener {
       override fun onItemClick(item: String) {
-        ARouter.getInstance().build("/chat/chatroom").navigation()
+//        ARouter.getInstance().build("/chat/chatroom").navigation()
       }
     })
 

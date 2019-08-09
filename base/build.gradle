@@ -38,19 +38,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // AndroidX, LifeCycle, ViewModel
+    api "androidx.appcompat:appcompat:$appCompatVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    // Glide
+    api "com.github.bumptech.glide:glide:$glideVersion"
+    // AutoSize
+    api "me.jessyan:autosize:$autoSizeVersion"
+    // Kotlin
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
 
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    // Okhttp
+    // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
     // Room
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+
 }
