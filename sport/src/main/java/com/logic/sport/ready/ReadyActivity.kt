@@ -10,9 +10,9 @@ import android.os.Build
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.logic.sport.R
 import com.logic.sport.databinding.ActivityReadyBinding
-import com.logic.sport.timer.TimerActivity
 import com.logic.sport.utils.EventObserver
 import com.logic.utils.BaseActivity
 
@@ -28,21 +28,22 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ActivityReadyBinding>(
     binding.viewmodel = viewModel
 
     viewModel.startEvent.observe(this, EventObserver {
-      val needRequestPermissionList = findDeniedPermissions(needPermissions)
-      if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
-        try {
-          val array = needRequestPermissionList.toTypedArray()
-          val method = javaClass.getMethod(
-            "requestPermissions",
-            Array<String>::class.java, Int::class.javaPrimitiveType
-          )
-          method.invoke(this, array, 0)
-        } catch (e: Throwable) {
-          e.printStackTrace()
-        }
-      } else {
-        openGPSSetting()
-      }
+      ARouter.getInstance().build("/sport/timer").navigation()
+//      val needRequestPermissionList = findDeniedPermissions(needPermissions)
+//      if (needRequestPermissionList != null && needRequestPermissionList.isNotEmpty()) {
+//        try {
+//          val array = needRequestPermissionList.toTypedArray()
+//          val method = javaClass.getMethod(
+//            "requestPermissions",
+//            Array<String>::class.java, Int::class.javaPrimitiveType
+//          )
+//          method.invoke(this, array, 0)
+//        } catch (e: Throwable) {
+//          e.printStackTrace()
+//        }
+//      } else {
+//        openGPSSetting()
+//      }
     })
   }
 
@@ -130,7 +131,7 @@ class ReadyActivity : BaseActivity<ReadyViewModel, ActivityReadyBinding>(
 
   private fun openGPSSetting() {
     if (checkGpsIsOpen()) {
-      startActivity(Intent(this, TimerActivity::class.java))
+      ARouter.getInstance().build("/sport/timer").navigation()
     } else {
       AlertDialog.Builder(this).setTitle("open GPS")
         .setMessage("go to open")

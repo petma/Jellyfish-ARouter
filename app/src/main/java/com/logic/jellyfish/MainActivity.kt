@@ -18,7 +18,7 @@ import me.jessyan.autosize.internal.CustomAdapt
 class MainActivity : AppCompatActivity(), CustomAdapt {
 
   private var lastActiveFragmentTag: String? = null
-  var fragment: Fragment? = null
+  private var fragment: Fragment? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

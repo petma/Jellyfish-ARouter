@@ -7,6 +7,7 @@ class SportFragment : BaseFragment<SportViewModel, FragmentSportBinding>(
   R.layout.fragment_sport
 ) {
   override fun init() {
+    binding.viewmodel = viewModel
   }
 
 

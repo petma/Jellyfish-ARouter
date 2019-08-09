@@ -14,10 +14,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.sport.SportFragment">
 
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:text="Sport" />
+    <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:onClick="@{() -> viewmodel.navToReady()}"
+      android:text="Button" />
 
   </FrameLayout>
 </layout>

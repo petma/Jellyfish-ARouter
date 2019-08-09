@@ -1,7 +1,6 @@
 include ':app',
         ':sport',
         ':chat',
-        ':uikit',
         ':web',
         ':login',
         ':mine',

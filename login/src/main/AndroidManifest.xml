@@ -9,7 +9,7 @@
     android:largeHeap="true"
     android:roundIcon="@mipmap/login_logo"
     android:supportsRtl="true"
-    android:theme="@style/login_AppTheme"
+    android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning"
     tools:targetApi="n">
 

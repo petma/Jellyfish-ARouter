@@ -27,6 +27,45 @@ android {
         multiDexEnabled true
     }
 
+    if (SPORT_IS_APPLICATION.toBoolean()) {
+        signingConfigs {
+            debug {
+                storeFile file('sport.jks')
+                storePassword '12345678'
+                keyAlias 'sport'
+                keyPassword '12345678'
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+
+            release {
+                storeFile file('sport.jks')
+                storePassword '12345678'
+                keyAlias 'sport'
+                keyPassword '12345678'
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+
+        buildTypes {
+            debug {
+                minifyEnabled false
+                useProguard false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.debug
+            }
+
+            release {
+                minifyEnabled true
+                useProguard true
+                shrinkResources true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = "$javaVersion"
         targetCompatibility = "$javaVersion"
@@ -49,6 +88,7 @@ android {
             }
         }
     }
+
 }
 
 dependencies {
